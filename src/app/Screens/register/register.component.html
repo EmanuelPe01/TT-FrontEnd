@@ -1,1 +1,205 @@
-<p>register works!</p>
+<div class="card-form">
+    <div class="card">
+        <div class="flex flex-wrap justify-content-center card-container blue-container gap-3">
+            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
+                <a routerLink="/">
+                    <button class="button">
+                        <div class="button-box">
+                          <span class="button-elem">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 40">
+                              <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+                            </svg>
+                          </span>
+                          <span class="button-elem">
+                            <svg viewBox="0 0 46 40">
+                              <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+                            </svg>
+                          </span>
+                        </div>
+                    </button>
+                </a>
+                <p class="text-6xl">Registro</p>
+            </div>
+            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
+                <div class="wave-group">
+                    <input 
+                        required="required" 
+                        type="text" 
+                        class="input"
+                        [(ngModel)]="name"
+                    >
+                    <span class="bar"></span>
+                    <label class="label">
+                      <span class="label-char" style="--index: 0">N</span>
+                      <span class="label-char" style="--index: 1">o</span>
+                      <span class="label-char" style="--index: 2">m</span>
+                      <span class="label-char" style="--index: 3">b</span>
+                      <span class="label-char" style="--index: 4">r</span>
+                      <span class="label-char" style="--index: 5">e</span>
+                      <span class="label-char" style="--index: 6">(s)</span>
+                    </label>
+                </div>
+            </div>
+            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
+                <div class="wave-group">
+                    <input 
+                        required="required" 
+                        type="text" 
+                        class="input"
+                        [(ngModel)]="firstSurname"
+                    >
+                    <span class="bar"></span>
+                    <label class="label">
+                        <span class="label-char" style="--index: 0">P</span>
+                        <span class="label-char" style="--index: 1">r</span>
+                        <span class="label-char" style="--index: 2">i</span>
+                        <span class="label-char" style="--index: 3">m</span>
+                        <span class="label-char" style="--index: 4">e</span>
+                        <span class="label-char" style="--index: 5">r</span>
+                        <span class="blanco" style="--index: 6">-</span>
+                        <span class="label-char" style="--index: 7">a</span>
+                        <span class="label-char" style="--index: 8">p</span>
+                        <span class="label-char" style="--index: 9">e</span>
+                        <span class="label-char" style="--index: 10">l</span>
+                        <span class="label-char" style="--index: 11">l</span>
+                        <span class="label-char" style="--index: 12">i</span>
+                        <span class="label-char" style="--index: 13">d</span>
+                        <span class="label-char" style="--index: 14">o</span>
+                    </label>
+                </div>
+            </div>
+            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
+                <div class="wave-group">
+                    <input 
+                        required="required" 
+                        type="text" 
+                        class="input"
+                        [(ngModel)]="secondSurname"
+                    >
+                    <span class="bar"></span>
+                    <label class="label">
+                        <span class="label-char" style="--index: 0">S</span>
+                        <span class="label-char" style="--index: 1">e</span>
+                        <span class="label-char" style="--index: 2">g</span>
+                        <span class="label-char" style="--index: 3">u</span>
+                        <span class="label-char" style="--index: 4">n</span>
+                        <span class="label-char" style="--index: 5">d</span>
+                        <span class="label-char" style="--index: 6">o</span>
+                        <span class="blanco" style="--index: 7">-</span>
+                        <span class="label-char" style="--index: 8">a</span>
+                        <span class="label-char" style="--index: 9">p</span>
+                        <span class="label-char" style="--index: 10">e</span>
+                        <span class="label-char" style="--index: 11">l</span>
+                        <span class="label-char" style="--index: 12">l</span>
+                        <span class="label-char" style="--index: 13">i</span>
+                        <span class="label-char" style="--index: 14">d</span>
+                        <span class="label-char" style="--index: 15">o</span>                        
+                    </label>
+                </div>
+            </div>
+            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
+                <div class="wave-group">
+                    <input 
+                        required="required" 
+                        type="text" 
+                        class="input"
+                        [(ngModel)]="telephone"
+                    >
+                    <span class="bar"></span>
+                    <label class="label">
+                        <span class="label-char" style="--index: 0">T</span>
+                        <span class="label-char" style="--index: 1">e</span>
+                        <span class="label-char" style="--index: 2">l</span>
+                        <span class="label-char" style="--index: 3">é</span>
+                        <span class="label-char" style="--index: 4">f</span>
+                        <span class="label-char" style="--index: 5">o</span>
+                        <span class="label-char" style="--index: 6">n</span>
+                        <span class="label-char" style="--index: 7">o</span>                       
+                    </label>
+                </div>
+            </div>
+            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
+                <div class="wave-group">
+                    <input 
+                        required="required" 
+                        type="text" 
+                        class="input"
+                        [(ngModel)]="telephone"
+                    >
+                    <span class="bar"></span>
+                    <label class="label">
+                        <span class="label-char" style="--index: 0">E</span>
+                        <span class="label-char" style="--index: 1">m</span>
+                        <span class="label-char" style="--index: 2">a</span>
+                        <span class="label-char" style="--index: 3">i</span>
+                        <span class="label-char" style="--index: 4">l</span>                     
+                    </label>
+                </div>
+            </div>
+            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
+                <div class="wave-group">
+                    <input 
+                        required="required" 
+                        type="password" 
+                        class="input"
+                        [(ngModel)] = "password"
+                    >
+                    <span class="bar"></span>
+                    <label class="label">
+                        <span class="label-char" style="--index: 0">C</span>
+                        <span class="label-char" style="--index: 1">o</span>
+                        <span class="label-char" style="--index: 2">n</span>
+                        <span class="label-char" style="--index: 3">t</span>
+                        <span class="label-char" style="--index: 4">r</span>
+                        <span class="label-char" style="--index: 5">a</span>
+                        <span class="label-char" style="--index: 6">s</span>
+                        <span class="label-char" style="--index: 7">e</span>
+                        <span class="label-char" style="--index: 8">ñ</span>
+                        <span class="label-char" style="--index: 9">a</span>                       
+                    </label>
+                </div>
+            </div>
+            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
+                <div class="wave-group">
+                    <input 
+                        required="required" 
+                        type="password" 
+                        class="input"
+                        [(ngModel)]="confirm_parr"
+                    >
+                    <span class="bar"></span>
+                    <label class="label">
+                        <span class="label-char" style="--index: 0">C</span>
+                        <span class="label-char" style="--index: 1">o</span>
+                        <span class="label-char" style="--index: 2">n</span>
+                        <span class="label-char" style="--index: 3">f</span>
+                        <span class="label-char" style="--index: 4">i</span>
+                        <span class="label-char" style="--index: 5">r</span>
+                        <span class="label-char" style="--index: 6">m</span>
+                        <span class="label-char" style="--index: 7">a</span>
+                        <span class="label-char" style="--index: 8">r</span>
+                        <span class="blanco" style="--index: 9">-</span>
+                        <span class="label-char" style="--index: 10">c</span>
+                        <span class="label-char" style="--index: 11">o</span>
+                        <span class="label-char" style="--index: 12">n</span>
+                        <span class="label-char" style="--index: 13">t</span>
+                        <span class="label-char" style="--index: 14">r</span>
+                        <span class="label-char" style="--index: 15">a</span>
+                        <span class="label-char" style="--index: 16">s</span>
+                        <span class="label-char" style="--index: 17">e</span>
+                        <span class="label-char" style="--index: 18">ñ</span>
+                        <span class="label-char" style="--index: 19">a</span>                      
+                    </label>
+                </div>
+            </div>
+            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
+                <button class="btn-31">
+                    <span class="text-container">
+                      <span class="text">Aceptar</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
