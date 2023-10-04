@@ -1,205 +1,259 @@
-<div class="card-form">
-    <div class="card">
-        <div class="flex flex-wrap justify-content-center card-container blue-container gap-3">
-            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
-                <a routerLink="/">
-                    <button class="button">
-                        <div class="button-box">
-                          <span class="button-elem">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 40">
-                              <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
-                            </svg>
-                          </span>
-                          <span class="button-elem">
-                            <svg viewBox="0 0 46 40">
-                              <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
-                            </svg>
-                          </span>
+<div class="container text-center center-card">
+    <div class="row justify-content-center">
+        <div class="card col col-12 col-xl-10">
+            <div class="col">
+                <div class="row">
+                    <div class="col col-12">
+                        <a routerLink="/">
+                            <button class="button">
+                                <div class="button-box">
+                                  <span class="button-elem">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 40">
+                                      <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+                                    </svg>
+                                  </span>
+                                  <span class="button-elem">
+                                    <svg viewBox="0 0 46 40">
+                                      <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+                                    </svg>
+                                  </span>
+                                </div>
+                            </button>
+                        </a>
+                        <h1>Registro</h1>
+                    </div>
+                    <div class="col col-12">
+                        <div class="card-body">
+                            <form (ngSubmit)="saveClient()" [formGroup]="formRegistro">
+                                <div class="wave-group mb-4">
+                                    <input 
+                                        required="required" 
+                                        type="text" 
+                                        class="input"
+                                        formControlName="name"
+                                    >
+                                    <span class="bar"></span>
+                                    <label class="label">
+                                      <span class="label-char" style="--index: 0">N</span>
+                                      <span class="label-char" style="--index: 1">o</span>
+                                      <span class="label-char" style="--index: 2">m</span>
+                                      <span class="label-char" style="--index: 3">b</span>
+                                      <span class="label-char" style="--index: 4">r</span>
+                                      <span class="label-char" style="--index: 5">e</span>
+                                      <span class="label-char" style="--index: 6">(s)</span>
+                                    </label>
+                                    <div *ngIf="formRegistro.get('name')?.hasError('required') && formRegistro.get('name')?.touched;">
+                                        <p class="errorText">Campo requerido*</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-12 col-md-6">
+                                        <div class="wave-group mb-4">
+                                            <input 
+                                                required="required" 
+                                                type="text" 
+                                                class="input"
+                                                formControlName="firstSurname"
+                                            >
+                                            <span class="bar"></span>
+                                            <label class="label">
+                                                <span class="label-char" style="--index: 0">P</span>
+                                                <span class="label-char" style="--index: 1">r</span>
+                                                <span class="label-char" style="--index: 2">i</span>
+                                                <span class="label-char" style="--index: 3">m</span>
+                                                <span class="label-char" style="--index: 4">e</span>
+                                                <span class="label-char" style="--index: 5">r</span>
+                                                <span class="blanco" style="--index: 6">-</span>
+                                                <span class="label-char" style="--index: 7">a</span>
+                                                <span class="label-char" style="--index: 8">p</span>
+                                                <span class="label-char" style="--index: 9">e</span>
+                                                <span class="label-char" style="--index: 10">l</span>
+                                                <span class="label-char" style="--index: 11">l</span>
+                                                <span class="label-char" style="--index: 12">i</span>
+                                                <span class="label-char" style="--index: 13">d</span>
+                                                <span class="label-char" style="--index: 14">o</span>
+                                            </label>
+                                            <div *ngIf="formRegistro.get('firstSurname')?.hasError('required') && formRegistro.get('firstSurname')?.touched;">
+                                                <p class="errorText">Campo requerido*</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 col-md-6">
+                                        <div class="wave-group mb-4">
+                                            <input 
+                                                required="required" 
+                                                type="text" 
+                                                class="input"
+                                                formControlName="secondSurname"
+                                            >
+                                            <span class="bar"></span>
+                                            <label class="label">
+                                                <span class="label-char" style="--index: 0">S</span>
+                                                <span class="label-char" style="--index: 1">e</span>
+                                                <span class="label-char" style="--index: 2">g</span>
+                                                <span class="label-char" style="--index: 3">u</span>
+                                                <span class="label-char" style="--index: 4">n</span>
+                                                <span class="label-char" style="--index: 5">d</span>
+                                                <span class="label-char" style="--index: 6">o</span>
+                                                <span class="blanco" style="--index: 7">-</span>
+                                                <span class="label-char" style="--index: 8">a</span>
+                                                <span class="label-char" style="--index: 9">p</span>
+                                                <span class="label-char" style="--index: 10">e</span>
+                                                <span class="label-char" style="--index: 11">l</span>
+                                                <span class="label-char" style="--index: 12">l</span>
+                                                <span class="label-char" style="--index: 13">i</span>
+                                                <span class="label-char" style="--index: 14">d</span>
+                                                <span class="label-char" style="--index: 15">o</span>                        
+                                            </label>
+                                            <div *ngIf="formRegistro.get('secondSurname')?.hasError('required') && formRegistro.get('secondSurname')?.touched;">
+                                                <p class="errorText">Campo requerido*</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-12 col-md-6">
+                                        <div class="wave-group mb-4">
+                                            <input 
+                                                required="required" 
+                                                type="text" 
+                                                class="input"
+                                                formControlName="telephone"
+                                            >
+                                            <span class="bar"></span>
+                                            <label class="label">
+                                                <span class="label-char" style="--index: 0">T</span>
+                                                <span class="label-char" style="--index: 1">e</span>
+                                                <span class="label-char" style="--index: 2">l</span>
+                                                <span class="label-char" style="--index: 3">é</span>
+                                                <span class="label-char" style="--index: 4">f</span>
+                                                <span class="label-char" style="--index: 5">o</span>
+                                                <span class="label-char" style="--index: 6">n</span>
+                                                <span class="label-char" style="--index: 7">o</span>                       
+                                            </label>
+                                            <div *ngIf="formRegistro.get('telephone')?.hasError('required') && formRegistro.get('telephone')?.touched; else ErrorPhone">
+                                                <p class="errorText">Campo requerido*</p>
+                                            </div>
+                                            <ng-template #ErrorPhone>
+                                                <div *ngIf="formRegistro.get('telephone')?.hasError('telefonoInvalido') && formRegistro.get('telephone')?.touched">
+                                                    <p class="errorText">Teléfono inválido</p>
+                                                </div>
+                                            </ng-template>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 col-md-6">
+                                        <div class="wave-group mb-4">
+                                            <input 
+                                                required="required" 
+                                                type="text" 
+                                                class="input"
+                                                formControlName="email"
+                                            >
+                                            <span class="bar"></span>
+                                            <label class="label">
+                                                <span class="label-char" style="--index: 0">E</span>
+                                                <span class="label-char" style="--index: 1">m</span>
+                                                <span class="label-char" style="--index: 2">a</span>
+                                                <span class="label-char" style="--index: 3">i</span>
+                                                <span class="label-char" style="--index: 4">l</span>                     
+                                            </label>
+                                            <div *ngIf="formRegistro.get('email')?.hasError('required') && formRegistro.get('email')?.touched; else ErrorMail">
+                                                <p class="errorText">Campo requerido*</p>
+                                            </div>
+                                            <ng-template #ErrorMail>
+                                                <div *ngIf="formRegistro.get('email')?.hasError('email') && formRegistro.get('email')?.touched">
+                                                    <p class="errorText">Ingresa un correo electrónico válido</p>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-12 col-md-6">
+                                        <div class="wave-group mb-4">
+                                            <input 
+                                                required="required" 
+                                                type="password" 
+                                                class="input"
+                                                formControlName="password"
+                                            >
+                                            <span class="bar"></span>
+                                            <label class="label">
+                                                <span class="label-char" style="--index: 0">C</span>
+                                                <span class="label-char" style="--index: 1">o</span>
+                                                <span class="label-char" style="--index: 2">n</span>
+                                                <span class="label-char" style="--index: 3">t</span>
+                                                <span class="label-char" style="--index: 4">r</span>
+                                                <span class="label-char" style="--index: 5">a</span>
+                                                <span class="label-char" style="--index: 6">s</span>
+                                                <span class="label-char" style="--index: 7">e</span>
+                                                <span class="label-char" style="--index: 8">ñ</span>
+                                                <span class="label-char" style="--index: 9">a</span>                       
+                                            </label>
+                                            <div *ngIf="formRegistro.get('password')?.hasError('required') && formRegistro.get('password')?.touched; else ErrorLength">
+                                                <p class="errorText">Campo requerido*</p>
+                                            </div>
+                                            <ng-template #ErrorLength>  
+                                                <div *ngIf="formRegistro.get('password')?.hasError('minlength') && formRegistro.get('conf_pass')?.touched">
+                                                    <p class="errorText">Debe contener más de 8 caracteres</p>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 col-md-6">
+                                        <div class="wave-group mb-4">
+                                            <input 
+                                                required="required" 
+                                                type="password" 
+                                                class="input"
+                                                formControlName="conf_pass"
+                                            >
+                                            <span class="bar"></span>
+                                            <label class="label">
+                                                <span class="label-char" style="--index: 0">C</span>
+                                                <span class="label-char" style="--index: 1">o</span>
+                                                <span class="label-char" style="--index: 2">n</span>
+                                                <span class="label-char" style="--index: 3">f</span>
+                                                <span class="label-char" style="--index: 4">i</span>
+                                                <span class="label-char" style="--index: 5">r</span>
+                                                <span class="label-char" style="--index: 6">m</span>
+                                                <span class="label-char" style="--index: 7">a</span>
+                                                <span class="label-char" style="--index: 8">r</span>
+                                                <span class="blanco" style="--index: 9">-</span>
+                                                <span class="label-char" style="--index: 10">c</span>
+                                                <span class="label-char" style="--index: 11">o</span>
+                                                <span class="label-char" style="--index: 12">n</span>
+                                                <span class="label-char" style="--index: 13">t</span>
+                                                <span class="label-char" style="--index: 14">r</span>
+                                                <span class="label-char" style="--index: 15">a</span>
+                                                <span class="label-char" style="--index: 16">s</span>
+                                                <span class="label-char" style="--index: 17">e</span>
+                                                <span class="label-char" style="--index: 18">ñ</span>
+                                                <span class="label-char" style="--index: 19">a</span>                      
+                                            </label>
+                                            <div *ngIf="formRegistro.get('conf_pass')?.hasError('required') && formRegistro.get('conf_pass')?.touched; else ErrorMatch">
+                                                <p class="errorText">Campo requerido*</p>
+                                            </div>
+                                            <ng-template #ErrorMatch>
+                                                <div *ngIf="formRegistro.get('conf_pass')?.hasError('noCoincide') && formRegistro.get('conf_pass')?.touched">
+                                                    <p class="errorText">Las contraseñas no coinciden</p>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 mb-4">
+                                        <button class="btn-31" [disabled]="formRegistro.invalid">
+                                            <span class="text-container">
+                                                <span class="text">Aceptar</span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </button>
-                </a>
-                <p class="text-6xl">Registro</p>
-            </div>
-            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
-                <div class="wave-group">
-                    <input 
-                        required="required" 
-                        type="text" 
-                        class="input"
-                        [(ngModel)]="name"
-                    >
-                    <span class="bar"></span>
-                    <label class="label">
-                      <span class="label-char" style="--index: 0">N</span>
-                      <span class="label-char" style="--index: 1">o</span>
-                      <span class="label-char" style="--index: 2">m</span>
-                      <span class="label-char" style="--index: 3">b</span>
-                      <span class="label-char" style="--index: 4">r</span>
-                      <span class="label-char" style="--index: 5">e</span>
-                      <span class="label-char" style="--index: 6">(s)</span>
-                    </label>
+                    </div>
                 </div>
-            </div>
-            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
-                <div class="wave-group">
-                    <input 
-                        required="required" 
-                        type="text" 
-                        class="input"
-                        [(ngModel)]="firstSurname"
-                    >
-                    <span class="bar"></span>
-                    <label class="label">
-                        <span class="label-char" style="--index: 0">P</span>
-                        <span class="label-char" style="--index: 1">r</span>
-                        <span class="label-char" style="--index: 2">i</span>
-                        <span class="label-char" style="--index: 3">m</span>
-                        <span class="label-char" style="--index: 4">e</span>
-                        <span class="label-char" style="--index: 5">r</span>
-                        <span class="blanco" style="--index: 6">-</span>
-                        <span class="label-char" style="--index: 7">a</span>
-                        <span class="label-char" style="--index: 8">p</span>
-                        <span class="label-char" style="--index: 9">e</span>
-                        <span class="label-char" style="--index: 10">l</span>
-                        <span class="label-char" style="--index: 11">l</span>
-                        <span class="label-char" style="--index: 12">i</span>
-                        <span class="label-char" style="--index: 13">d</span>
-                        <span class="label-char" style="--index: 14">o</span>
-                    </label>
-                </div>
-            </div>
-            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
-                <div class="wave-group">
-                    <input 
-                        required="required" 
-                        type="text" 
-                        class="input"
-                        [(ngModel)]="secondSurname"
-                    >
-                    <span class="bar"></span>
-                    <label class="label">
-                        <span class="label-char" style="--index: 0">S</span>
-                        <span class="label-char" style="--index: 1">e</span>
-                        <span class="label-char" style="--index: 2">g</span>
-                        <span class="label-char" style="--index: 3">u</span>
-                        <span class="label-char" style="--index: 4">n</span>
-                        <span class="label-char" style="--index: 5">d</span>
-                        <span class="label-char" style="--index: 6">o</span>
-                        <span class="blanco" style="--index: 7">-</span>
-                        <span class="label-char" style="--index: 8">a</span>
-                        <span class="label-char" style="--index: 9">p</span>
-                        <span class="label-char" style="--index: 10">e</span>
-                        <span class="label-char" style="--index: 11">l</span>
-                        <span class="label-char" style="--index: 12">l</span>
-                        <span class="label-char" style="--index: 13">i</span>
-                        <span class="label-char" style="--index: 14">d</span>
-                        <span class="label-char" style="--index: 15">o</span>                        
-                    </label>
-                </div>
-            </div>
-            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
-                <div class="wave-group">
-                    <input 
-                        required="required" 
-                        type="text" 
-                        class="input"
-                        [(ngModel)]="telephone"
-                    >
-                    <span class="bar"></span>
-                    <label class="label">
-                        <span class="label-char" style="--index: 0">T</span>
-                        <span class="label-char" style="--index: 1">e</span>
-                        <span class="label-char" style="--index: 2">l</span>
-                        <span class="label-char" style="--index: 3">é</span>
-                        <span class="label-char" style="--index: 4">f</span>
-                        <span class="label-char" style="--index: 5">o</span>
-                        <span class="label-char" style="--index: 6">n</span>
-                        <span class="label-char" style="--index: 7">o</span>                       
-                    </label>
-                </div>
-            </div>
-            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
-                <div class="wave-group">
-                    <input 
-                        required="required" 
-                        type="text" 
-                        class="input"
-                        [(ngModel)]="telephone"
-                    >
-                    <span class="bar"></span>
-                    <label class="label">
-                        <span class="label-char" style="--index: 0">E</span>
-                        <span class="label-char" style="--index: 1">m</span>
-                        <span class="label-char" style="--index: 2">a</span>
-                        <span class="label-char" style="--index: 3">i</span>
-                        <span class="label-char" style="--index: 4">l</span>                     
-                    </label>
-                </div>
-            </div>
-            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
-                <div class="wave-group">
-                    <input 
-                        required="required" 
-                        type="password" 
-                        class="input"
-                        [(ngModel)] = "password"
-                    >
-                    <span class="bar"></span>
-                    <label class="label">
-                        <span class="label-char" style="--index: 0">C</span>
-                        <span class="label-char" style="--index: 1">o</span>
-                        <span class="label-char" style="--index: 2">n</span>
-                        <span class="label-char" style="--index: 3">t</span>
-                        <span class="label-char" style="--index: 4">r</span>
-                        <span class="label-char" style="--index: 5">a</span>
-                        <span class="label-char" style="--index: 6">s</span>
-                        <span class="label-char" style="--index: 7">e</span>
-                        <span class="label-char" style="--index: 8">ñ</span>
-                        <span class="label-char" style="--index: 9">a</span>                       
-                    </label>
-                </div>
-            </div>
-            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
-                <div class="wave-group">
-                    <input 
-                        required="required" 
-                        type="password" 
-                        class="input"
-                        [(ngModel)]="confirm_parr"
-                    >
-                    <span class="bar"></span>
-                    <label class="label">
-                        <span class="label-char" style="--index: 0">C</span>
-                        <span class="label-char" style="--index: 1">o</span>
-                        <span class="label-char" style="--index: 2">n</span>
-                        <span class="label-char" style="--index: 3">f</span>
-                        <span class="label-char" style="--index: 4">i</span>
-                        <span class="label-char" style="--index: 5">r</span>
-                        <span class="label-char" style="--index: 6">m</span>
-                        <span class="label-char" style="--index: 7">a</span>
-                        <span class="label-char" style="--index: 8">r</span>
-                        <span class="blanco" style="--index: 9">-</span>
-                        <span class="label-char" style="--index: 10">c</span>
-                        <span class="label-char" style="--index: 11">o</span>
-                        <span class="label-char" style="--index: 12">n</span>
-                        <span class="label-char" style="--index: 13">t</span>
-                        <span class="label-char" style="--index: 14">r</span>
-                        <span class="label-char" style="--index: 15">a</span>
-                        <span class="label-char" style="--index: 16">s</span>
-                        <span class="label-char" style="--index: 17">e</span>
-                        <span class="label-char" style="--index: 18">ñ</span>
-                        <span class="label-char" style="--index: 19">a</span>                      
-                    </label>
-                </div>
-            </div>
-            <div class="flex align-items-center justify-content-center col-8 sm:col-12">
-                <button class="btn-31">
-                    <span class="text-container">
-                      <span class="text">Aceptar</span>
-                    </span>
-                </button>
             </div>
         </div>
     </div>
 </div>
-
