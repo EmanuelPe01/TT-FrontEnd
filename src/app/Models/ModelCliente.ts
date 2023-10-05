@@ -6,3 +6,8 @@ export interface registrarCliente{
     email:          string,
     password:       string
 }
+
+export interface loginCliente {
+    email:          string,
+    password:       string
+}
