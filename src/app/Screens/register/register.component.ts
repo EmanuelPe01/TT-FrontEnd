@@ -23,7 +23,7 @@ export class RegisterComponent {
       name: ['', [Validators.required]],
       firstSurname: ['', [Validators.required]],
       secondSurname: ['', [Validators.required]],
-      telephone: ['', [Validators.required, this.validarNumeroTelefono]],
+      telephone: ['', [this.validarNumeroTelefono]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       conf_pass: ['', [Validators.required]]
@@ -37,6 +37,7 @@ export class RegisterComponent {
       const datosForm = this.formRegistro.value;
       delete datosForm.conf_pass;
       const cliente: registrarCliente = datosForm
+      cliente.id_rol = 1;
 
       this.user_service.saveClient(cliente).subscribe(
         (data) => {
@@ -52,7 +53,7 @@ export class RegisterComponent {
 
   //Errores de validación
   validarNumeroTelefono(control: { value: string; }) {
-    const telefonoRegex = /^[0-9]{10}$/; 
+    const telefonoRegex = /^([0-9]{10})?$/; 
     if (telefonoRegex.test(control.value)) {
       return null; 
     } else {

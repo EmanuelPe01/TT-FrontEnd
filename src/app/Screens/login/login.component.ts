@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
-import { loginCliente } from 'src/app/Models';
+import { loginUsuario, infoLogin } from 'src/app/Models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
@@ -19,18 +19,18 @@ export class LoginComponent {
   ){
     this.formLogin = this.form.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required]],
     })
   }
   
-  login() {
+  login(){
     if(this.formLogin.valid) {
       const datosForm = this.formLogin.value;
-      const cliente: loginCliente = datosForm
+      const cliente: loginUsuario = datosForm
 
       this.user_service.login(cliente).subscribe(
-        (data: any) => {
-          this.showMessageSucces("Ieeessss");
+        (data: infoLogin) => {
+          this.showMessageSucces("Sesion iniciada como " + data.user.rol.rol_name);
           this.user_service.setToken(data.token);
         },
         (error) => {
