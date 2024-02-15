@@ -13,30 +13,39 @@
                                     <input required="required" type="text" class="input" formControlName="email">
                                     <span class="bar"></span>
                                     <label class="label">
-                                      <span class="label-char" style="--index: 0">U</span>
-                                      <span class="label-char" style="--index: 1">s</span>
-                                      <span class="label-char" style="--index: 2">u</span>
-                                      <span class="label-char" style="--index: 3">a</span>
-                                      <span class="label-char" style="--index: 4">r</span>
-                                      <span class="label-char" style="--index: 5">i</span>
-                                      <span class="label-char" style="--index: 6">o</span>
+                                        <span class="label-char" style="--index: 0">E</span>
+                                        <span class="label-char" style="--index: 1">m</span>
+                                        <span class="label-char" style="--index: 2">a</span>
+                                        <span class="label-char" style="--index: 3">i</span>
+                                        <span class="label-char" style="--index: 4">l</span>                     
                                     </label>
+                                    <div *ngIf="formLogin.get('email')?.hasError('required') && formLogin.get('email')?.touched; else ErrorMail">
+                                        <p class="errorText">Campo requerido*</p>
+                                    </div>
+                                    <ng-template #ErrorMail>
+                                        <div *ngIf="formLogin.get('email')?.hasError('email') && formLogin.get('email')?.touched">
+                                            <p class="errorText">Ingresa un correo electrónico válido</p>
+                                        </div>
+                                    </ng-template>
                                 </div>
                                 <div class="wave-group mb-4">
                                     <input required="required" type="password" class="input" formControlName="password">
                                     <span class="bar"></span>
                                     <label class="label">
-                                      <span class="label-char" style="--index: 0">C</span>
-                                      <span class="label-char" style="--index: 1">o</span>
-                                      <span class="label-char" style="--index: 2">n</span>
-                                      <span class="label-char" style="--index: 3">t</span>
-                                      <span class="label-char" style="--index: 4">r</span>
-                                      <span class="label-char" style="--index: 5">a</span>
-                                      <span class="label-char" style="--index: 6">s</span>
-                                      <span class="label-char" style="--index: 7">e</span>
-                                      <span class="label-char" style="--index: 8">ñ</span>
-                                      <span class="label-char" style="--index: 9">a</span>
+                                        <span class="label-char" style="--index: 0">C</span>
+                                        <span class="label-char" style="--index: 1">o</span>
+                                        <span class="label-char" style="--index: 2">n</span>
+                                        <span class="label-char" style="--index: 3">t</span>
+                                        <span class="label-char" style="--index: 4">r</span>
+                                        <span class="label-char" style="--index: 5">a</span>
+                                        <span class="label-char" style="--index: 6">s</span>
+                                        <span class="label-char" style="--index: 7">e</span>
+                                        <span class="label-char" style="--index: 8">ñ</span>
+                                        <span class="label-char" style="--index: 9">a</span>
                                     </label>
+                                    <div *ngIf="formLogin.get('password')?.hasError('required') && formLogin.get('password')?.touched">
+                                        <p class="errorText">Campo requerido*</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +56,7 @@
                                 </span>
                             </button>
                         </div>
-                    </form>               
+                    </form>
                     <div class="col col-12 mb-4">
                         <a routerLink="/register">
                             ¿No tienes cuenta?

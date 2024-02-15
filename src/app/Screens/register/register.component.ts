@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { registrarCliente } from 'src/app/Models';
+import { registrarUsuario } from 'src/app/Models';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
 import Swal from 'sweetalert2';
 
@@ -23,7 +23,7 @@ export class RegisterComponent {
       name: ['', [Validators.required]],
       firstSurname: ['', [Validators.required]],
       secondSurname: ['', [Validators.required]],
-      telephone: ['', [this.validarNumeroTelefono]],
+      telephone: ['', [Validators.required, this.validarNumeroTelefono]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       conf_pass: ['', [Validators.required]]
@@ -36,10 +36,10 @@ export class RegisterComponent {
     if(this.formRegistro.valid) {
       const datosForm = this.formRegistro.value;
       delete datosForm.conf_pass;
-      const cliente: registrarCliente = datosForm
-      cliente.id_rol = 1;
+      const usuario: registrarUsuario = datosForm
+      usuario.id_rol = 1;
 
-      this.user_service.saveClient(cliente).subscribe(
+      this.user_service.saveClient(usuario).subscribe(
         (data) => {
           this.showMessageSucces("Registro exitoso");
           this.router.navigate(["/"]);

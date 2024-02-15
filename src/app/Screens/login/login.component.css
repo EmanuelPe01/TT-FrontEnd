@@ -218,6 +218,12 @@ a:hover{
     text-decoration:underline;
 }
 
+.errorText{
+  text-align: left;
+  color: red;
+  font-size: 10px;
+}  
+
 @media (max-width: 768px) {
     .input {
         max-width: 20em;

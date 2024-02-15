@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
 import { loginUsuario, infoLogin } from 'src/app/Models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,6 +17,7 @@ export class LoginComponent {
   constructor(
       private form: FormBuilder,
       private user_service: UserServiceService,
+      private router: Router
   ){
     this.formLogin = this.form.group({
       email: ['', [Validators.required, Validators.email]],
@@ -32,9 +34,10 @@ export class LoginComponent {
         (data: infoLogin) => {
           this.showMessageSucces("Sesion iniciada como " + data.user.rol.rol_name);
           this.user_service.setToken(data.token);
+          this.router.navigate(['dashboard']);
         },
         (error) => {
-          this.showErrorMessage();
+          
         }
       )
     }

@@ -1,6 +1,6 @@
 import { Rol } from "./ModelRol"
 
-export interface registrarCliente{
+export interface registrarUsuario{
     id_rol:         number
     name:           string,
     firstSurname:   string,
