@@ -11,14 +11,6 @@ export class UserServiceService {
 
   constructor(private http: HttpClient, private cookie: CookieService) { }
 
-  saveClient(usuario: registrarUsuario){
-    return this.http.post(url + 'createUser', usuario);
-  } 
-
-  login(usuario: loginUsuario): Observable<infoLogin>{
-    return this.http.post<infoLogin>(url + 'login', usuario);
-  }
-
   setToken(token: string) {
     this.cookie.set('token', token);
   }
@@ -31,6 +23,21 @@ export class UserServiceService {
     this.cookie.delete('token');
   }
 
+  saveClient(usuario: registrarUsuario){
+    return this.http.post(url + 'createUser', usuario);
+  } 
+
+  login(usuario: loginUsuario): Observable<infoLogin>{
+    return this.http.post<infoLogin>(url + 'login', usuario);
+  }
+  
+  logout(): Observable<any> { 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.post(url + 'logout', {}, { headers });
+  }
+
   isAuthenticated(): boolean {
     //Consumir metodo para comprobar token en backend
     const token = this.cookie.get('token'); 
@@ -40,10 +47,8 @@ export class UserServiceService {
     return false
   }
 
-  logout(): Observable<any> { 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.getToken()}`
-    });
-    return this.http.post(url + 'logout', {}, { headers });
+  sendEmail(email: any) {
+    return this.http.post(url + 'recoveryPassword', email);
   }
+
 }

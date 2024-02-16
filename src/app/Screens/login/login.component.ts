@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   formLogin: FormGroup;
-  error: string = "Un error";
+  formRecoveryPass: FormGroup;
 
   constructor(
       private form: FormBuilder,
@@ -22,7 +22,11 @@ export class LoginComponent {
     this.formLogin = this.form.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-    })
+    });
+
+    this.formRecoveryPass = this.form.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
   }
   
   login(){
@@ -43,7 +47,31 @@ export class LoginComponent {
     }
   }
 
-  showMessageSucces(message: String){
+  sendEmail() {
+    if(this.formRecoveryPass.valid) {
+      this.showLoadingMessage(true);
+      const button = document.getElementById('cerrarModalButton'); 
+      const datosForm = this.formRecoveryPass.value;
+      const email = {
+        'email': datosForm.email
+      }
+
+      this.user_service.sendEmail(email).subscribe(
+        (data:any) => {
+          this.showLoadingMessage(false);
+          setTimeout(() => {}, 100);
+          this.showMessageSucces('El correo se a enviado correctamente a ' + email.email);
+          if(button) button.setAttribute('data-bs-dismiss', 'modal');
+          
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }
+  }
+
+  showMessageSucces(message: string){
     Swal.fire({
       icon: 'success',
       title: message,
@@ -57,5 +85,16 @@ export class LoginComponent {
       icon: 'error',
       title: 'Algo salió mal',
     })
+  }
+
+  showLoadingMessage(flag: boolean) {
+    if (flag) {
+      Swal.fire({
+        title: 'Enviando correo',
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+    }
   }
 }

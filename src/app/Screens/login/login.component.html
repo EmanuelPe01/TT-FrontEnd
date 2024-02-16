@@ -17,13 +17,15 @@
                                         <span class="label-char" style="--index: 1">m</span>
                                         <span class="label-char" style="--index: 2">a</span>
                                         <span class="label-char" style="--index: 3">i</span>
-                                        <span class="label-char" style="--index: 4">l</span>                     
+                                        <span class="label-char" style="--index: 4">l</span>
                                     </label>
-                                    <div *ngIf="formLogin.get('email')?.hasError('required') && formLogin.get('email')?.touched; else ErrorMail">
+                                    <div
+                                        *ngIf="formLogin.get('email')?.hasError('required') && formLogin.get('email')?.touched; else ErrorMail">
                                         <p class="errorText">Campo requerido*</p>
                                     </div>
                                     <ng-template #ErrorMail>
-                                        <div *ngIf="formLogin.get('email')?.hasError('email') && formLogin.get('email')?.touched">
+                                        <div
+                                            *ngIf="formLogin.get('email')?.hasError('email') && formLogin.get('email')?.touched">
                                             <p class="errorText">Ingresa un correo electrónico válido</p>
                                         </div>
                                     </ng-template>
@@ -43,7 +45,8 @@
                                         <span class="label-char" style="--index: 8">ñ</span>
                                         <span class="label-char" style="--index: 9">a</span>
                                     </label>
-                                    <div *ngIf="formLogin.get('password')?.hasError('required') && formLogin.get('password')?.touched">
+                                    <div
+                                        *ngIf="formLogin.get('password')?.hasError('required') && formLogin.get('password')?.touched">
                                         <p class="errorText">Campo requerido*</p>
                                     </div>
                                 </div>
@@ -62,10 +65,65 @@
                             ¿No tienes cuenta?
                         </a>
                     </div>
-                    <div class="col col-12 mb-4">
-                        <a routerLink="">
-                            ¿Olvidaste tu contraseña?
-                        </a>
+                    <div>
+                        <div class="col col-12 mb-4">
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#recoveryPass">
+                                ¿Olvidaste tu contraseña?
+                            </a>
+                        </div>
+                        <div>
+                            <div class="modal fade" id="recoveryPass" tabindex="-1" aria-labelledby="recoveryPassLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="recoveryPassLabel">Recuperar contraseña
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <form (ngSubmit)="sendEmail()" [formGroup]="formRecoveryPass">
+                                            <div class="modal-body">
+                                                <div class="col col-12">
+                                                    <div class="card-body">
+                                                        <div class="wave-group mb-4">
+                                                            <input required="required" type="text" class="input"
+                                                                formControlName="email">
+                                                            <span class="bar"></span>
+                                                            <label class="label">
+                                                                <span class="label-char" style="--index: 0">E</span>
+                                                                <span class="label-char" style="--index: 1">m</span>
+                                                                <span class="label-char" style="--index: 2">a</span>
+                                                                <span class="label-char" style="--index: 3">i</span>
+                                                                <span class="label-char" style="--index: 4">l</span>
+                                                            </label>
+                                                            <div
+                                                                *ngIf="formRecoveryPass.get('email')?.hasError('required') && formRecoveryPass.get('email')?.touched; else ErrorMail">
+                                                                <p class="errorText">Campo requerido*</p>
+                                                            </div>
+                                                            <ng-template #ErrorMail>
+                                                                <div
+                                                                    *ngIf="formRecoveryPass.get('email')?.hasError('email') && formRecoveryPass.get('email')?.touched">
+                                                                    <p class="errorText">Ingresa un correo electrónico
+                                                                        válido</p>
+                                                                </div>
+                                                            </ng-template>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <button class="btn-31" id="cerrarModalButton" [disabled]="formRecoveryPass.invalid">
+                                                    <span class="text-container">
+                                                        <span class="text">Enviar</span>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

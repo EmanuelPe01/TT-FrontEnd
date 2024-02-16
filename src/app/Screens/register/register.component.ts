@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent {
   formRegistro: FormGroup;
-  error: string = "Un error";
 
   constructor(
       private form: FormBuilder,
@@ -45,6 +44,7 @@ export class RegisterComponent {
           this.router.navigate(["/"]);
         },
         (error) => {
+          console.log(error)
           this.showErrorMessage();
         }
       )
@@ -53,7 +53,7 @@ export class RegisterComponent {
 
   //Errores de validación
   validarNumeroTelefono(control: { value: string; }) {
-    const telefonoRegex = /^([0-9]{10})?$/; 
+    const telefonoRegex = /^(\d{10})?$/; 
     if (telefonoRegex.test(control.value)) {
       return null; 
     } else {
@@ -72,7 +72,7 @@ export class RegisterComponent {
     }
   }
 
-  showMessageSucces(message: String){
+  showMessageSucces(message: string){
     Swal.fire({
       icon: 'success',
       title: message,
