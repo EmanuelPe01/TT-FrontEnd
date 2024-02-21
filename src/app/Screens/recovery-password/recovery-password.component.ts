@@ -14,6 +14,12 @@ import Swal from 'sweetalert2';
 export class RecoveryPasswordComponent {
   formRestorePassword: FormGroup;
   recoveryPassToken: string = "";
+  flagShowPass: boolean = false;
+  inputTypePass: string = "password";
+  iconButton: string = "fa-regular fa-eye";
+  flagShowPass_conf: boolean = false;
+  inputTypePass_conf: string = "password";
+  iconButton_conf: string = "fa-regular fa-eye";
 
   constructor(
     private activatedRute: ActivatedRoute,
@@ -37,11 +43,12 @@ export class RecoveryPasswordComponent {
       this.userService.validateRecoveryToken(recoveryPassToken).pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 404) {
-            console.log('El recurso no se encuentra');
+            this.showErrorMessage("Este enlace ya fue utilizado");
           } else {
             console.error('Ocurrió un error:', error.error.message);
           }
           this.route.navigate(['/']);
+
           return "";
         })
       ).subscribe();
@@ -68,7 +75,7 @@ export class RecoveryPasswordComponent {
       this.userService.restorePassword(this.recoveryPassToken, password)
       .pipe(
           catchError((error: HttpErrorResponse) => {
-            this.showErrorMessage();
+            this.showErrorMessage(error.message);
             return "";
         })        
       ).subscribe(
@@ -80,6 +87,29 @@ export class RecoveryPasswordComponent {
     }
   }
 
+  
+  showPassword() {
+    if(!this.flagShowPass) {
+      this.inputTypePass = "password";
+      this.iconButton = "fa-regular fa-eye"
+    } else {
+      this.inputTypePass = "text"
+      this.iconButton = "fa-regular fa-eye-slash"
+    }
+    this.flagShowPass = !this.flagShowPass;
+  }
+
+  showPassword_conf() {
+    if(!this.flagShowPass_conf) {
+      this.inputTypePass_conf = "password";
+      this.iconButton_conf = "fa-regular fa-eye"
+    } else {
+      this.inputTypePass_conf = "text"
+      this.iconButton_conf = "fa-regular fa-eye-slash"
+    }
+    this.flagShowPass_conf = !this.flagShowPass_conf;
+  }
+
   showMessageSucces(message: string){
     Swal.fire({
       icon: 'success',
@@ -89,10 +119,12 @@ export class RecoveryPasswordComponent {
     })
   }
 
-  showErrorMessage(){
+  showErrorMessage(message: string){
     Swal.fire({
       icon: 'error',
-      title: 'Algo salió mal',
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
     })
   }
 }

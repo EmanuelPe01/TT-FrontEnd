@@ -48,7 +48,7 @@ export class UserServiceService {
   }
 
   sendEmail(email: any) {
-    return this.http.post(url + 'recoveryPassword', email);
+    return this.http.post(url + 'sendEmailToRestorePassword', email);
   }
 
   validateRecoveryToken(token: string) {

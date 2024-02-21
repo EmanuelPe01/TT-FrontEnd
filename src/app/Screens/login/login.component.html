@@ -56,18 +56,27 @@
                                 </div>
                             </div>
                             <div class="col col-2">
-                                <button class="btn btn-outline-secondary" 
+                                <button type="button" class="btn btn-outline-secondary" 
                                         style="
                                             --bs-btn-color: #000;
                                             --bs-btn-hover-bg: #000;
-                                            --bs-btn-hover-border-color: #000;
+                                            --bs-btn-hover-border-color: #00000000;
                                             --bs-btn-font-size: 1rem;
+                                            --bs-btn-padding-y: .4rem; 
+                                            --bs-btn-padding-x: .6rem;
                                         "
                                         (click)="showPassword()"
                                >
-                                    <i class="fa-regular fa-eye"></i>
+                                    <i class="{{iconButton}}"></i>
                                 </button>
                             </div>
+                        </div>
+                        <div class="col col-12 mb-4">
+                            <button class="btn-31" [disabled]="formLogin.invalid">
+                                <span class="text-container">
+                                    <span class="text">Aceptar</span>
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </form>

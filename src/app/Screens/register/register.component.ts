@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 import { registrarUsuario } from 'src/app/Models';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
 import Swal from 'sweetalert2';
@@ -12,12 +14,18 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent {
   formRegistro: FormGroup;
+  flagShowPass: boolean = false;
+  inputTypePass: string = "password";
+  iconButton: string = "fa-regular fa-eye";
+  flagShowPass_conf: boolean = false;
+  inputTypePass_conf: string = "password";
+  iconButton_conf: string = "fa-regular fa-eye";
 
   constructor(
-      private form: FormBuilder,
-      private user_service: UserServiceService,
-      private router: Router
-  ){
+    private form: FormBuilder,
+    private user_service: UserServiceService,
+    private router: Router
+  ) {
     this.formRegistro = this.form.group({
       name: ['', [Validators.required]],
       firstSurname: ['', [Validators.required]],
@@ -31,33 +39,42 @@ export class RegisterComponent {
     });
   }
 
-  saveClient(){
-    if(this.formRegistro.valid) {
+  saveClient() {
+    if (this.formRegistro.valid) {
+      this.showLoadingMessage(true);
       const datosForm = this.formRegistro.value;
       delete datosForm.conf_pass;
       const usuario: registrarUsuario = datosForm
       usuario.id_rol = 1;
 
-      this.user_service.saveClient(usuario).subscribe(
-        (data) => {
-          this.showMessageSucces("Registro exitoso");
-          this.router.navigate(["/"]);
-        },
-        (error) => {
-          console.log(error)
-          this.showErrorMessage();
-        }
-      )
+      this.user_service.saveClient(usuario)
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            this.showLoadingMessage(false);
+            if (error.status == 400) 
+              this.showErrorMessage("Este correo electrónico ya esta registrado");            
+            else if (error.status == 500 )
+              this.showErrorMessage("Error en el servidor, intente más tarde");
+
+            console.log(error.message);
+            return "";
+          })
+        ).subscribe(
+          (data) => {
+            this.showLoadingMessage(false);
+            this.showMessageSucces("Registro exitoso");
+            this.router.navigate(["/"]);
+        })
     }
   }
 
-  //Errores de validación
+  //validación de errores
   validarNumeroTelefono(control: { value: string; }) {
-    const telefonoRegex = /^(\d{10})?$/; 
+    const telefonoRegex = /^(\d{10})?$/;
     if (telefonoRegex.test(control.value)) {
-      return null; 
+      return null;
     } else {
-      return { telefonoInvalido: true }; 
+      return { telefonoInvalido: true };
     }
   }
 
@@ -72,7 +89,29 @@ export class RegisterComponent {
     }
   }
 
-  showMessageSucces(message: string){
+  showPassword() {
+    if (!this.flagShowPass) {
+      this.inputTypePass = "password";
+      this.iconButton = "fa-regular fa-eye"
+    } else {
+      this.inputTypePass = "text"
+      this.iconButton = "fa-regular fa-eye-slash"
+    }
+    this.flagShowPass = !this.flagShowPass;
+  }
+
+  showPassword_conf() {
+    if (!this.flagShowPass_conf) {
+      this.inputTypePass_conf = "password";
+      this.iconButton_conf = "fa-regular fa-eye"
+    } else {
+      this.inputTypePass_conf = "text"
+      this.iconButton_conf = "fa-regular fa-eye-slash"
+    }
+    this.flagShowPass_conf = !this.flagShowPass_conf;
+  }
+
+  showMessageSucces(message: string) {
     Swal.fire({
       icon: 'success',
       title: message,
@@ -81,10 +120,23 @@ export class RegisterComponent {
     })
   }
 
-  showErrorMessage(){
+  showErrorMessage(message: string) {
     Swal.fire({
       icon: 'error',
-      title: 'Algo salió mal',
+      title: message,
+      confirmButtonColor: "#000",
+      confirmButtonText: "Aceptar",
     })
+  }
+
+  showLoadingMessage(flag: boolean) {
+    if (flag) {
+      Swal.fire({
+        title: 'Registrando',
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+    }
   }
 }

@@ -12,14 +12,16 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   formLogin: FormGroup;
-  flagShowPass: boolean = false;
+  flagShowPass: boolean;
   inputTypePass: string = "password";
+  iconButton: string = "fa-regular fa-eye";
 
   constructor(
       private form: FormBuilder,
       private user_service: UserServiceService,
       private router: Router
   ){
+    this.flagShowPass = false;
     this.formLogin = this.form.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -54,7 +56,7 @@ export class LoginComponent {
       confirmButtonColor: "#000",
       confirmButtonText: "Enviar correo",
       cancelButtonText: "Cancelar",
-      cancelButtonColor: "##6E1300"
+      cancelButtonColor: "#6E1300"
     });
     if (userEmail) {
       this.showLoadingMessage(true);
@@ -77,7 +79,13 @@ export class LoginComponent {
   }
 
   showPassword() {
-    this.flagShowPass ? this.inputTypePass = "text" : this.inputTypePass = "password";
+    if(!this.flagShowPass) {
+      this.inputTypePass = "password";
+      this.iconButton = "fa-regular fa-eye"
+    } else {
+      this.inputTypePass = "text"
+      this.iconButton = "fa-regular fa-eye-slash"
+    }
     this.flagShowPass = !this.flagShowPass;
   }
 
