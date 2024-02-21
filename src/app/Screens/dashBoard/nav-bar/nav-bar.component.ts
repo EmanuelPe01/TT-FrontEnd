@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
 import Swal from 'sweetalert2';
 
@@ -9,37 +11,31 @@ import Swal from 'sweetalert2';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent {
+
+  @Input() navBarBrand: string = "";
+  @Input() urls: { nombre: string, url: string }[] = [];
+  @Input() labelNavBar: string = "";
+
   constructor (
     private user_service: UserServiceService,
     private route: Router
   ) { }
 
-  ngOnInit() {
-    this.isAuthenticated();
-  }
-
-  isAuthenticated() {
-    if(!this.user_service.isAuthenticated()) 
-      this.route.navigate(['/']);
-  }
-
   logOut() {
-    this.user_service.logout().subscribe(
+    this.user_service.logout().
+    pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => new Error("Error de conexión"));
+      })
+    ).subscribe(
       (data) => {
         this.user_service.deleteToken();
         this.route.navigate(['/']);
-      }, 
-      (error) => {
-        this.showErrorMessage();
-        console.log(error)
       }
     )
   }
 
-  showErrorMessage(){
-    Swal.fire({
-      icon: 'error',
-      title: 'Algo salió mal',
-    })
+  setItemName(itemName: string) {
+    this.navBarBrand = itemName;
   }
 }

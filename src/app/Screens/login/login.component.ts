@@ -19,50 +19,50 @@ export class LoginComponent {
   iconButton: string = "fa-regular fa-eye";
 
   constructor(
-      private form: FormBuilder,
-      private user_service: UserServiceService,
-      private router: Router
-  ){
+    private form: FormBuilder,
+    private user_service: UserServiceService,
+    private router: Router
+  ) {
     this.flagShowPass = false;
     this.formLogin = this.form.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
   }
-  
-  login(){
-    if(this.formLogin.valid) {
+
+  login() {
+    if (this.formLogin.valid) {
       const datosForm = this.formLogin.value;
       const cliente: loginUsuario = datosForm
 
       this.user_service.login(cliente)
-      .pipe(
-        catchError((error) => {
-          this.showLoadingMessage(false);
-          if (error instanceof HttpErrorResponse) {
-            switch (error.status) {
-              case 401:
-                this.showErrorMessage("Credenciales inválidas");
-                break;
-              case 404:
-                this.showErrorMessage("El usuario no existe");
-                break;
-              case 500:
-                this.showErrorMessage("Error en el servidor, intente más tarde");
-                break;
-              default:
-                this.showErrorMessage("Error inesperado");
+        .pipe(
+          catchError((error) => {
+            this.showLoadingMessage(false);
+            if (error instanceof HttpErrorResponse) {
+              switch (error.status) {
+                case 401:
+                  this.showErrorMessage("Credenciales inválidas");
+                  break;
+                case 404:
+                  this.showErrorMessage("El usuario no existe");
+                  break;
+                case 500:
+                  this.showErrorMessage("Error en el servidor, intente más tarde");
+                  break;
+                default:
+                  this.showErrorMessage("Error inesperado");
+              }
+            } else {
+              this.showErrorMessage("Error de conexión");
             }
-          } else {
-            this.showErrorMessage("Error de conexión");
-          }
-          return throwError(() => new Error("Login failed"));
-        })
-      ).subscribe(
-        (data: infoLogin) => {
-          this.user_service.setToken(data.token);
-          this.router.navigate(['dash-board']);
-        })
+            return throwError(() => new Error("Login failed"));
+          })
+        ).subscribe(
+          (data: infoLogin) => {
+            this.user_service.setToken(data.token);
+            this.router.navigate(['dash-board']);
+          })
     }
   }
 
@@ -83,17 +83,33 @@ export class LoginComponent {
       const email = {
         'email': userEmail
       }
-      this.user_service.sendEmail(email).subscribe(
-        (data:any) => {
+      this.user_service.sendEmail(email).pipe(
+        catchError((error: HttpErrorResponse) => {
           this.showLoadingMessage(false);
-          setTimeout(() => {}, 100);
-          this.showMessageSucces('El correo se a enviado correctamente a ' + email.email); 
+          switch(error.status) {
+            case 404:
+              this.showErrorMessage("El email no está registrado");
+              break;
+            case 500: 
+              this.showErrorMessage("Error de conexión"); 
+              break;
+            default:
+              this.showErrorMessage("Error inesperado");
+              console.log(error)
+          }           
+          return "";
+        })
+      ).subscribe(
+        (data: any) => {
+          this.showLoadingMessage(false);
+          setTimeout(() => { }, 100);
+          this.showMessageSucces('Correo enviado a ' + email.email);
         })
     }
   }
 
   showPassword() {
-    if(!this.flagShowPass) {
+    if (!this.flagShowPass) {
       this.inputTypePass = "password";
       this.iconButton = "fa-regular fa-eye"
     } else {
@@ -103,7 +119,7 @@ export class LoginComponent {
     this.flagShowPass = !this.flagShowPass;
   }
 
-  showMessageSucces(message: string){
+  showMessageSucces(message: string) {
     Swal.fire({
       icon: 'success',
       title: message,

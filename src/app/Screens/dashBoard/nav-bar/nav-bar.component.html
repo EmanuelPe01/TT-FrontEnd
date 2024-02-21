@@ -1,5 +1,44 @@
-<div>
-    <button type="button" class="btn btn-danger" (click)="logOut()">    
-        Cerrar sesión
-    </button>
-</div>
+<!-- <button type="button" class="btn btn-danger" (click)="logOut()">    
+            Cerrar sesión
+        </button> -->
+<nav class="navbar border-bottom border-body" style="
+        background-color: #000;
+        color: #fff;
+    " data-bs-theme="dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#dashBoard"
+            aria-controls="dashBoard" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <h4 class="navbar-brand">{{navBarBrand}}</h4>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="dashBoard" aria-labelledby="dashBoardLabel"
+            style="background-color: #000; color: #fff; ">
+            <div class="offcanvas-header">
+                <button type="button" 
+                        class="btn btn-outline-secondary" 
+                        style="
+                            --bs-btn-color: #fff;
+                            --bs-btn-hover-bg: #000000;
+                            --bs-btn-hover-border-color: #fff;
+                            --bs-btn-font-size: 1rem;
+                            --bs-btn-padding-y: .4rem; 
+                            --bs-btn-padding-x: .6rem;
+                        "
+                        (click)="logOut()"
+                        >
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+                <h4 class="offcanvas-title" id="dashBoardLabel">{{labelNavBar}}</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body fs-5">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li *ngFor="let item of urls" class="nav-item">
+                        <a routerLink="{{item.url}}" class="nav-link" (click)="setItemName(item.nombre)">{{ item.nombre
+                            }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
-import { infoLogin, loginUsuario, registrarUsuario, url } from 'src/app/Models';
+import { Observable, catchError, throwError } from 'rxjs';
+import { infoLogin, informacionUsuario, loginUsuario, registrarUsuario, url } from 'src/app/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -38,13 +38,11 @@ export class UserServiceService {
     return this.http.post(url + 'logout', {}, { headers });
   }
 
-  isAuthenticated(): boolean {
-    //Consumir metodo para comprobar token en backend
-    const token = this.cookie.get('token'); 
-    if(token && token !== '')
-      return true
-
-    return false
+  isAuthenticated(): Observable<infoLogin> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.get<infoLogin>(url + 'check-status', { headers });
   }
 
   sendEmail(email: any) {

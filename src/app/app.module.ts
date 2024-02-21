@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 import { RecoveryPasswordComponent } from './Screens/recovery-password/recovery-password.component';
 import { NavBarComponent } from './Screens/dashBoard/nav-bar/nav-bar.component';
+import { ScreenControllerComponent } from './Screens/dashBoard/screen-controller/screen-controller.component';
+import { RutinasComponent } from './Screens/dashBoard/rutinas/rutinas.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { NavBarComponent } from './Screens/dashBoard/nav-bar/nav-bar.component';
     LoginComponent,
     RegisterComponent,
     RecoveryPasswordComponent,
-    NavBarComponent
+    NavBarComponent,
+    ScreenControllerComponent,
+    RutinasComponent
   ],
   imports: [
     BrowserModule,
