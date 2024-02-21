@@ -11,13 +11,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 import { RecoveryPasswordComponent } from './Screens/recovery-password/recovery-password.component';
+import { NavBarComponent } from './Screens/dashBoard/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    RecoveryPasswordComponent
+    RecoveryPasswordComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

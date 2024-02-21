@@ -4,6 +4,8 @@ import { loginUsuario, infoLogin } from 'src/app/Models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -33,16 +35,34 @@ export class LoginComponent {
       const datosForm = this.formLogin.value;
       const cliente: loginUsuario = datosForm
 
-      this.user_service.login(cliente).subscribe(
+      this.user_service.login(cliente)
+      .pipe(
+        catchError((error) => {
+          this.showLoadingMessage(false);
+          if (error instanceof HttpErrorResponse) {
+            switch (error.status) {
+              case 401:
+                this.showErrorMessage("Credenciales inválidas");
+                break;
+              case 404:
+                this.showErrorMessage("El usuario no existe");
+                break;
+              case 500:
+                this.showErrorMessage("Error en el servidor, intente más tarde");
+                break;
+              default:
+                this.showErrorMessage("Error inesperado");
+            }
+          } else {
+            this.showErrorMessage("Error de conexión");
+          }
+          return throwError(() => new Error("Login failed"));
+        })
+      ).subscribe(
         (data: infoLogin) => {
-          this.showMessageSucces("Sesion iniciada como " + data.user.rol.rol_name);
           this.user_service.setToken(data.token);
-          this.router.navigate(['dashboard']);
-        },
-        (error) => {
-          
-        }
-      )
+          this.router.navigate(['dash-board']);
+        })
     }
   }
 
@@ -68,13 +88,7 @@ export class LoginComponent {
           this.showLoadingMessage(false);
           setTimeout(() => {}, 100);
           this.showMessageSucces('El correo se a enviado correctamente a ' + email.email); 
-        },
-        (error) => {
-          this.showLoadingMessage(false);
-          console.log(error);
-          this.showErrorMessage();
-        }
-      )
+        })
     }
   }
 
@@ -98,10 +112,12 @@ export class LoginComponent {
     })
   }
 
-  showErrorMessage(){
+  showErrorMessage(message: string) {
     Swal.fire({
       icon: 'error',
-      title: 'Algo salió mal',
+      title: message,
+      confirmButtonColor: "#000",
+      confirmButtonText: "Aceptar",
     })
   }
 

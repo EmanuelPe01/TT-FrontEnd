@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-main-screen',
-  templateUrl: './main-screen.component.html',
-  styleUrls: ['./main-screen.component.css']
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.css']
 })
-export class MainScreenComponent implements OnInit {
-
-
+export class NavBarComponent {
   constructor (
     private user_service: UserServiceService,
     private route: Router
