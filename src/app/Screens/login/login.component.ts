@@ -12,7 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   formLogin: FormGroup;
-  formRecoveryPass: FormGroup;
+  flagShowPass: boolean = false;
+  inputTypePass: string = "password";
 
   constructor(
       private form: FormBuilder,
@@ -22,10 +23,6 @@ export class LoginComponent {
     this.formLogin = this.form.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-    });
-
-    this.formRecoveryPass = this.form.group({
-      email: ['', [Validators.required, Validators.email]],
     });
   }
   
@@ -47,28 +44,41 @@ export class LoginComponent {
     }
   }
 
-  sendEmail() {
-    if(this.formRecoveryPass.valid) {
+  async recoveryPassword() {
+    const { value: userEmail } = await Swal.fire({
+      title: "Ingresa tu email",
+      input: "email",
+      inputPlaceholder: "ejemplo@ejemplo.com",
+      validationMessage: "Email inválido",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      confirmButtonText: "Enviar correo",
+      cancelButtonText: "Cancelar",
+      cancelButtonColor: "##6E1300"
+    });
+    if (userEmail) {
       this.showLoadingMessage(true);
-      const button = document.getElementById('cerrarModalButton'); 
-      const datosForm = this.formRecoveryPass.value;
       const email = {
-        'email': datosForm.email
+        'email': userEmail
       }
-
       this.user_service.sendEmail(email).subscribe(
         (data:any) => {
           this.showLoadingMessage(false);
           setTimeout(() => {}, 100);
-          this.showMessageSucces('El correo se a enviado correctamente a ' + email.email);
-          if(button) button.setAttribute('data-bs-dismiss', 'modal');
-          
+          this.showMessageSucces('El correo se a enviado correctamente a ' + email.email); 
         },
         (error) => {
-          console.log(error)
+          this.showLoadingMessage(false);
+          console.log(error);
+          this.showErrorMessage();
         }
       )
     }
+  }
+
+  showPassword() {
+    this.flagShowPass ? this.inputTypePass = "text" : this.inputTypePass = "password";
+    this.flagShowPass = !this.flagShowPass;
   }
 
   showMessageSucces(message: string){

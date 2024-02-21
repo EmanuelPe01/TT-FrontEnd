@@ -51,4 +51,11 @@ export class UserServiceService {
     return this.http.post(url + 'recoveryPassword', email);
   }
 
+  validateRecoveryToken(token: string) {
+    return this.http.get(url + 'validateRecoveryToken/' + token);
+  }
+
+  restorePassword(token: string, password: any) {
+    return this.http.post(url + 'restorePassword/' + token, password);
+  }
 }

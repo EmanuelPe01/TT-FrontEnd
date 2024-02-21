@@ -1,14 +1,14 @@
 <div class="container text-center center-card">
     <div class="row justify-content-center">
         <div class="card col col-12 col-xl-7">
-            <div class="col">
-                <div class="row">
-                    <div class="col col-12">
-                        <h1 class="mt-5 mb-5">¡Bienvenido!</h1>
-                    </div>
-                    <form (ngSubmit)="login()" [formGroup]="formLogin">
-                        <div class="col col-12">
-                            <div class="card-body">
+            <div class="row">
+                <div class="col col-12">
+                    <h1 class="mt-5 mb-5">¡Bienvenido!</h1>
+                </div>
+                <form (ngSubmit)="login()" [formGroup]="formLogin">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col col-12">
                                 <div class="wave-group mb-4">
                                     <input required="required" type="text" class="input" formControlName="email">
                                     <span class="bar"></span>
@@ -30,8 +30,12 @@
                                         </div>
                                     </ng-template>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-10">
                                 <div class="wave-group mb-4">
-                                    <input required="required" type="password" class="input" formControlName="password">
+                                    <input required="required" id="textPass" type="{{inputTypePass}}" class="input" formControlName="password">
                                     <span class="bar"></span>
                                     <label class="label">
                                         <span class="label-char" style="--index: 0">C</span>
@@ -51,79 +55,32 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col col-12 mb-4">
-                            <button class="btn-31" [disabled]="formLogin.invalid">
-                                <span class="text-container">
-                                    <span class="text">Aceptar</span>
-                                </span>
-                            </button>
-                        </div>
-                    </form>
-                    <div class="col col-12 mb-4">
-                        <a routerLink="/register">
-                            ¿No tienes cuenta?
-                        </a>
-                    </div>
-                    <div>
-                        <div class="col col-12 mb-4">
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#recoveryPass">
-                                ¿Olvidaste tu contraseña?
-                            </a>
-                        </div>
-                        <div>
-                            <div class="modal fade" id="recoveryPass" tabindex="-1" aria-labelledby="recoveryPassLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="recoveryPassLabel">Recuperar contraseña
-                                            </h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <form (ngSubmit)="sendEmail()" [formGroup]="formRecoveryPass">
-                                            <div class="modal-body">
-                                                <div class="col col-12">
-                                                    <div class="card-body">
-                                                        <div class="wave-group mb-4">
-                                                            <input required="required" type="text" class="input"
-                                                                formControlName="email">
-                                                            <span class="bar"></span>
-                                                            <label class="label">
-                                                                <span class="label-char" style="--index: 0">E</span>
-                                                                <span class="label-char" style="--index: 1">m</span>
-                                                                <span class="label-char" style="--index: 2">a</span>
-                                                                <span class="label-char" style="--index: 3">i</span>
-                                                                <span class="label-char" style="--index: 4">l</span>
-                                                            </label>
-                                                            <div
-                                                                *ngIf="formRecoveryPass.get('email')?.hasError('required') && formRecoveryPass.get('email')?.touched; else ErrorMail">
-                                                                <p class="errorText">Campo requerido*</p>
-                                                            </div>
-                                                            <ng-template #ErrorMail>
-                                                                <div
-                                                                    *ngIf="formRecoveryPass.get('email')?.hasError('email') && formRecoveryPass.get('email')?.touched">
-                                                                    <p class="errorText">Ingresa un correo electrónico
-                                                                        válido</p>
-                                                                </div>
-                                                            </ng-template>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer justify-content-center">
-                                                <button class="btn-31" id="cerrarModalButton" [disabled]="formRecoveryPass.invalid">
-                                                    <span class="text-container">
-                                                        <span class="text">Enviar</span>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                            <div class="col col-2">
+                                <button class="btn btn-outline-secondary" 
+                                        style="
+                                            --bs-btn-color: #000;
+                                            --bs-btn-hover-bg: #000;
+                                            --bs-btn-hover-border-color: #000;
+                                            --bs-btn-font-size: 1rem;
+                                        "
+                                        (click)="showPassword()"
+                               >
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
                             </div>
                         </div>
+                    </div>
+                </form>
+                <div class="col col-12 mb-4">
+                    <a routerLink="/register">
+                        ¿No tienes cuenta?
+                    </a>
+                </div>
+                <div>
+                    <div class="col col-12 mb-4">
+                        <a routerLink="/" (click)="recoveryPassword()">
+                            ¿Olvidaste tu contraseña?
+                        </a>
                     </div>
                 </div>
             </div>

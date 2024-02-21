@@ -10,12 +10,14 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
+import { RecoveryPasswordComponent } from './Screens/recovery-password/recovery-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RecoveryPasswordComponent
   ],
   imports: [
     BrowserModule,
