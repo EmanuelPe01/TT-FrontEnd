@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
+import { NgArrayPipesModule } from 'ngx-pipes';
 import { RecoveryPasswordComponent } from './Screens/recovery-password/recovery-password.component';
 import { NavBarComponent } from './Screens/dashBoard/nav-bar/nav-bar.component';
 import { ScreenControllerComponent } from './Screens/dashBoard/screen-controller/screen-controller.component';
@@ -38,7 +39,8 @@ import { ConsultaInscripcionesComponent } from './Screens/dashboard/inscripcione
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgArrayPipesModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

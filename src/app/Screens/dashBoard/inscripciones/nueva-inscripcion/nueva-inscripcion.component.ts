@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-nueva-inscripcion',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class NuevaInscripcionComponent {
 
+  formRegistro: FormGroup;
+
+  constructor (
+    private form: FormBuilder
+  ) {
+    this.formRegistro = this.form.group([
+      
+    ])
+  }
+
+  saveInscription() {
+
+  }
 }

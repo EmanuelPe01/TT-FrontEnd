@@ -13,9 +13,9 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col col-11 col-md-3 mt-1 ps-3">
+                    <div class="col col-11 col-md-4 mt-1 ps-3">
                         <div class="wave-group mb-4">
-                            <input required="required" type="text" class="input">
+                            <input required="required" type="text" class="input" [(ngModel)]="criterio_nombre">
                             <span class="bar"></span>
                             <label class="label">
                                 <span class="label-char" style="--index: 0">N</span>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="col col-11 col-md-3 mt-1 ">
                         <div class="wave-group mb-4">
-                            <input required="required" type="text" class="input">
+                            <input required="required" type="text" class="input" [(ngModel)]="criterio_p_a">
                             <span class="bar"></span>
                             <label class="label">
                                 <span class="label-char" style="--index: 0">P</span>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="col col-11 col-md-3 mt-1 ">
                         <div class="wave-group mb-4">
-                            <input required="required" type="text" class="input">
+                            <input required="required" type="text" class="input" [(ngModel)]="criterio_s_a">
                             <span class="bar"></span>
                             <label class="label">
                                 <span class="label-char" style="--index: 0">S</span>
@@ -75,37 +75,16 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col col-12 col-md-3 mt-1">
-                        <div class="row">
-                            <div class="col col-6">
-                                <button type="button" class="btn btn-dark" style="
-                                        --bs-btn-color: #fff;
-                                        --bs-btn-bg: #000;
-                                        --bs-btn-border-color: #fff;
-                                        --bs-btn-hover-color: #000;
-                                        --bs-btn-hover-bg: #fff;
-                                        --bs-btn-hover-border-color: #000;
+                    <div class="col col-12 col-md-2 mt-1">
+                        <a class="btn btn-outline-dark" style="
                                         --bs-btn-font-size: 1rem;
                                         --bs-btn-padding-y: .4rem; 
                                         --bs-btn-padding-x: .6rem;
-                                    ">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    Buscar
-                                </button>
-                            </div>
-                            <div class="col col-6">
-                                <a class="btn btn-outline-dark" style="
-                                        --bs-btn-font-size: 1rem;
-                                        --bs-btn-padding-y: .4rem; 
-                                        --bs-btn-padding-x: .6rem;
-                                    "
-                                    routerLink="nuevaInscripcion"
-                                    >
-                                    <i class="fa-regular fa-address-card"></i>
-                                    Inscribir
-                                </a>
-                            </div>
-                        </div>
+                                        text-decoration: none;
+                                    " routerLink="nuevaInscripcion">
+                            <i class="fa-regular fa-address-card"></i>
+                            Inscribir
+                        </a>
                     </div>
                 </div>
             </div>
@@ -124,7 +103,8 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <tr *ngFor="let inscripcion of inscripciones">
+                        <tr
+                            *ngFor="let inscripcion of filterInscripciones(inscripciones, criterio_nombre, criterio_p_a, criterio_s_a)">
                             <td>{{inscripcion.cliente.name}} {{inscripcion.cliente.firstSurname}}
                                 {{inscripcion.cliente.secondSurname}}</td>
                             <td>{{inscripcion.entrenador.name}} {{inscripcion.entrenador.firstSurname}}
@@ -139,9 +119,7 @@
                                             --bs-btn-font-size: 1rem;
                                             --bs-btn-padding-y: .4rem; 
                                             --bs-btn-padding-x: .6rem;
-                                        "
-                                        routerLink="edit/{{inscripcion.id}}"
-                                        >
+                                        " routerLink="edit/{{inscripcion.id}}">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </div>
@@ -150,9 +128,7 @@
                                             --bs-btn-font-size: 1rem;
                                             --bs-btn-padding-y: .4rem; 
                                             --bs-btn-padding-x: .6rem;
-                                        "
-                                        routerLink="detail/{{inscripcion.id}}"
-                                        >
+                                        " routerLink="detail/{{inscripcion.id}}">
                                             <i class="fa-solid fa-circle-info"></i>
                                         </a>
                                     </div>
@@ -161,9 +137,7 @@
                                             --bs-btn-font-size: 1rem;
                                             --bs-btn-padding-y: .4rem; 
                                             --bs-btn-padding-x: .6rem;
-                                        "
-                                        routerLink="/"
-                                        >
+                                        " routerLink="/">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </div>
