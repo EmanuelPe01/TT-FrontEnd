@@ -3,4 +3,18 @@
     [urls]="urls"
     [labelNavBar]="labelNavBar"
 > </app-nav-bar>
-<router-outlet></router-outlet>
+<div *ngIf="!isLoading; else loadingSpinner">
+    <div *ngIf="showDashBoard; else SolicitarInscripcion" >
+        <router-outlet></router-outlet>
+    </div>
+    <ng-template #SolicitarInscripcion>
+        <h1 class="text-center">Cuenta inactiva</h1>
+    </ng-template>
+</div>
+<ng-template #loadingSpinner>
+    <div class="text-center">
+        <div class="spinner-grow text-dark m-5" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</ng-template>

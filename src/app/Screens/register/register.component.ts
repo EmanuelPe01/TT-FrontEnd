@@ -33,7 +33,8 @@ export class RegisterComponent {
       telephone: ['', [Validators.required, this.validarNumeroTelefono]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      conf_pass: ['', [Validators.required]]
+      conf_pass: ['', [Validators.required]],
+      fecha_nacimiento: ['', Validators.required]
     }, {
       validator: this.passwordMatchValidator
     });
@@ -55,8 +56,6 @@ export class RegisterComponent {
               this.showErrorMessage("Este correo electrónico ya esta registrado");            
             else if (error.status == 500 )
               this.showErrorMessage("Error en el servidor, intente más tarde");
-
-            console.log(error.message);
             return "";
           })
         ).subscribe(

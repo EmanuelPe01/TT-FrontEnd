@@ -13,7 +13,11 @@ import { CookieService } from "ngx-cookie-service";
 import { RecoveryPasswordComponent } from './Screens/recovery-password/recovery-password.component';
 import { NavBarComponent } from './Screens/dashBoard/nav-bar/nav-bar.component';
 import { ScreenControllerComponent } from './Screens/dashBoard/screen-controller/screen-controller.component';
-import { RutinasComponent } from './Screens/dashBoard/rutinas/rutinas.component';
+import { InscripcionesComponent } from './Screens/dashBoard/inscripciones/inscripciones.component';
+import { GestionWoodComponent } from './Screens/dashboard/wood/gestion-wood/gestion-wood.component';
+import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/consultar-wood.component';
+import { NuevaInscripcionComponent } from './Screens/dashBoard/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
+import { ConsultaInscripcionesComponent } from './Screens/dashboard/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { RutinasComponent } from './Screens/dashBoard/rutinas/rutinas.component'
     RecoveryPasswordComponent,
     NavBarComponent,
     ScreenControllerComponent,
-    RutinasComponent
+    InscripcionesComponent,
+    GestionWoodComponent,
+    ConsultarWoodComponent,
+    NuevaInscripcionComponent,
+    ConsultaInscripcionesComponent
   ],
   imports: [
     BrowserModule,

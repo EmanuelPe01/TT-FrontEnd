@@ -1,0 +1,165 @@
+.blanco {
+    color: #ffffff00;
+}
+
+.wave-group {
+    position: relative;
+}
+
+.wave-group .input {
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #515151;
+    background: transparent;
+}
+
+.wave-group .input:focus {
+    outline: none;
+}
+
+.wave-group .label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    display: flex;
+}
+
+.wave-group .label-char {
+    transition: 0.2s ease all;
+    transition-delay: calc(var(--index) * .05s);
+}
+
+.wave-group .input:focus~label .label-char,
+.wave-group .input:valid~label .label-char {
+    transform: translateY(-20px);
+    font-size: 14px;
+    color: #000000;
+}
+
+.wave-group .bar {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.wave-group .bar:before,
+.wave-group .bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #000000;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.wave-group .bar:before {
+    left: 50%;
+}
+
+.wave-group .bar:after {
+    right: 50%;
+}
+
+.wave-group .input:focus~.bar:before,
+.wave-group .input:focus~.bar:after {
+    width: 50%;
+}
+
+.button {
+    display: block;
+    position: relative;
+    width: 56px;
+    height: 56px;
+    margin: 0;
+    overflow: hidden;
+    outline: none;
+    background-color: transparent;
+    border: 0;
+}
+
+.button:before,
+.button:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    inset: 7px;
+}
+
+.button:before {
+    border: 4px solid #fff;
+    transition: opacity .4s cubic-bezier(.77, 0, .175, 1) 80ms, transform .5s cubic-bezier(.455, .03, .515, .955) 80ms;
+}
+
+.button:after {
+    border: 4px solid #333333;
+    transform: scale(1.3);
+    transition: opacity .4s cubic-bezier(.165, .84, .44, 1), transform .5s cubic-bezier(.25, .46, .45, .94);
+    opacity: 0;
+}
+
+.button:hover:before,
+.button:focus:before {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity .4s cubic-bezier(.165, .84, .44, 1), transform .5s cubic-bezier(.25, .46, .45, .94);
+}
+
+.button:hover:after,
+.button:focus:after {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity .4s cubic-bezier(.77, 0, .175, 1) 80ms, transform .5s cubic-bezier(.455, .03, .515, .955) 80ms;
+}
+
+.button-box {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.button-elem {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: 17px 18px 0 18px;
+    transform: rotate(180deg);
+    fill: #000000;
+}
+
+.button:hover .button-box,
+.button:focus .button-box {
+    transition: .4s;
+    transform: translateX(-56px);
+}
+
+.errorText {
+    text-align: left;
+    color: red;
+    font-size: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .input, .bar, .label{
+        margin-left: 1em;
+    }
+}

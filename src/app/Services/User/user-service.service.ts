@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, catchError, throwError } from 'rxjs';
-import { infoLogin, informacionUsuario, loginUsuario, registrarUsuario, url } from 'src/app/Models';
+import { Observable } from 'rxjs';
+import { detailInscription, infoLogin, loginUsuario, registrarUsuario, url } from 'src/app/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +55,12 @@ export class UserServiceService {
 
   restorePassword(token: string, password: any) {
     return this.http.post(url + 'restorePassword/' + token, password);
+  }
+
+  detailInscription(): Observable<detailInscription> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.get<detailInscription>(url + 'getDetailInscription', { headers });
   }
 }

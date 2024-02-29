@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { NavBarComponent } from '../nav-bar/nav-bar.component';
-import { infoLogin } from 'src/app/Models';
+import { detailInscription, infoLogin } from 'src/app/Models';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
-import { catchError, throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-screen-controller',
@@ -13,47 +11,79 @@ import { Router } from '@angular/router';
 })
 export class ScreenControllerComponent {
   userInformation: infoLogin | undefined;
-  navBarBrand: string = "Rutinas";
+  inscriptionInformation: detailInscription | undefined;
+  navBarBrand: string = "MERO CrossFit";
   urls: { nombre: string, url: string }[] = [];
   labelNavBar: string = "";
+  isLoading: boolean = true;
+  showDashBoard: boolean = false;
 
-  constructor (
+  constructor(
     private userService: UserServiceService,
     private route: Router
-  ) {}
+  ) { }
 
-  ngOnInit() {
-    this.userService.isAuthenticated()
-    .pipe(
-      catchError((error: HttpErrorResponse) => {
-        this.route.navigate(['/']);
-        return throwError(() => new Error("Validation Failed"));
-      })
-    ).subscribe(
-      (data: infoLogin) => {
-        this.userInformation = data;
-        this.labelNavBar = "Hola " + this.userInformation.user.name
-        switch(this.userInformation.user.rol.id) {
-          case 1: 
-            this.urls = [
-              {nombre:  'Rutinas', url: '/dash-board'},
-              {nombre:  'Comentarios', url: '/dash-board'}
-            ]
-            break;
-          case 2:
-            this.urls = [
-              {nombre:  'Rutinas', url: '/dash-board'}
-            ]
-            break;
-          case 3:
-            this.urls = [
-              {nombre:  'Rutinas', url: '/dash-board'}
-            ]
-            break;
-          default:
-            console.log("Sin información");
-        }
+  async ngOnInit() {
+    try {
+      const infoUser: infoLogin | undefined = await this.userService.isAuthenticated().toPromise();
+      const infoInscipcion: detailInscription | undefined 
+                            = await this.userService.detailInscription().toPromise().
+                              then(data => {return data}).catch((data) => {
+                                return undefined;
+                              });
+
+      this.userInformation = infoUser;
+      if(infoInscipcion) 
+        this.inscriptionInformation = infoInscipcion;
+      
+      const rutaNavegacion = this.setTitles();
+      this.isLoading = false;
+      this.route.navigate([rutaNavegacion]);      
+    } catch (error) {
+      this.route.navigate(['/']);
+      console.error(error);
+    }
+  }
+
+  setTitles() {
+    let rutaNavegacion: string = ''
+    this.labelNavBar = "Hola " + this.userInformation?.user.name
+    if(this.inscriptionInformation && (this.inscriptionInformation.detalle.estado === 1 || this.inscriptionInformation.rol.id >= 2)) {
+      this.navBarBrand = 'Rutinas';
+      switch (this.userInformation?.user.rol.id) {
+        case 1:
+          rutaNavegacion = '/dash-board/user'
+          this.urls = [
+            { nombre: 'Rutinas', url: '/dash-board/user' },
+          ]
+          break;
+        case 2:
+          rutaNavegacion = '/dash-board/admin'
+          this.urls = [
+            { nombre: 'Rutinas', url: '/dash-board/admin' }
+          ]
+          break;
+        case 3:
+          rutaNavegacion = '/dash-board/admin/inscripciones'
+          this.urls = [
+            { nombre: 'Rutinas', url: '/dash-board/admin' },
+            { nombre: 'Inscripciones', url: '/dash-board/admin/inscripciones'}
+          ]
+          break;
+        default:
+          console.log("Sin información");
       }
-    )    
+      this.showDashBoard = true;
+    }
+    return rutaNavegacion;
+  }
+
+  showErrorMessage(message: string) {
+    Swal.fire({
+      icon: 'error',
+      title: message,
+      confirmButtonColor: "#000",
+      confirmButtonText: "Aceptar",
+    })
   }
 }

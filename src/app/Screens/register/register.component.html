@@ -267,6 +267,43 @@
                                             <i class="{{iconButton_conf}}"></i>
                                         </button>
                                     </div>
+                                    <div class="col col-12 col-md-6">
+                                        <div class="wave-group mb-4">
+                                            <input 
+                                                required="required" 
+                                                type="text" 
+                                                class="input"
+                                                formControlName="fecha_nacimiento"
+                                                onfocus="(this.type='date')" 
+                                                onblur="(this.type='text')"
+                                            >
+                                            <span class="bar"></span>
+                                            <label class="label">
+                                                <span class="label-char" style="--index: 0">F</span>
+                                                <span class="label-char" style="--index: 0">e</span>
+                                                <span class="label-char" style="--index: 0">c</span>
+                                                <span class="label-char" style="--index: 0">h</span>
+                                                <span class="label-char" style="--index: 0">a</span>
+                                                <span class="blanco" style="--index: 0">-</span>
+                                                <span class="label-char" style="--index: 1">d</span>
+                                                <span class="label-char" style="--index: 1">e</span>
+                                                <span class="blanco" style="--index: 1">-</span>
+                                                <span class="label-char" style="--index: 2">n</span>
+                                                <span class="label-char" style="--index: 2">a</span>
+                                                <span class="label-char" style="--index: 2">c</span>
+                                                <span class="label-char" style="--index: 2">i</span>
+                                                <span class="label-char" style="--index: 2">m</span>
+                                                <span class="label-char" style="--index: 2">i</span>
+                                                <span class="label-char" style="--index: 2">e</span>
+                                                <span class="label-char" style="--index: 2">n</span>
+                                                <span class="label-char" style="--index: 2">t</span>
+                                                <span class="label-char" style="--index: 2">o</span>                      
+                                            </label>
+                                            <div *ngIf="formRegistro.get('fecha_nacimiento')?.hasError('required') && formRegistro.get('conf_pass')?.touched; else ErrorMatch">
+                                                <p class="errorText">Campo requerido*</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col col-12 mb-4">
                                         <button class="btn-31" [disabled]="formRegistro.invalid">
                                             <span class="text-container">

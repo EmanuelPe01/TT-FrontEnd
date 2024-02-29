@@ -1,0 +1,178 @@
+<div *ngIf="isLoading; else showScreen">
+    <div class="text-center">
+        <div class="spinner-grow text-dark m-5" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+<ng-template #showScreen>
+    <div class="container">
+        <div class="card mt-2">
+            <div class="card-header">
+                Búsqueda de inscripción por cliente
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-11 col-md-3 mt-1 ps-3">
+                        <div class="wave-group mb-4">
+                            <input required="required" type="text" class="input">
+                            <span class="bar"></span>
+                            <label class="label">
+                                <span class="label-char" style="--index: 0">N</span>
+                                <span class="label-char" style="--index: 1">o</span>
+                                <span class="label-char" style="--index: 2">m</span>
+                                <span class="label-char" style="--index: 3">b</span>
+                                <span class="label-char" style="--index: 4">r</span>
+                                <span class="label-char" style="--index: 5">e</span>
+                                <span class="label-char" style="--index: 6">(s)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col col-11 col-md-3 mt-1 ">
+                        <div class="wave-group mb-4">
+                            <input required="required" type="text" class="input">
+                            <span class="bar"></span>
+                            <label class="label">
+                                <span class="label-char" style="--index: 0">P</span>
+                                <span class="label-char" style="--index: 1">r</span>
+                                <span class="label-char" style="--index: 2">i</span>
+                                <span class="label-char" style="--index: 3">m</span>
+                                <span class="label-char" style="--index: 4">e</span>
+                                <span class="label-char" style="--index: 5">r</span>
+                                <span class="blanco" style="--index: 6">-</span>
+                                <span class="label-char" style="--index: 7">a</span>
+                                <span class="label-char" style="--index: 8">p</span>
+                                <span class="label-char" style="--index: 9">e</span>
+                                <span class="label-char" style="--index: 10">l</span>
+                                <span class="label-char" style="--index: 11">l</span>
+                                <span class="label-char" style="--index: 12">i</span>
+                                <span class="label-char" style="--index: 13">d</span>
+                                <span class="label-char" style="--index: 14">o</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col col-11 col-md-3 mt-1 ">
+                        <div class="wave-group mb-4">
+                            <input required="required" type="text" class="input">
+                            <span class="bar"></span>
+                            <label class="label">
+                                <span class="label-char" style="--index: 0">S</span>
+                                <span class="label-char" style="--index: 1">e</span>
+                                <span class="label-char" style="--index: 2">g</span>
+                                <span class="label-char" style="--index: 3">u</span>
+                                <span class="label-char" style="--index: 4">n</span>
+                                <span class="label-char" style="--index: 5">d</span>
+                                <span class="label-char" style="--index: 6">o</span>
+                                <span class="blanco" style="--index: 7">-</span>
+                                <span class="label-char" style="--index: 8">a</span>
+                                <span class="label-char" style="--index: 9">p</span>
+                                <span class="label-char" style="--index: 10">e</span>
+                                <span class="label-char" style="--index: 11">l</span>
+                                <span class="label-char" style="--index: 12">l</span>
+                                <span class="label-char" style="--index: 13">i</span>
+                                <span class="label-char" style="--index: 14">d</span>
+                                <span class="label-char" style="--index: 15">o</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col col-12 col-md-3 mt-1">
+                        <div class="row">
+                            <div class="col col-6">
+                                <button type="button" class="btn btn-dark" style="
+                                        --bs-btn-color: #fff;
+                                        --bs-btn-bg: #000;
+                                        --bs-btn-border-color: #fff;
+                                        --bs-btn-hover-color: #000;
+                                        --bs-btn-hover-bg: #fff;
+                                        --bs-btn-hover-border-color: #000;
+                                        --bs-btn-font-size: 1rem;
+                                        --bs-btn-padding-y: .4rem; 
+                                        --bs-btn-padding-x: .6rem;
+                                    ">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    Buscar
+                                </button>
+                            </div>
+                            <div class="col col-6">
+                                <a class="btn btn-outline-dark" style="
+                                        --bs-btn-font-size: 1rem;
+                                        --bs-btn-padding-y: .4rem; 
+                                        --bs-btn-padding-x: .6rem;
+                                    "
+                                    routerLink="nuevaInscripcion"
+                                    >
+                                    <i class="fa-regular fa-address-card"></i>
+                                    Inscribir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="table-responsive-xl">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Entrenador</th>
+                            <th scope="col">Estatus</th>
+                            <th scope="col">Peso máximo</th>
+                            <th scope="col">Fecha inicio</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr *ngFor="let inscripcion of inscripciones">
+                            <td>{{inscripcion.cliente.name}} {{inscripcion.cliente.firstSurname}}
+                                {{inscripcion.cliente.secondSurname}}</td>
+                            <td>{{inscripcion.entrenador.name}} {{inscripcion.entrenador.firstSurname}}
+                                {{inscripcion.entrenador.secondSurname}}</td>
+                            <td>{{inscripcion.estado}}</td>
+                            <td>{{inscripcion.peso_maximo}} lb</td>
+                            <td>{{inscripcion.fecha_inicio}}</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col col-4">
+                                        <a class="btn btn-outline-dark" style="
+                                            --bs-btn-font-size: 1rem;
+                                            --bs-btn-padding-y: .4rem; 
+                                            --bs-btn-padding-x: .6rem;
+                                        "
+                                        routerLink="edit/{{inscripcion.id}}"
+                                        >
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col col-4">
+                                        <a class="btn btn-outline-dark" style="
+                                            --bs-btn-font-size: 1rem;
+                                            --bs-btn-padding-y: .4rem; 
+                                            --bs-btn-padding-x: .6rem;
+                                        "
+                                        routerLink="detail/{{inscripcion.id}}"
+                                        >
+                                            <i class="fa-solid fa-circle-info"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col col-4">
+                                        <a class="btn btn-outline-dark" style="
+                                            --bs-btn-font-size: 1rem;
+                                            --bs-btn-padding-y: .4rem; 
+                                            --bs-btn-padding-x: .6rem;
+                                        "
+                                        routerLink="/"
+                                        >
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</ng-template>
