@@ -1,78 +1,89 @@
-.blanco {
-    color: #ffffff00;
-}
-
-.wave-group {
+.textInputWrapper {
     position: relative;
+    width: 100%;
+    margin: 12px 5px;
+    --accent-color: #000000;
 }
 
-.wave-group .input {
+.textInputWrapper:before {
+    transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
+.textInputWrapper:before,
+.textInputWrapper:after {
+    content: "";
+    left: 0;
+    right: 0;
+    position: absolute;
+    pointer-events: none;
+    bottom: -1px;
+    z-index: 4;
+    width: 100%;
+}
+
+.textInputWrapper:focus-within:before {
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.textInputWrapper:before {
+    transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+}
+
+.textInputWrapper:focus-within:before {
+    border-bottom: 1px solid var(--accent-color);
+    transform: scaleX(1);
+}
+
+.textInputWrapper:focus-within:after {
+    border-bottom: 2px solid var(--accent-color);
+    transform: scaleX(1);
+}
+
+.textInputWrapper:after {
+    content: "";
+    transform: scaleX(0);
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    will-change: transform;
+    border-bottom: 2px solid var(--accent-color);
+    border-bottom-color: var(--accent-color);
+}
+
+.textInput::placeholder {
+    transition: opacity 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+    opacity: 1;
+    user-select: none;
+    color: rgba(0, 0, 0, 0.582);
+}
+
+.textInputWrapper .textInput {
+    max-height: 36px;
+    background-color: #ffffff;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 200ms;
+    transition-property: background-color;
+    color: #000000;
     font-size: 16px;
-    padding: 10px 10px 10px 5px;
-    display: block;
+    font-weight: 500;
+    padding: 12px;
     width: 100%;
     border: none;
-    border-bottom: 1px solid #515151;
-    background: transparent;
 }
 
-.wave-group .input:focus {
+.textInputWrapper .textInput:focus,
+.textInputWrapper .textInput:active {
     outline: none;
 }
 
-.wave-group .label {
-    color: #999;
-    font-size: 18px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    display: flex;
+.textInputWrapper:focus-within .textInput,
+.textInputWrapper .textInput:focus,
+.textInputWrapper .textInput:active {
+    background-color: #ffffff;
 }
 
-.wave-group .label-char {
-    transition: 0.2s ease all;
-    transition-delay: calc(var(--index) * .05s);
-}
-
-.wave-group .input:focus~label .label-char,
-.wave-group .input:valid~label .label-char {
-    transform: translateY(-20px);
-    font-size: 14px;
-    color: #000000;
-}
-
-.wave-group .bar {
-    position: relative;
-    display: block;
-    width: 100%;
-}
-
-.wave-group .bar:before,
-.wave-group .bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #000000;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-}
-
-.wave-group .bar:before {
-    left: 50%;
-}
-
-.wave-group .bar:after {
-    right: 50%;
-}
-
-.wave-group .input:focus~.bar:before,
-.wave-group .input:focus~.bar:after {
-    width: 50%;
+.textInputWrapper:focus-within .textInput::placeholder {
+    opacity: 0;
 }
 
 .button {
@@ -159,7 +170,10 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-    .input, .bar, .label{
+
+    .input,
+    .bar,
+    .label {
         margin-left: 1em;
     }
 }

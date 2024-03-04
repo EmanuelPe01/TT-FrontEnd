@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-inscripciones',
-  templateUrl: './inscripciones.component.html',
-  styleUrls: ['./inscripciones.component.css']
+  template: `<router-outlet></router-outlet>`
 })
 export class InscripcionesComponent {
 
