@@ -22,6 +22,7 @@
                             <h3>Inscripción al box virtual</h3>
                         </div>
                     </div>
+
                     <div class="col col-12">
                         <div class="row">
                             <div class="col col-12 col-md-6 mt-1">
@@ -31,13 +32,16 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="textInputWrapper">
-                                            <input placeholder="Nombre(s)" type="text" class="textInput">
+                                            <input placeholder="Nombre(s)" type="text" class="textInput"
+                                                [(ngModel)]="criterio_c_nombre">
                                         </div>
                                         <div class="textInputWrapper">
-                                            <input placeholder="Primer apellido" type="text" class="textInput">
+                                            <input placeholder="Primer apellido" type="text" class="textInput"
+                                                [(ngModel)]="criterio_c_p_a">
                                         </div>
                                         <div class="textInputWrapper">
-                                            <input placeholder="Segundo apellido" type="text" class="textInput">
+                                            <input placeholder="Segundo apellido" type="text" class="textInput"
+                                                [(ngModel)]="criterio_c_s_a">
                                         </div>
                                     </div>
                                 </div>
@@ -48,20 +52,92 @@
                                         Entrenador
                                     </div>
                                     <div class="card-body">
-                                        <div class="col col-12">
-                                            <div class="textInputWrapper">
-                                                <input placeholder="Nombre(s)" type="text" class="textInput">
-                                            </div>
-                                            <div class="textInputWrapper">
-                                                <input placeholder="Primer apellido" type="text" class="textInput">
-                                            </div>
-                                            <div class="textInputWrapper">
-                                                <input placeholder="Segundo apellido" type="text" class="textInput">
-                                            </div>
+                                        <div class="textInputWrapper">
+                                            <input placeholder="Nombre(s)" type="text" class="textInput"
+                                                [(ngModel)]="criterio_e_nombre">
+                                        </div>
+                                        <div class="textInputWrapper">
+                                            <input placeholder="Primer apellido" type="text" class="textInput"
+                                                [(ngModel)]="criterio_e_p_a">
+                                        </div>
+                                        <div class="textInputWrapper">
+                                            <input placeholder="Segundo apellido" type="text" class="textInput"
+                                                [(ngModel)]="criterio_e_s_a">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div *ngIf="isLoading; else showTables">
+                                <div class="mt-5 mb-5">
+                                    <div class="loader"></div>
+                                </div>
+                            </div>
+                            <ng-template #showTables>
+                                <div class="col col-12 col-md-6 mt-1">
+                                    <div class="table-wrapper mt-3">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col">Primer apellido</th>
+                                                    <th scope="col">Segundo apellido</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="table-group-divider">
+                                                <tr
+                                                    *ngFor="let usuario of filterCliente(usersCliente, criterio_c_nombre, criterio_c_p_a, criterio_c_s_a)">
+                                                    <td>{{usuario.name}}</td>
+                                                    <td>{{usuario.firstSurname}}</td>
+                                                    <td>{{usuario.secondSurname}}</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-dark" style="
+                                                                    --bs-btn-font-size: 1rem;
+                                                                    --bs-btn-padding-y: .4rem; 
+                                                                    --bs-btn-padding-x: .6rem;
+                                                                ">
+                                                            <i class="fa-solid fa-circle-plus"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col col-12 col-md-6 mt-1">
+                                    <div class="table-wrapper mt-3">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col">Primer apellido</th>
+                                                    <th scope="col">Segundo apellido</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="table-group-divider">
+                                                <tr
+                                                    *ngFor="let usuario of filterCliente(usersEntrenador, criterio_e_nombre, criterio_e_p_a, criterio_e_s_a)">
+                                                    <td>{{usuario.name}}</td>
+                                                    <td>{{usuario.firstSurname}}</td>
+                                                    <td>{{usuario.secondSurname}}</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-dark" style="
+                                                                    --bs-btn-font-size: 1rem;
+                                                                    --bs-btn-padding-y: .4rem; 
+                                                                    --bs-btn-padding-x: .6rem;
+                                                                ">
+                                                            <i class="fa-solid fa-circle-plus"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </ng-template>
                         </div>
                     </div>
                 </div>

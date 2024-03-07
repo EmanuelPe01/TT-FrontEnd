@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-screen-controller',
   templateUrl: './screen-controller.component.html',
+  styleUrls: ['./screen-controller.component.css']
 })
 export class ScreenControllerComponent {
   userInformation: infoLogin | undefined;

@@ -89,25 +89,25 @@ export class RegisterComponent {
   }
 
   showPassword() {
-    if (!this.flagShowPass) {
-      this.inputTypePass = "password";
-      this.iconButton = "fa-regular fa-eye"
-    } else {
+    this.flagShowPass = !this.flagShowPass;
+    if (this.flagShowPass) {
       this.inputTypePass = "text"
       this.iconButton = "fa-regular fa-eye-slash"
+    } else {
+      this.inputTypePass = "password";
+      this.iconButton = "fa-regular fa-eye"
     }
-    this.flagShowPass = !this.flagShowPass;
   }
 
   showPassword_conf() {
-    if (!this.flagShowPass_conf) {
-      this.inputTypePass_conf = "password";
-      this.iconButton_conf = "fa-regular fa-eye"
-    } else {
+    this.flagShowPass_conf = !this.flagShowPass_conf;
+    if (this.flagShowPass_conf) {
       this.inputTypePass_conf = "text"
       this.iconButton_conf = "fa-regular fa-eye-slash"
+    } else {
+      this.inputTypePass_conf = "password";
+      this.iconButton_conf = "fa-regular fa-eye"
     }
-    this.flagShowPass_conf = !this.flagShowPass_conf;
   }
 
   showMessageSucces(message: string) {

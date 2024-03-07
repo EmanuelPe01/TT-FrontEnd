@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { detailInscription, infoLogin, loginUsuario, registrarUsuario, url } from 'src/app/Models';
+import { detailInscription, infoBasicaUsuario, infoLogin, informacionUsuario, loginUsuario, registrarUsuario, url } from 'src/app/Models';
+
 
 @Injectable({
   providedIn: 'root'
@@ -62,5 +63,9 @@ export class UserServiceService {
       'Authorization': `Bearer ${this.getToken()}`
     });
     return this.http.get<detailInscription>(url + 'getDetailInscription', { headers });
+  }
+
+  getUserByRole(id_rol: number): Observable<infoBasicaUsuario[]> {
+    return this.http.get<infoBasicaUsuario[]>(url + "usersByRole/" + id_rol)
   }
 }
