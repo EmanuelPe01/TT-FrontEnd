@@ -3,7 +3,7 @@
     [urls]="urls"
     [labelNavBar]="labelNavBar"
 > </app-nav-bar>
-<div *ngIf="!isLoading; else loadingSpinner">
+<div class="mt-sc" *ngIf="!isLoading; else loadingSpinner">
     <div *ngIf="showDashBoard; else SolicitarInscripcion" >
         <router-outlet></router-outlet>
     </div>
@@ -12,7 +12,7 @@
     </ng-template>
 </div>
 <ng-template #loadingSpinner>
-    <div class="text-center m-5">
+    <div class="text-center mt-md">
         <div class="loader"></div>
     </div>
 </ng-template>

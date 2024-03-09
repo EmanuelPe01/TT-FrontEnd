@@ -1,5 +1,5 @@
 <div class="container-fluid text-center mt-3">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-5">
         <div class="card col col-12 col-xl-10">
             <div class="col">
                 <div class="row">
@@ -88,18 +88,21 @@
                                             </thead>
                                             <tbody class="table-group-divider">
                                                 <tr
-                                                    *ngFor="let usuario of filterCliente(usersCliente, criterio_c_nombre, criterio_c_p_a, criterio_c_s_a)">
+                                                    *ngFor="let usuario of filterUsers(usersCliente, criterio_c_nombre, criterio_c_p_a, criterio_c_s_a)">
                                                     <td>{{usuario.name}}</td>
                                                     <td>{{usuario.firstSurname}}</td>
                                                     <td>{{usuario.secondSurname}}</td>
                                                     <td>
-                                                        <a class="btn btn-outline-dark" style="
+                                                        <button class="btn btn-outline-dark" style="
                                                                     --bs-btn-font-size: 1rem;
                                                                     --bs-btn-padding-y: .4rem; 
                                                                     --bs-btn-padding-x: .6rem;
-                                                                ">
+                                                                "
+                                                                type="button"
+                                                                (click)="setCliente(usuario)"
+                                                                >
                                                             <i class="fa-solid fa-circle-plus"></i>
-                                                        </a>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -119,18 +122,21 @@
                                             </thead>
                                             <tbody class="table-group-divider">
                                                 <tr
-                                                    *ngFor="let usuario of filterCliente(usersEntrenador, criterio_e_nombre, criterio_e_p_a, criterio_e_s_a)">
+                                                    *ngFor="let usuario of filterUsers(usersEntrenador, criterio_e_nombre, criterio_e_p_a, criterio_e_s_a)">
                                                     <td>{{usuario.name}}</td>
                                                     <td>{{usuario.firstSurname}}</td>
                                                     <td>{{usuario.secondSurname}}</td>
                                                     <td>
-                                                        <a class="btn btn-outline-dark" style="
+                                                        <button class="btn btn-outline-dark" style="
                                                                     --bs-btn-font-size: 1rem;
                                                                     --bs-btn-padding-y: .4rem; 
                                                                     --bs-btn-padding-x: .6rem;
-                                                                ">
+                                                                "
+                                                                type="button"
+                                                                (click)="setEntrenador(usuario)"
+                                                                >
                                                             <i class="fa-solid fa-circle-plus"></i>
-                                                        </a>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -138,6 +144,63 @@
                                     </div>
                                 </div>
                             </ng-template>
+                            <div class="col col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form [formGroup]="formRegistro">
+                                            <div class="row">
+                                                <div class="col col-12 col-md-4">
+                                                    <div class="input-container">
+                                                        <input required="" value="{{ valueCliente }}" id="input-cliente" type="text"/>
+                                                        <label class="label" for="input-cliente">Cliente</label>
+                                                        <div class="underline"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col col-12 col-md-4">
+                                                    <div class="input-container">
+                                                        <input required="" value="{{ valueEntrenador }}" id="input-entrendador" type="text"/>
+                                                        <label class="label" for="input-entrendador">Entrenador</label>
+                                                        <div class="underline"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col col-12 col-md-2">
+                                                    <div class="input-container">
+                                                        <input required="" formControlName="fecha_inicio" id="input-fecha-inicio" type="text"
+                                                            onfocus="(this.type='date')" onblur="(this.type='text')" />
+                                                        <label class="label" for="input-fecha-inicio">Fecha de inicio</label>
+                                                        <div class="underline"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col col-12 col-md-2">
+                                                    <div class="input-container">
+                                                        <input required="" formControlName="peso_maximo" id="input-peso" type="text" />
+                                                        <label class="label" for="input-peso">Peso máximo (lb)</label>
+                                                        <div class="underline"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col col-6">
+                                                    <a routerLink="..">
+                                                        <button class="btn-32">
+                                                            <span class="text-container">
+                                                                <span class="text">Cancelar</span>
+                                                            </span>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                                <div class="col col-6">
+                                                    <button class="btn-31" [disabled]="formRegistro.invalid">
+                                                        <span class="text-container">
+                                                            <span class="text">Aceptar</span>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

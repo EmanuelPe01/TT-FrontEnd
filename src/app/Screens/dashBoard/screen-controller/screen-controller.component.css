@@ -60,3 +60,11 @@
         transform: rotate(0.5turn)
     }
 }
+
+.mt-sc {
+    margin-top: 5em;
+}
+
+.mt-md {
+    margin-top: 10em
+}
