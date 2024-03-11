@@ -27,7 +27,7 @@ export class ConsultaInscripcionesComponent {
                           .then((data: any) => {
                             return data.inscripciones
                           }).catch((data) => {return undefined})
-                        
+    console.log(this.inscripciones)                    
     this.isLoading = false;
   }
 

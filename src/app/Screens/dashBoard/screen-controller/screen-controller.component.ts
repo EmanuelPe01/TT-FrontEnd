@@ -24,31 +24,24 @@ export class ScreenControllerComponent {
   ) { }
 
   async ngOnInit() {
-    try {
-      const infoUser: infoLogin | undefined = await this.userService.isAuthenticated().toPromise();
-      const infoInscipcion: detailInscription | undefined 
-                            = await this.userService.detailInscription().toPromise().
-                              then(data => {return data}).catch((data) => {
-                                return undefined;
-                              });
-
-      this.userInformation = infoUser;
-      if(infoInscipcion) 
-        this.inscriptionInformation = infoInscipcion;
-      
-      const rutaNavegacion = this.setTitles();
-      this.isLoading = false;
-      this.route.navigate([rutaNavegacion]);      
-    } catch (error) {
-      this.route.navigate(['/']);
-      console.error(error);
-    }
+    this.userInformation = await this.userService.isAuthenticated().toPromise().
+      then((data) => {return data}).catch((data) => {
+        this.route.navigate(['/']);
+        return undefined
+      });
+    this.inscriptionInformation = await this.userService.detailInscription().toPromise().
+      then(data => { return data }).catch((data) => {
+        return undefined;
+      });
+    const rutaNavegacion = this.setTitles();
+    this.isLoading = false;
+    this.route.navigate([rutaNavegacion]);
   }
 
   setTitles() {
     let rutaNavegacion: string = ''
     this.labelNavBar = "Hola " + this.userInformation?.user.name
-    if(this.inscriptionInformation && (this.inscriptionInformation.detalle.estado === 1 || this.inscriptionInformation.rol.id >= 2)) {
+    if (this.inscriptionInformation && (this.inscriptionInformation.detalle.estado === 1 || this.inscriptionInformation.rol.id >= 2)) {
       this.navBarBrand = 'Rutinas';
       switch (this.userInformation?.user.rol.id) {
         case 1:
@@ -67,13 +60,16 @@ export class ScreenControllerComponent {
           rutaNavegacion = 'dash-board/admin/inscripciones/nuevaInscripcion'
           this.urls = [
             { nombre: 'Rutinas', url: '/dash-board/admin' },
-            { nombre: 'Inscripciones', url: '/dash-board/admin/inscripciones'}
+            { nombre: 'Inscripciones', url: '/dash-board/admin/inscripciones' }
           ]
           break;
         default:
           console.log("Sin información");
       }
       this.showDashBoard = true;
+    } else {
+      this.showDashBoard = false;
+      rutaNavegacion = '/dash-board'
     }
     return rutaNavegacion;
   }
