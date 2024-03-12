@@ -13,6 +13,7 @@ import { NuevaInscripcionComponent } from './Screens/dashBoard/inscripciones/nue
 //Woods
 import { GestionWoodComponent } from './Screens/dashboard/wood/gestion-wood/gestion-wood.component';
 import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/consultar-wood.component';
+import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/editar-inscripcion/editar-inscripcion.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,8 @@ const routes: Routes = [
           {
             path: 'inscripciones', component: InscripcionesComponent, children: [
               {path: '', component: ConsultaInscripcionesComponent},
-              {path: 'nuevaInscripcion', component: NuevaInscripcionComponent}
+              {path: 'nuevaInscripcion', component: NuevaInscripcionComponent},
+              {path: 'edit/:idInscripcion', component: EditarInscripcionComponent}
             ]
           }
         ]

@@ -109,14 +109,14 @@ export class LoginComponent {
   }
 
   showPassword() {
-    if (!this.flagShowPass) {
-      this.inputTypePass = "password";
-      this.iconButton = "fa-regular fa-eye"
-    } else {
+    this.flagShowPass = !this.flagShowPass;
+    if (this.flagShowPass) {
       this.inputTypePass = "text"
       this.iconButton = "fa-regular fa-eye-slash"
+    } else {
+      this.inputTypePass = "password";
+      this.iconButton = "fa-regular fa-eye"
     }
-    this.flagShowPass = !this.flagShowPass;
   }
 
   showMessageSucces(message: string) {

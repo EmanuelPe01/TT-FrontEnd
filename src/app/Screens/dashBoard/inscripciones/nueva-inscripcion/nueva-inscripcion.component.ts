@@ -1,7 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 import { infoBasicaUsuario } from 'src/app/Models';
+import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.service';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nueva-inscripcion',
@@ -26,14 +31,16 @@ export class NuevaInscripcionComponent {
 
   constructor (
     private form: FormBuilder,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private inscriptionService: IncripcionService,
+    private router: Router
   ) {
     this.formRegistro = this.form.group({
       id_user_cliente: ['', Validators.required],
       id_user_entrenador: ['', Validators.required],
       fecha_inicio: ['', Validators.required],
       peso_maximo: ['20', Validators.required],
-      estado: ['', Validators.required]
+      estado: ['1', Validators.required]
     })
   }
 
@@ -69,26 +76,90 @@ export class NuevaInscripcionComponent {
         id_user_cliente: cliente.id
       });
       this.valueCliente = cliente.name + ' ' + cliente.firstSurname + ' ' + cliente.secondSurname;
-      this.deshabilitarInput('input-cliente');
+      this.setInputReadOnly('input-cliente', true);
     }    
   }
 
   setEntrenador(entrenador: infoBasicaUsuario) {
     if (entrenador) {
       this.formRegistro.patchValue({
-        id_user_cliente: entrenador.id
+        id_user_entrenador: entrenador.id
       });
       this.valueEntrenador = entrenador.name + ' ' + entrenador.firstSurname + ' ' + entrenador.secondSurname
-      this.deshabilitarInput('input-entrendador');
+      this.setInputReadOnly('input-entrendador', true);
     } 
   }
 
-  deshabilitarInput(id: string) {
-    const inputCliente = document.getElementById(id) as HTMLInputElement;
-    inputCliente.readOnly = true;
+  resetUser(rol: number) {
+    if(rol === 1) {
+      this.formRegistro.patchValue({
+        id_user_cliente: null
+      });
+      this.setInputReadOnly('input-cliente', false);
+      this.valueCliente = '';
+    } else {
+      this.formRegistro.patchValue({
+        id_user_entrenador: null
+      });
+      this.setInputReadOnly('input-entrendador', false);
+      this.valueEntrenador = '';
+    }
   }
 
   saveInscription() {
+    if(this.formRegistro.valid) {
+      this.showLoadingMessage(true);
+      this.inscriptionService.saveInscription(this.formRegistro.value).
+      pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.showLoadingMessage(false);
+          if (error.status == 400) 
+            this.showErrorMessage("El usuario ya está registrado");            
+          else if (error.status == 500 )
+            this.showErrorMessage("Error en la base de datos");
 
+          console.log(error)
+          return "";
+        })
+      ).subscribe((data) => {
+        this.showLoadingMessage(false);
+        this.showMessageSucces("Registro exitoso");
+        this.router.navigate(["dash-board/admin/inscripciones"]);
+      });
+    }
+  }
+
+  setInputReadOnly(id: string, flag: boolean) {
+    const inputCliente = document.getElementById(id) as HTMLInputElement;
+    inputCliente.readOnly = flag;
+  }
+
+  showMessageSucces(message: string) {
+    Swal.fire({
+      icon: 'success',
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  showErrorMessage(message: string) {
+    Swal.fire({
+      icon: 'error',
+      title: message,
+      confirmButtonColor: "#000",
+      confirmButtonText: "Aceptar",
+    })
+  }
+
+  showLoadingMessage(flag: boolean) {
+    if (flag) {
+      Swal.fire({
+        title: 'Registrando',
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+    }
   }
 }

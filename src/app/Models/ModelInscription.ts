@@ -25,3 +25,11 @@ export interface singleInscription {
     cliente:            infoBasicaUsuario,
     entrenador:         infoBasicaUsuario
 }
+
+export interface generateInscription {
+    id_user_cliente:    number,
+    id_user_entrenador: number,
+    fecha_inicio:       Date,
+    peso_maximo:        number,
+    estado:             string, 
+}

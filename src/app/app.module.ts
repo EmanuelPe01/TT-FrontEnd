@@ -18,6 +18,7 @@ import { GestionWoodComponent } from './Screens/dashboard/wood/gestion-wood/gest
 import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/consultar-wood.component';
 import { NuevaInscripcionComponent } from './Screens/dashBoard/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
 import { ConsultaInscripcionesComponent } from './Screens/dashboard/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
+import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/editar-inscripcion/editar-inscripcion.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ConsultaInscripcionesComponent } from './Screens/dashboard/inscripcione
     GestionWoodComponent,
     ConsultarWoodComponent,
     NuevaInscripcionComponent,
-    ConsultaInscripcionesComponent
+    ConsultaInscripcionesComponent,
+    EditarInscripcionComponent
   ],
   imports: [
     BrowserModule,

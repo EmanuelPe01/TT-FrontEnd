@@ -26,8 +26,7 @@ export class ConsultaInscripcionesComponent {
     this.inscripciones = await this.inscripcionService.getAllInscriptions().toPromise()
                           .then((data: any) => {
                             return data.inscripciones
-                          }).catch((data) => {return undefined})
-    console.log(this.inscripciones)                    
+                          }).catch((data) => {return undefined})                  
     this.isLoading = false;
   }
 
