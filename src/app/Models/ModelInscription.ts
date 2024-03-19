@@ -33,3 +33,7 @@ export interface generateInscription {
     peso_maximo:        number,
     estado:             string, 
 }
+
+export interface inscripciones {
+    inscripciones: singleInscription[]
+}

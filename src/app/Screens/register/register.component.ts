@@ -133,7 +133,8 @@ export class RegisterComponent {
       Swal.fire({
         title: 'Registrando',
         didOpen: () => {
-          Swal.showLoading();
+          Swal.disableButtons();
+          Swal.showLoading(Swal.getConfirmButton());
         }
       });
     }

@@ -1,6 +1,6 @@
 <div class="container-fluid text-center mt-3">
     <div class="row justify-content-center mb-5">
-        <div class="card col col-12 col-xl-10">
+        <div class="card col col-12 col-xl-10 card-bd">
             <div class="col">
                 <div class="row">
                     <div class="row">
@@ -22,26 +22,17 @@
                             <h3>Inscripción al box virtual</h3>
                         </div>
                     </div>
-
                     <div class="col col-12">
                         <div class="row">
-                            <div class="col col-12 col-md-6 mt-1">
+                            <div class="col col-12 col-md-6">
                                 <div class="card">
                                     <div class="card-header text-bg-dark">
                                         Cliente
                                     </div>
                                     <div class="card-body">
                                         <div class="textInputWrapper">
-                                            <input placeholder="Nombre(s)" type="text" class="textInput"
+                                            <input placeholder="Nombre(s) y/o apellidos" type="text" class="textInput"
                                                 [(ngModel)]="criterio_c_nombre">
-                                        </div>
-                                        <div class="textInputWrapper">
-                                            <input placeholder="Primer apellido" type="text" class="textInput"
-                                                [(ngModel)]="criterio_c_p_a">
-                                        </div>
-                                        <div class="textInputWrapper">
-                                            <input placeholder="Segundo apellido" type="text" class="textInput"
-                                                [(ngModel)]="criterio_c_s_a">
                                         </div>
                                     </div>
                                 </div>
@@ -53,16 +44,8 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="textInputWrapper">
-                                            <input placeholder="Nombre(s)" type="text" class="textInput"
+                                            <input placeholder="Nombre(s) y/o apellidos" type="text" class="textInput"
                                                 [(ngModel)]="criterio_e_nombre">
-                                        </div>
-                                        <div class="textInputWrapper">
-                                            <input placeholder="Primer apellido" type="text" class="textInput"
-                                                [(ngModel)]="criterio_e_p_a">
-                                        </div>
-                                        <div class="textInputWrapper">
-                                            <input placeholder="Segundo apellido" type="text" class="textInput"
-                                                [(ngModel)]="criterio_e_s_a">
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +71,7 @@
                                             </thead>
                                             <tbody class="table-group-divider">
                                                 <tr
-                                                    *ngFor="let usuario of filterUsers(usersCliente, criterio_c_nombre, criterio_c_p_a, criterio_c_s_a)">
+                                                    *ngFor="let usuario of filterUsers(usersCliente, criterio_c_nombre)">
                                                     <td>{{usuario.name}}</td>
                                                     <td>{{usuario.firstSurname}}</td>
                                                     <td>{{usuario.secondSurname}}</td>
@@ -119,7 +102,7 @@
                                             </thead>
                                             <tbody class="table-group-divider">
                                                 <tr
-                                                    *ngFor="let usuario of filterUsers(usersEntrenador, criterio_e_nombre, criterio_e_p_a, criterio_e_s_a)">
+                                                    *ngFor="let usuario of filterUsers(usersEntrenador, criterio_e_nombre)">
                                                     <td>{{usuario.name}}</td>
                                                     <td>{{usuario.firstSurname}}</td>
                                                     <td>{{usuario.secondSurname}}</td>
@@ -138,8 +121,11 @@
                                     </div>
                                 </div>
                             </ng-template>
-                            <div class="col col-12">
+                            <div class="col col-12 mb-2 mt-2">
                                 <div class="card">
+                                    <div class="card-header text-bg-dark">
+                                        Ficha de inscripción
+                                    </div>
                                     <div class="card-body">
                                         <form [formGroup]="formRegistro" (ngSubmit)="saveInscription()">
                                             <div class="row">
@@ -207,7 +193,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row mt-3">
+                                            <div class="row mt-1">
                                                 <div class="col col-6">
                                                     <a routerLink="..">
                                                         <button class="btn-32">

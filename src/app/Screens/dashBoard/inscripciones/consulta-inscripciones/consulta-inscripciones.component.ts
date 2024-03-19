@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { singleInscription } from 'src/app/Models/ModelInscription';
+import { inscripciones, singleInscription } from 'src/app/Models/ModelInscription';
 import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.service';
 
 @Component({
@@ -22,24 +22,26 @@ export class ConsultaInscripcionesComponent {
   ) {
    }
 
-  async ngOnInit(){
-    this.inscripciones = await this.inscripcionService.getAllInscriptions().toPromise()
-                          .then((data: any) => {
-                            return data.inscripciones
-                          }).catch((data) => {return undefined})                  
-    this.isLoading = false;
+  ngOnInit(){
+    this.inscripcionService.getAllInscriptions().
+    pipe().
+    subscribe((data: inscripciones) => {
+      this.inscripciones = data.inscripciones;
+      this.isLoading = false;
+    })
   }
 
   filterInscripciones(inscripciones: singleInscription[] | undefined, nombre: string, primerApellido: string, segundoApellido: string): singleInscription[] {
-    if(inscripciones) {
+    if( (nombre.length >=3 || primerApellido.length >= 3  || segundoApellido.length >= 3 ) && inscripciones) {
       return inscripciones.filter(
         (inscripcion) =>
           inscripcion.cliente.name.toLowerCase().includes(nombre.toLowerCase()) &&
           inscripcion.cliente.firstSurname.toLowerCase().includes(primerApellido.toLowerCase()) &&
           inscripcion.cliente.secondSurname.toLowerCase().includes(segundoApellido.toLowerCase())
       );
-    } else {
-      return [];
+    } else if(inscripciones){
+      return inscripciones;
     }
+    return [];
   }
 }

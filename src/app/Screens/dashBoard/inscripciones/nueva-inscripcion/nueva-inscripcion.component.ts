@@ -19,15 +19,10 @@ export class NuevaInscripcionComponent {
   isLoading: boolean = true
   usersCliente: infoBasicaUsuario[] | undefined
   usersEntrenador: infoBasicaUsuario[] | undefined
-  valueCliente: String = ''
-  valueEntrenador: String = ''
-
+  valueCliente: string = ''
+  valueEntrenador: string = ''
   criterio_c_nombre: string = ''
-  criterio_c_p_a: string = ''
-  criterio_c_s_a: string = ''
   criterio_e_nombre: string = ''
-  criterio_e_p_a: string = ''
-  criterio_e_s_a: string = ''
 
   constructor (
     private form: FormBuilder,
@@ -57,17 +52,18 @@ export class NuevaInscripcionComponent {
     this.isLoading = false;
   }
 
-  filterUsers(users: infoBasicaUsuario[] | undefined, nombre: string, primerApellido: string, segundoApellido: string): infoBasicaUsuario[] {
-    if(users) {
+  filterUsers(users: infoBasicaUsuario[] | undefined, nombre: string): infoBasicaUsuario[] {
+    if((nombre.length >= 3) && users) {
       return users.filter(
         (user) =>
-          user.name.toLowerCase().includes(nombre.toLowerCase()) &&
-          user.firstSurname.toLowerCase().includes(primerApellido.toLowerCase()) &&
-          user.secondSurname.toLowerCase().includes(segundoApellido.toLowerCase())
+          user.name.toLowerCase().includes(nombre.toLowerCase()) ||
+          user.firstSurname.toLowerCase().includes(nombre.toLowerCase()) ||
+          user.secondSurname.toLowerCase().includes(nombre.toLowerCase())
       );
-    } else {
-      return [];
+    } else if(users) {
+       return users;
     }
+    return [];
   }
 
   setCliente(cliente: infoBasicaUsuario) {
@@ -157,7 +153,8 @@ export class NuevaInscripcionComponent {
       Swal.fire({
         title: 'Registrando',
         didOpen: () => {
-          Swal.showLoading();
+          Swal.disableButtons();
+          Swal.showLoading(Swal.getConfirmButton());
         }
       });
     }

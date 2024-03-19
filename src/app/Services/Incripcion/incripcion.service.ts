@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { url } from 'src/app/Models';
-import { generateInscription, singleInscription } from 'src/app/Models/ModelInscription';
+import { generateInscription, inscripciones, url } from 'src/app/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +12,8 @@ export class IncripcionService {
     private http: HttpClient
   ) { }
 
-  getAllInscriptions(): Observable<singleInscription[]> {
-    return this.http.get<singleInscription[]>(url + 'allInscriptions');
+  getAllInscriptions(): Observable<inscripciones> {
+    return this.http.get<inscripciones>(url + 'allInscriptions');
   }
 
   saveInscription(inscripcion: generateInscription) {

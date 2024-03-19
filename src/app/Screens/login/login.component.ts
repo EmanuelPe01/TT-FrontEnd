@@ -142,7 +142,8 @@ export class LoginComponent {
       Swal.fire({
         title: 'Enviando correo',
         didOpen: () => {
-          Swal.showLoading();
+          Swal.disableButtons();
+          Swal.showLoading(Swal.getConfirmButton());
         }
       });
     }
