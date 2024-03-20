@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
-import { loginUsuario, infoLogin } from 'src/app/Models';
+import { LoginUsuario, InfoLogin } from 'src/app/Models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -33,7 +33,7 @@ export class LoginComponent {
   login() {
     if (this.formLogin.valid) {
       const datosForm = this.formLogin.value;
-      const cliente: loginUsuario = datosForm
+      const cliente: LoginUsuario = datosForm
 
       this.user_service.login(cliente)
         .pipe(
@@ -59,7 +59,7 @@ export class LoginComponent {
             return throwError(() => new Error("Login failed"));
           })
         ).subscribe(
-          (data: infoLogin) => {
+          (data: InfoLogin) => {
             this.user_service.setToken(data.token);
             this.router.navigate(['dash-board']);
           })

@@ -1,6 +1,6 @@
 import { Rol } from "./ModelRol"
 
-export interface registrarUsuario{
+export interface RegistrarUsuario{
     id_rol:           number
     name:             string,
     firstSurname:     string,
@@ -11,12 +11,12 @@ export interface registrarUsuario{
     fecha_nacimiento: Date
 }
 
-export interface loginUsuario{
+export interface LoginUsuario{
     email:          string,
     password:       string
 }
 
-export interface informacionUsuario {
+export interface InformacionUsuario {
     id:             number,
     name:           string,
     firstSurname:   string,
@@ -26,14 +26,14 @@ export interface informacionUsuario {
     rol:            Rol
 }
 
-export interface infoBasicaUsuario {
+export interface InfoBasicaUsuario {
     id:             number,
     name:           string,
     firstSurname:   string,
     secondSurname:  string,
 }
 
-export interface infoLogin {
+export interface InfoLogin {
     token:      string,
-    user:    informacionUsuario
+    user:    InformacionUsuario
 }

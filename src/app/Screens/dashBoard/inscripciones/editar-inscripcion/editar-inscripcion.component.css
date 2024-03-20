@@ -220,11 +220,16 @@
 
 .input-container input[type="text"]:focus~.underline,
 .input-container input[type="text"]:valid~.underline,
-.input-container input[type="text"]:read-only~.underline {
+.input-container input[type="text"]:read-only~.underline,
+.input-container select:valid~.underline {
   transform: scaleX(1);
 }
 
-.input-container input[type="date"] {
+.input-container select:focus~.underline{
+  transform: scaleX(0);
+}
+
+.input-container input[type="date"], .select-estatus {
   font-size: 16px;
   width: 100%;
   border: none;

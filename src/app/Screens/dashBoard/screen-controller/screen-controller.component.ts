@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { detailInscription, infoLogin } from 'src/app/Models';
+import { DetailInscription, InfoLogin } from 'src/app/Models';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -10,8 +10,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./screen-controller.component.css']
 })
 export class ScreenControllerComponent {
-  userInformation: infoLogin | undefined;
-  inscriptionInformation: detailInscription | undefined;
+  userInformation: InfoLogin | undefined;
+  inscriptionInformation: DetailInscription | undefined;
   navBarBrand: string = "MERO CrossFit";
   urls: { nombre: string, url: string }[] = [];
   labelNavBar: string = "";

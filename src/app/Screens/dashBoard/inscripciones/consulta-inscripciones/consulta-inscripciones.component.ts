@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { inscripciones, singleInscription } from 'src/app/Models/ModelInscription';
+import { SingleInscription } from 'src/app/Models/ModelInscription';
 import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.servic
 })
 export class ConsultaInscripcionesComponent {
 
-  inscripciones: singleInscription[] | undefined
+  inscripciones: SingleInscription[] | undefined
   isLoading: boolean = true
 
   criterio_nombre: string = ''
@@ -25,13 +25,13 @@ export class ConsultaInscripcionesComponent {
   ngOnInit(){
     this.inscripcionService.getAllInscriptions().
     pipe().
-    subscribe((data: inscripciones) => {
-      this.inscripciones = data.inscripciones;
+    subscribe((data: SingleInscription[]) => {
+      this.inscripciones = data;
       this.isLoading = false;
     })
   }
 
-  filterInscripciones(inscripciones: singleInscription[] | undefined, nombre: string, primerApellido: string, segundoApellido: string): singleInscription[] {
+  filterInscripciones(inscripciones: SingleInscription[] | undefined, nombre: string, primerApellido: string, segundoApellido: string): SingleInscription[] {
     if( (nombre.length >=3 || primerApellido.length >= 3  || segundoApellido.length >= 3 ) && inscripciones) {
       return inscripciones.filter(
         (inscripcion) =>

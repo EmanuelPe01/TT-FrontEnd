@@ -23,139 +23,149 @@
                         </div>
                     </div>
                     <div class="col col-12">
-                        <div class="row">
-                            <div class="col col-12 col-md-6 mt-1">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="input-container">
-                                                        <input required="" value="" id="input-cliente" type="text" />
-                                                        <label class="label" for="input-cliente">Cliente</label>
-                                                        <div class="underline"></div>
+                        <div *ngIf="isLoading; else showTables">
+                            <div class="mt-5 mb-5">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
+                        <ng-template #showTables>
+                            <div class="row">
+                                <div class="col col-12 col-md-6 mt-1">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form [formGroup]="formRegistro">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="input-container">
+                                                            <input required="" value="{{nameCliente}}"
+                                                                id="input-cliente" type="text" readonly />
+                                                            <label class="label" for="input-cliente">Cliente</label>
+                                                            <div class="underline"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col col-10">
-                                                    <div class="input-container">
-                                                        <input required="" value="" id="input-entrendador"
-                                                            type="text" />
-                                                        <label class="label" for="input-entrendador">Entrenador</label>
-                                                        <div class="underline"></div>
+                                                <div class="row">
+                                                    <div class="col col-10">
+                                                        <div class="input-container">
+                                                            <input required="" value="{{nameEntrenador}}"
+                                                                id="input-entrenador" type="text" readonly />
+                                                            <label class="label"
+                                                                for="input-entrendador">Entrenador</label>
+                                                            <div class="underline"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col col-2">
+                                                        <button class="btn btn-outline-dark" style="
+                                                                        --bs-btn-font-size: 1rem;
+                                                                        --bs-btn-padding-y: .4rem; 
+                                                                        --bs-btn-padding-x: .6rem;
+                                                                        --bs-btn-border-color: #fff;
+                                                                    " type="button" (click)="resetUser()">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <div class="col col-2">
-                                                    <button class="btn btn-outline-dark" style="
-                                                                    --bs-btn-font-size: 1rem;
-                                                                    --bs-btn-padding-y: .4rem; 
-                                                                    --bs-btn-padding-x: .6rem;
-                                                                    --bs-btn-border-color: #fff;
-                                                                " type="button">
-                                                        <i class="fa-solid fa-xmark"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col col-12 col-md-4">
-                                                    <div class="input-container">
-                                                        <input required="" formControlName="fecha_inicio"
-                                                            id="input-fecha-inicio" type="text"
-                                                            onfocus="(this.type='date')" onblur="(this.type='text')" />
-                                                        <label class="label" for="input-fecha-inicio">Fecha de
-                                                            inicio</label>
-                                                        <div class="underline"></div>
+                                                <div class="row">
+                                                    <div class="col col-12 col-md-4">
+                                                        <div class="input-container">
+                                                            <input required="" formControlName="fecha_inicio"
+                                                                id="input-fecha-inicio" type="text"
+                                                                onfocus="(this.type='date')"
+                                                                onblur="(this.type='text')" />
+                                                            <label class="label" for="input-fecha-inicio">Fecha de
+                                                                inicio</label>
+                                                            <div class="underline"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col col-12 col-md-4">
+                                                        <div class="input-container">
+                                                            <input formControlName="peso_maximo" id="input-peso"
+                                                                type="text" />
+                                                            <label class="label" for="input-peso">Peso máximo
+                                                                (lb)</label>
+                                                            <div class="underline"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col col-12 col-md-4">
+                                                        <div class="input-container">
+                                                            <select class="select-estatus">
+                                                                <option value="0"
+                                                                    [attr.selected]="cuentaActiva() ? null : 'selected'">
+                                                                    Inactivo</option>
+                                                                <option value="1"
+                                                                    [attr.selected]="cuentaActiva() ? 'selected' : null">
+                                                                    Activo</option>
+                                                            </select>
+                                                            <div class="underline"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col col-12 col-md-4">
-                                                    <div class="input-container">
-                                                        <input required="" formControlName="peso_maximo" id="input-peso"
-                                                            type="text" />
-                                                        <label class="label" for="input-peso">Peso máximo (lb)</label>
-                                                        <div class="underline"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="col col-12 col-md-4">
-                                                    
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mt-3 mb-3">
-                                    <div class="col col-6">
-                                        <a routerLink="../..">
-                                            <button class="btn-32">
+                                    <div class="row mt-3 mb-3">
+                                        <div class="col col-6">
+                                            <a routerLink="../..">
+                                                <button class="btn-32">
+                                                    <span class="text-container">
+                                                        <span class="text">Cancelar</span>
+                                                    </span>
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <div class="col col-6">
+                                            <button class="btn-31">
                                                 <span class="text-container">
-                                                    <span class="text">Cancelar</span>
+                                                    <span class="text">Aceptar</span>
                                                 </span>
                                             </button>
-                                        </a>
-                                    </div>
-                                    <div class="col col-6">
-                                        <button class="btn-31">
-                                            <span class="text-container">
-                                                <span class="text">Aceptar</span>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-12 col-md-6 mt-1">
-                                <div class="card">
-                                    <div class="card-header text-bg-dark">
-                                        Entrenador
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="textInputWrapper">
-                                            <input placeholder="Nombre(s) y/o apellidos" type="text" class="textInput">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="table-wrapper mt-3">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Nombre</th>
-                                                <th scope="col">Primer apellido</th>
-                                                <th scope="col">Segundo apellido</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="table-group-divider">
-                                            <!-- <tr
-                                                    *ngFor="let usuario of filterUsers(usersEntrenador, criterio_e_nombre, criterio_e_p_a, criterio_e_s_a)">
+                                <div class="col col-12 col-md-6 mt-1">
+                                    <div class="card">
+                                        <div class="card-header text-bg-dark">
+                                            Entrenador
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="textInputWrapper">
+                                                <input placeholder="Nombre(s) y/o apellidos" type="text"
+                                                    class="textInput" [(ngModel)]="criterio_e_nombre">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-wrapper mt-3">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Nombre</th>
+                                                    <th scope="col">Primer apellido</th>
+                                                    <th scope="col">Segundo apellido</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="table-group-divider">
+                                                <tr
+                                                    *ngFor="let usuario of filterUsers(usersEntrenador, criterio_e_nombre)">
                                                     <td>{{usuario.name}}</td>
                                                     <td>{{usuario.firstSurname}}</td>
                                                     <td>{{usuario.secondSurname}}</td>
                                                     <td>
                                                         <button class="btn btn-outline-dark" style="
-                                                                    --bs-btn-font-size: 1rem;
-                                                                    --bs-btn-padding-y: .4rem; 
-                                                                    --bs-btn-padding-x: .6rem;
-                                                                " type="button" (click)="setEntrenador(usuario)">
+                                                                        --bs-btn-font-size: 1rem;
+                                                                        --bs-btn-padding-y: .4rem; 
+                                                                        --bs-btn-padding-x: .6rem;
+                                                                    " type="button" (click)="setEntrenador(usuario)">
                                                             <i class="fa-solid fa-circle-plus"></i>
                                                         </button>
                                                     </td>
-                                                </tr> -->
-                                        </tbody>
-                                    </table>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <!-- <div *ngIf="false; else showTables">
-                                <div class="mt-5 mb-5">
-                                    <div class="loader"></div>
-                                </div>
-                            </div> -->
-                            <div #showTables>
-                                <div class="row">
-
-                                </div>
-                            </div>
-                        </div>
+                        </ng-template>
                     </div>
                 </div>
             </div>

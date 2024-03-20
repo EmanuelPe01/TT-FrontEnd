@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
-import { infoBasicaUsuario } from 'src/app/Models';
+import { InfoBasicaUsuario } from 'src/app/Models';
 import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.service';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
 import Swal from 'sweetalert2';
@@ -17,8 +17,8 @@ export class NuevaInscripcionComponent {
 
   formRegistro: FormGroup;
   isLoading: boolean = true
-  usersCliente: infoBasicaUsuario[] | undefined
-  usersEntrenador: infoBasicaUsuario[] | undefined
+  usersCliente: InfoBasicaUsuario[] | undefined
+  usersEntrenador: InfoBasicaUsuario[] | undefined
   valueCliente: string = ''
   valueEntrenador: string = ''
   criterio_c_nombre: string = ''
@@ -40,19 +40,20 @@ export class NuevaInscripcionComponent {
   }
 
   async ngOnInit(){
-    this.usersCliente = await this.userService.getUserByRole(1).toPromise()
-                        .then((data: any) =>{
-                          return data.usuarios;
-                        }).catch((data) => {return undefined})
-
-    this.usersEntrenador = await this.userService.getUserByRole(2).toPromise()
-                        .then((data: any) =>{
-                          return data.usuarios;
-                        }).catch((data) => {return undefined})              
-    this.isLoading = false;
+    this.userService.getUserByRole(1).
+    pipe().
+    subscribe((data) => {
+      this.usersCliente = data;
+      this.userService.getUserByRole(2).
+      pipe().
+      subscribe((data) => {
+        this.usersEntrenador = data;
+        this.isLoading = false;
+      });
+    });
   }
 
-  filterUsers(users: infoBasicaUsuario[] | undefined, nombre: string): infoBasicaUsuario[] {
+  filterUsers(users: InfoBasicaUsuario[] | undefined, nombre: string): InfoBasicaUsuario[] {
     if((nombre.length >= 3) && users) {
       return users.filter(
         (user) =>
@@ -66,7 +67,7 @@ export class NuevaInscripcionComponent {
     return [];
   }
 
-  setCliente(cliente: infoBasicaUsuario) {
+  setCliente(cliente: InfoBasicaUsuario) {
     if (cliente) {
       this.formRegistro.patchValue({
         id_user_cliente: cliente.id
@@ -76,7 +77,7 @@ export class NuevaInscripcionComponent {
     }    
   }
 
-  setEntrenador(entrenador: infoBasicaUsuario) {
+  setEntrenador(entrenador: InfoBasicaUsuario) {
     if (entrenador) {
       this.formRegistro.patchValue({
         id_user_entrenador: entrenador.id

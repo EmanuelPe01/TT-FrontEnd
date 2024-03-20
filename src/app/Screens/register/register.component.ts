@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
-import { registrarUsuario } from 'src/app/Models';
+import { RegistrarUsuario } from 'src/app/Models';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
 import Swal from 'sweetalert2';
 
@@ -45,7 +45,7 @@ export class RegisterComponent {
       this.showLoadingMessage(true);
       const datosForm = this.formRegistro.value;
       delete datosForm.conf_pass;
-      const usuario: registrarUsuario = datosForm
+      const usuario: RegistrarUsuario = datosForm
       usuario.id_rol = 1;
 
       this.user_service.saveClient(usuario)

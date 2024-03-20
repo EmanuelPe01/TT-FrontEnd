@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { detailInscription, infoBasicaUsuario, infoLogin, informacionUsuario, loginUsuario, registrarUsuario, url } from 'src/app/Models';
+import { DetailInscription, InfoBasicaUsuario, InfoLogin, LoginUsuario, RegistrarUsuario, url } from 'src/app/Models';
 
 
 @Injectable({
@@ -24,12 +24,12 @@ export class UserServiceService {
     this.cookie.delete('token');
   }
 
-  saveClient(usuario: registrarUsuario){
+  saveClient(usuario: RegistrarUsuario){
     return this.http.post(url + 'createUser', usuario);
   } 
 
-  login(usuario: loginUsuario): Observable<infoLogin>{
-    return this.http.post<infoLogin>(url + 'login', usuario);
+  login(usuario: LoginUsuario): Observable<InfoLogin>{
+    return this.http.post<InfoLogin>(url + 'login', usuario);
   }
   
   logout(): Observable<any> { 
@@ -39,11 +39,11 @@ export class UserServiceService {
     return this.http.post(url + 'logout', {}, { headers });
   }
 
-  isAuthenticated(): Observable<infoLogin> {
+  isAuthenticated(): Observable<InfoLogin> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.getToken()}`
     });
-    return this.http.get<infoLogin>(url + 'check-status', { headers });
+    return this.http.get<InfoLogin>(url + 'check-status', { headers });
   }
 
   sendEmail(email: any) {
@@ -58,14 +58,14 @@ export class UserServiceService {
     return this.http.post(url + 'restorePassword/' + token, password);
   }
 
-  detailInscription(): Observable<detailInscription> {
+  detailInscription(): Observable<DetailInscription> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.getToken()}`
     });
-    return this.http.get<detailInscription>(url + 'getDetailInscription', { headers });
+    return this.http.get<DetailInscription>(url + 'getDetailInscription', { headers });
   }
 
-  getUserByRole(id_rol: number): Observable<infoBasicaUsuario[]> {
-    return this.http.get<infoBasicaUsuario[]>(url + "usersByRole/" + id_rol)
+  getUserByRole(id_rol: number): Observable<InfoBasicaUsuario[]> {
+    return this.http.get<InfoBasicaUsuario[]>(url + "usersByRole/" + id_rol)
   }
 }

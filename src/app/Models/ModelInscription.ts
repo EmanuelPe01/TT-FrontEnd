@@ -1,12 +1,12 @@
 import { Rol } from "./ModelRol";
-import { infoBasicaUsuario } from "./ModelUser";
+import { InfoBasicaUsuario } from "./ModelUser";
 
-export interface detailInscription {
-    detalle:    inscriptionInformation
+export interface DetailInscription {
+    detalle:    InscriptionInformation
     rol:        Rol
 }
 
-export interface inscriptionInformation {
+export interface InscriptionInformation {
     id:                 number,
     id_user_cliente:    number,
     id_user_entrenador: number,
@@ -15,25 +15,21 @@ export interface inscriptionInformation {
     estado:             number
 }
 
-export interface singleInscription {
+export interface SingleInscription {
     id:                 number,
     id_user_cliente:    number,
     id_user_entrenador: number,
     fecha_inicio:       Date,
     peso_maximo:        number,
     estado:             string,
-    cliente:            infoBasicaUsuario,
-    entrenador:         infoBasicaUsuario
+    cliente:            InfoBasicaUsuario,
+    entrenador:         InfoBasicaUsuario
 }
 
-export interface generateInscription {
+export interface GenerateInscription {
     id_user_cliente:    number,
     id_user_entrenador: number,
     fecha_inicio:       Date,
     peso_maximo:        number,
     estado:             string, 
-}
-
-export interface inscripciones {
-    inscripciones: singleInscription[]
 }
