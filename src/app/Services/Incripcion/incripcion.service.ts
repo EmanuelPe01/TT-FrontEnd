@@ -27,4 +27,8 @@ export class IncripcionService {
   updateInscripcion(inscripcion: GenerateInscription, id: number) {
     return this.http.put(url + 'updateInscription/' + id, inscripcion);
   }
+
+  deleteInsctiption(id: number) {
+    return this.http.delete(url + 'deleteInscription/' + id);
+  }
 }

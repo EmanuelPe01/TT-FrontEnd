@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.service';
 import { InfoBasicaUsuario, SingleInscription } from 'src/app/Models';
 import { UserServiceService } from 'src/app/Services/User/user-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-inscripcion',
@@ -25,6 +26,7 @@ export class EditarInscripcionComponent {
     private inscriptionService: IncripcionService,
     private userService: UserServiceService,
     private activatedRute: ActivatedRoute,
+    private router: Router
   ) {
     this.formRegistro = this.form.group({
       id_user_cliente: ['', Validators.required],
@@ -98,6 +100,50 @@ export class EditarInscripcionComponent {
   setInputReadOnly(id: string, flag: boolean) {
     const inputCliente = document.getElementById(id) as HTMLInputElement;
     inputCliente.readOnly = flag;
+  }
+
+  saveInscription() {
+      if(this.formRegistro.valid){
+        this.showLoadingMessage(true);
+        const inscripcion: SingleInscription = this.formRegistro.value
+        this.inscriptionService.updateInscripcion(inscripcion, this.idInscripcion).
+        pipe().
+        subscribe((data) => { 
+          this.showLoadingMessage(false);
+          this.showMessageSucces("Actualización exitosa");
+          this.router.navigate(["dash-board/admin/inscripciones"]);
+        })
+      }    
+  }
+
+  showMessageSucces(message: string) {
+    Swal.fire({
+      icon: 'success',
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  showErrorMessage(message: string) {
+    Swal.fire({
+      icon: 'error',
+      title: message,
+      confirmButtonColor: "#000",
+      confirmButtonText: "Aceptar",
+    })
+  }
+
+  showLoadingMessage(flag: boolean) {
+    if (flag) {
+      Swal.fire({
+        title: 'Actualizando información',
+        didOpen: () => {
+          Swal.disableButtons();
+          Swal.showLoading(Swal.getConfirmButton());
+        }
+      });
+    }
   }
 
 }

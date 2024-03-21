@@ -19,6 +19,7 @@ import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/
 import { NuevaInscripcionComponent } from './Screens/dashBoard/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
 import { ConsultaInscripcionesComponent } from './Screens/dashboard/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
 import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/editar-inscripcion/editar-inscripcion.component';
+import { VerInscripcionComponent } from './Screens/dashboard/inscripciones/ver-inscripcion/ver-inscripcion.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/ed
     ConsultarWoodComponent,
     NuevaInscripcionComponent,
     ConsultaInscripcionesComponent,
-    EditarInscripcionComponent
+    EditarInscripcionComponent,
+    VerInscripcionComponent
   ],
   imports: [
     BrowserModule,

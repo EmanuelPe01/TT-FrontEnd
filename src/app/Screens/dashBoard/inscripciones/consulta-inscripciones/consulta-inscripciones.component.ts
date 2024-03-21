@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SingleInscription } from 'src/app/Models/ModelInscription';
 import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-consulta-inscripciones',
@@ -23,6 +24,10 @@ export class ConsultaInscripcionesComponent {
    }
 
   ngOnInit(){
+    this.getInscriptions();
+  }
+
+  getInscriptions() {
     this.inscripcionService.getAllInscriptions().
     pipe().
     subscribe((data: SingleInscription[]) => {
@@ -43,5 +48,50 @@ export class ConsultaInscripcionesComponent {
       return inscripciones;
     }
     return [];
+  }
+
+  deleteInscription(nameCliente: string, id: number) {
+    Swal.fire({
+      title: "¿Estas seguro?",
+      text: `Se eliminará la inscripción de ${nameCliente}` ,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#6E1300",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.showLoadingMessage(true);
+        this.inscripcionService.deleteInsctiption(id).
+        pipe().
+        subscribe((data) => {
+          this.showLoadingMessage(false);
+          this.showMessageSucces('Registro eliminado');
+          this.getInscriptions()
+        })
+      }
+    });
+  }
+
+  showMessageSucces(message: string) {
+    Swal.fire({
+      icon: 'success',
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  showLoadingMessage(flag: boolean) {
+    if (flag) {
+      Swal.fire({
+        title: 'Espera un momento',
+        didOpen: () => {
+          Swal.disableButtons();
+          Swal.showLoading(Swal.getConfirmButton());
+        }
+      });
+    }
   }
 }

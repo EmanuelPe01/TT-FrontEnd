@@ -34,7 +34,7 @@ export class NuevaInscripcionComponent {
       id_user_cliente: ['', Validators.required],
       id_user_entrenador: ['', Validators.required],
       fecha_inicio: ['', Validators.required],
-      peso_maximo: ['20', Validators.required],
+      peso_maximo: ['', Validators.required],
       estado: ['1', Validators.required]
     })
   }

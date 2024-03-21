@@ -9,6 +9,7 @@ import { ScreenControllerComponent } from './Screens/dashBoard/screen-controller
 import { InscripcionesComponent } from './Screens/dashBoard/inscripciones/inscripciones.component';
 import { ConsultaInscripcionesComponent } from './Screens/dashboard/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
 import { NuevaInscripcionComponent } from './Screens/dashBoard/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
+import { VerInscripcionComponent } from './Screens/dashboard/inscripciones/ver-inscripcion/ver-inscripcion.component';
 
 //Woods
 import { GestionWoodComponent } from './Screens/dashboard/wood/gestion-wood/gestion-wood.component';
@@ -31,7 +32,8 @@ const routes: Routes = [
             path: 'inscripciones', component: InscripcionesComponent, children: [
               {path: '', component: ConsultaInscripcionesComponent},
               {path: 'nuevaInscripcion', component: NuevaInscripcionComponent},
-              {path: 'edit/:idInscripcion', component: EditarInscripcionComponent}
+              {path: 'edit/:idInscripcion', component: EditarInscripcionComponent},
+              {path: 'detail/:idInscripcion', component: VerInscripcionComponent}
             ]
           }
         ]
