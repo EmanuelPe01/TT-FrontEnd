@@ -1,0 +1,174 @@
+<div class="container">
+    <div class="card mt-2">
+        <div class="card-header">
+            Búsqueda de ejercicios
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col col-12 col-md-5 mt-1 ps-3">
+                    <div class="textInputWrapper">
+                        <input placeholder="Nombre del ejercicio" type="text" class="textInput"
+                            [(ngModel)]="criterioEjercicio">
+                    </div>
+                </div>
+                <div class="col col-12 col-md-3">
+                    <div class="input-container">
+                        <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
+                        <select id="tipoEjercicio" class="select-estatus" [(ngModel)]="criterioTipoEjercicio">
+                            <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.nombre_tipo">
+                                {{tEjercicio.nombre_tipo}}</option>
+                        </select>
+                        <div class="underline"></div>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-2 mt-1">
+                    <div class="d-grid">
+                        <a class="btn btn-primary" style="
+                                    --bs-btn-font-size: 1rem;
+                                    --bs-btn-padding-y: .4rem; 
+                                    --bs-btn-padding-x: .6rem;
+                                    text-decoration: none;
+                                    --bs-btn-color: #fff;
+                                    --bs-btn-bg: #000;
+                                    --bs-btn-border-color: #fff;
+                                    --bs-btn-hover-color: #000;
+                                    --bs-btn-hover-bg: #fff;
+                                    --bs-btn-hover-border-color: #000;
+                                    --bs-btn-active-color: #000;
+                                    --bs-btn-active-bg: #fff;
+                                    --bs-btn-active-border-color: #000;
+                                " (click)="filterByParams()">
+                            <i class="fa-regular fa-address-card"></i>
+                            Buscar
+                        </a>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-2 mt-1">
+                    <div class="d-grid">
+                        <a class="btn btn-outline-dark" style="
+                            --bs-btn-font-size: 1rem;
+                            --bs-btn-padding-y: .4rem; 
+                            --bs-btn-padding-x: .6rem;
+                            text-decoration: none;
+                        " routerLink="nuevaInscripcion">
+                            <i class="fa-regular fa-plus"></i>
+                            Agregar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col col-12 col-md-4 mt-1">
+            <div class="d-grid">
+                <a class="btn btn-primary" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                    --bs-btn-color: #fff;
+                    --bs-btn-bg: #000;
+                    --bs-btn-border-color: #fff;
+                    --bs-btn-hover-color: #000;
+                    --bs-btn-hover-bg: #fff;
+                    --bs-btn-hover-border-color: #000;
+                    --bs-btn-active-color: #000;
+                    --bs-btn-active-bg: #fff;
+                    --bs-btn-active-border-color: #000;
+                " 
+                data-bs-toggle="modal" data-bs-target="#nuevoTipoEjercicio">
+                    Agregar tipo de ejercicio
+                </a>
+            </div>
+        </div>
+        <div class="col col-12 col-md-4 mt-1">
+            <div class="d-grid">
+                <a class="btn btn-primary" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                    --bs-btn-color: #fff;
+                    --bs-btn-bg: #000;
+                    --bs-btn-border-color: #fff;
+                    --bs-btn-hover-color: #000;
+                    --bs-btn-hover-bg: #fff;
+                    --bs-btn-hover-border-color: #000;
+                    --bs-btn-active-color: #000;
+                    --bs-btn-active-bg: #fff;
+                    --bs-btn-active-border-color: #000;
+                " routerLink="nuevaInscripcion">
+                    Editar tipo de ejercicio
+                </a>
+            </div>
+        </div>
+        <div class="col col-12 col-md-4 mt-1">
+            <div class="d-grid">
+                <a class="btn btn-primary" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                    --bs-btn-color: #fff;
+                    --bs-btn-bg: #000;
+                    --bs-btn-border-color: #fff;
+                    --bs-btn-hover-color: #000;
+                    --bs-btn-hover-bg: #fff;
+                    --bs-btn-hover-border-color: #000;
+                    --bs-btn-active-color: #000;
+                    --bs-btn-active-bg: #fff;
+                    --bs-btn-active-border-color: #000;
+                " routerLink="nuevaInscripcion">
+                    Eliminar tipo de ejercicios
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div *ngIf="isLoading; else showTable">
+            <div class="mt-5">
+                <div class="loader"></div>
+            </div>
+        </div>
+        <ng-template #showTable>
+            <div class="table-responsive-xl">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Ejercicio</th>
+                            <th scope="col">Demostración</th>
+                            <th scope="col">Unidad de medida</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+
+                    </tbody>
+                </table>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+<!-- Modales -->
+
+<!-- Nuevo tipo de ejercicio -->
+<div class="modal fade" id="nuevoTipoEjercicio" tabindex="-1" aria-labelledby="nuevoTipoEjercicioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="nuevoTipoEjercicioLabel">Agregar tipo de ejercicio</h1>
+            </div>
+            <div class="modal-body">
+                <input placeholder="Nombre del ejercicio" type="text" class="textInput"
+                    [(ngModel)]="nuevoTipoEjercicio">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="createTipoEjercicio()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

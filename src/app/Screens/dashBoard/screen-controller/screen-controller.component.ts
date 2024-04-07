@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DetailInscription, InfoLogin } from 'src/app/Models';
-import { UserServiceService } from 'src/app/Services/User/user-service.service';
+import { UserServiceService } from 'src/app/Services/user.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -57,10 +57,11 @@ export class ScreenControllerComponent {
           ]
           break;
         case 3:
-          rutaNavegacion = 'dash-board/admin/inscripciones'
+          rutaNavegacion = '/dash-board/admin/ejercicios'
           this.urls = [
             { nombre: 'Rutinas', url: '/dash-board/admin' },
-            { nombre: 'Inscripciones', url: '/dash-board/admin/inscripciones' }
+            { nombre: 'Inscripciones', url: '/dash-board/admin/inscripciones' },
+            { nombre: 'Ejercicios', url: '/dash-board/admin/ejercicios'}
           ]
           break;
         default:

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserServiceService } from 'src/app/Services/User/user-service.service';
+import { UserServiceService } from 'src/app/Services/user.service';
 import { LoginUsuario, InfoLogin } from 'src/app/Models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';

@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
-import { UserServiceService } from 'src/app/Services/User/user-service.service';
+import { UserServiceService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-nav-bar',

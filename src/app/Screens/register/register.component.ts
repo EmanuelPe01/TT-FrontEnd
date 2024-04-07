@@ -4,7 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 import { RegistrarUsuario } from 'src/app/Models';
-import { UserServiceService } from 'src/app/Services/User/user-service.service';
+import { UserServiceService } from 'src/app/Services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({

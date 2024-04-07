@@ -20,6 +20,8 @@ import { NuevaInscripcionComponent } from './Screens/dashBoard/inscripciones/nue
 import { ConsultaInscripcionesComponent } from './Screens/dashboard/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
 import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/editar-inscripcion/editar-inscripcion.component';
 import { VerInscripcionComponent } from './Screens/dashboard/inscripciones/ver-inscripcion/ver-inscripcion.component';
+import { EjerciciosComponent } from './Screens/dashboard/ejercicios/ejercicios.component';
+import { ConsultaEjerciciosComponent } from './Screens/dashboard/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { VerInscripcionComponent } from './Screens/dashboard/inscripciones/ver-i
     NuevaInscripcionComponent,
     ConsultaInscripcionesComponent,
     EditarInscripcionComponent,
-    VerInscripcionComponent
+    VerInscripcionComponent,
+    EjerciciosComponent,
+    ConsultaEjerciciosComponent
   ],
   imports: [
     BrowserModule,

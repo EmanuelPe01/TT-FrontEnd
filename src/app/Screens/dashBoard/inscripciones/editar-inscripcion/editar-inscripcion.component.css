@@ -180,7 +180,9 @@
   width: 100%;
 }
 
-.input-container input[type="text"] {
+.input-container input[type="text"], 
+.input-container input[type="date"], 
+.select-estatus{
   font-size: 16px;
   width: 100%;
   border: none;
@@ -199,8 +201,17 @@
   pointer-events: none;
 }
 
+.input-container .label-select {
+  position: absolute;
+  top: -20px;
+  font-size: 16px;
+  color: #333;
+}
+
 .input-container input[type="text"]:focus~.label,
 .input-container input[type="text"]:valid~.label,
+.input-container input[type="date"]:focus~.label,
+.input-container input[type="date"]:valid~.label,
 .input-container input[type="text"]:read-only~.label {
   top: -20px;
   font-size: 16px;
@@ -220,6 +231,8 @@
 
 .input-container input[type="text"]:focus~.underline,
 .input-container input[type="text"]:valid~.underline,
+.input-container input[type="date"]:focus~.underline,
+.input-container input[type="date"]:valid~.underline,
 .input-container input[type="text"]:read-only~.underline,
 .input-container select:valid~.underline {
   transform: scaleX(1);
@@ -227,28 +240,6 @@
 
 .input-container select:focus~.underline{
   transform: scaleX(0);
-}
-
-.input-container input[type="date"], .select-estatus {
-  font-size: 16px;
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid #ccc;
-  padding: 5px 0;
-  background-color: transparent;
-  outline: none;
-}
-
-.input-container input[type="date"]:focus~.label,
-.input-container input[type="date"]:valid~.label {
-  top: -20px;
-  font-size: 16px;
-  color: #333;
-}
-
-.input-container input[type="date"]:focus~.underline,
-.input-container input[type="date"]:valid~.underline {
-  transform: scaleX(1);
 }
 
 .btn-31,

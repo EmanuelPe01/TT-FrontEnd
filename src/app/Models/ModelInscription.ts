@@ -7,29 +7,29 @@ export interface DetailInscription {
 }
 
 export interface InscriptionInformation {
-    id:                 number,
-    id_user_cliente:    number,
-    id_user_entrenador: number,
-    fecha_inicio:       Date,
-    peso_maximo:        number,
+    id:                 number
+    id_user_cliente:    number
+    id_user_entrenador: number
+    fecha_inicio:       Date
+    peso_maximo:        number
     estado:             number
 }
 
 export interface SingleInscription {
-    id:                 number,
-    id_user_cliente:    number,
-    id_user_entrenador: number,
-    fecha_inicio:       Date,
-    peso_maximo:        number,
-    estado:             string,
-    cliente:            InfoBasicaUsuario,
+    id:                 number
+    id_user_cliente:    number
+    id_user_entrenador: number
+    fecha_inicio:       Date
+    peso_maximo:        number
+    estado:             string
+    cliente:            InfoBasicaUsuario
     entrenador:         InfoBasicaUsuario
 }
 
 export interface GenerateInscription {
-    id_user_cliente:    number,
-    id_user_entrenador: number,
-    fecha_inicio:       Date,
-    peso_maximo:        number,
-    estado:             string, 
+    id_user_cliente:    number
+    id_user_entrenador: number
+    fecha_inicio:       Date
+    peso_maximo:        number
+    estado:             string 
 }

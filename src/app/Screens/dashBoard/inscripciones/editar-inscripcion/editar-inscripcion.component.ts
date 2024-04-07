@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.service';
+import { IncripcionService } from 'src/app/Services/incripcion.service';
 import { InfoBasicaUsuario, SingleInscription } from 'src/app/Models';
-import { UserServiceService } from 'src/app/Services/User/user-service.service';
+import { UserServiceService } from 'src/app/Services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({

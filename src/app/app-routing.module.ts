@@ -16,6 +16,10 @@ import { GestionWoodComponent } from './Screens/dashboard/wood/gestion-wood/gest
 import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/consultar-wood.component';
 import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/editar-inscripcion/editar-inscripcion.component';
 
+//Ejercicios
+import { EjerciciosComponent } from './Screens/dashboard/ejercicios/ejercicios.component';
+import { ConsultaEjerciciosComponent } from './Screens/dashboard/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
+
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -33,7 +37,12 @@ const routes: Routes = [
               {path: '', component: ConsultaInscripcionesComponent},
               {path: 'nuevaInscripcion', component: NuevaInscripcionComponent},
               {path: 'edit/:idInscripcion', component: EditarInscripcionComponent},
-              {path: 'detail/:idInscripcion', component: VerInscripcionComponent}
+              {path: 'detail/:idInscripcion', component: VerInscripcionComponent},
+            ]
+          },
+          {
+            path: 'ejercicios', component: EjerciciosComponent, children: [
+              {path: '', component: ConsultaEjerciciosComponent}
             ]
           }
         ]

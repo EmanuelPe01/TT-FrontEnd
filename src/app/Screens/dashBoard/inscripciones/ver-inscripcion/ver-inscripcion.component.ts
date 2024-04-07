@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SingleInscription } from 'src/app/Models';
-import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.service';
+import { IncripcionService } from 'src/app/Services/incripcion.service';
 
 @Component({
   selector: 'app-ver-inscripcion',

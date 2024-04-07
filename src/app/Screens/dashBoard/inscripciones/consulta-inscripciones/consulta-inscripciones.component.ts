@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SingleInscription } from 'src/app/Models/ModelInscription';
-import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.service';
+import { IncripcionService } from 'src/app/Services/incripcion.service';
 import Swal from 'sweetalert2';
 
 @Component({

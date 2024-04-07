@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 import { InfoBasicaUsuario } from 'src/app/Models';
-import { IncripcionService } from 'src/app/Services/Incripcion/incripcion.service';
-import { UserServiceService } from 'src/app/Services/User/user-service.service';
+import { IncripcionService } from 'src/app/Services/incripcion.service';
+import { UserServiceService } from 'src/app/Services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
