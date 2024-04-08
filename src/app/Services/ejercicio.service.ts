@@ -19,4 +19,12 @@ export class EjercicioService {
   getAllTiposEjercicio(): Observable<tipoEjercicio[]> {
     return this.http.get<tipoEjercicio[]>(url + 'getAllTipoEjercicio');
   }
+
+  editTipoEjercicio(idTipoEjercicio: number, tipoEjercicio: any) {
+    return this.http.put(url + 'updateTypeTrining/' + idTipoEjercicio, tipoEjercicio);
+  }
+
+  deleteTipoEjercicio(idTipoEjercicio: number) {
+    return this.http.delete(url + 'deleteTypeTrining/' + idTipoEjercicio);
+  }
 }

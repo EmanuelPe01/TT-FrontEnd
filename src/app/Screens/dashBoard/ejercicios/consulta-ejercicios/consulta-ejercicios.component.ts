@@ -15,6 +15,8 @@ export class ConsultaEjerciciosComponent {
   criterioEjercicio: string = ''
   criterioTipoEjercicio: string = ''
   nuevoTipoEjercicio: string = ''
+  idTipoEjercicio: number | undefined
+  confirmDeleteTipoEjercicio: boolean = false
   tiposEjercicio: tipoEjercicio[] = []
 
   constructor(
@@ -46,8 +48,8 @@ export class ConsultaEjerciciosComponent {
         catchError((error: HttpErrorResponse) => {
           this.showLoadingMessage(false, '');
           switch (error.status) {
-            case 404:
-              this.showErrorMessage("El email no está registrado");
+            case 400:
+              this.showErrorMessage('Este nombre ya está registrado');
               break;
             case 500:
               this.showErrorMessage("Error de conexión");
@@ -61,10 +63,76 @@ export class ConsultaEjerciciosComponent {
       ).subscribe(
         (data: any) => {
           this.showLoadingMessage(false, '');
+          this.nuevoTipoEjercicio = ''
           setTimeout(() => { }, 100);
           this.showMessageSucces(data.message);
           this.getTiposEjercicio();
         })
+    }
+  }
+
+  editarTipoEjercicio() {
+    if(this.idTipoEjercicio && this.nuevoTipoEjercicio){
+      this.ocultarModal('editarTipoEjercicio');
+      this.showLoadingMessage(true, 'Actualizando')
+      const nombre_tipo = {
+        'nombre_tipo': this.nuevoTipoEjercicio
+      }
+      this.ejercicioService.editTipoEjercicio(this.idTipoEjercicio, nombre_tipo).pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.showLoadingMessage(false, '');
+          switch (error.status) {
+            case 400:
+              this.showErrorMessage('Este nombre ya está registrado');
+              break;
+            case 500:
+              this.showErrorMessage("Error de conexión");
+              break;
+            default:
+              this.showErrorMessage("Error inesperado");
+              console.log(error)
+          }
+          return "";
+        })
+      ).subscribe((data: any)=> {
+        this.showLoadingMessage(false, '');
+        this.idTipoEjercicio = undefined
+        this.nuevoTipoEjercicio = ''
+        setTimeout(() => { }, 100);
+        this.showMessageSucces(data.message);
+        this.getTiposEjercicio();
+      })
+    }
+  }
+
+  eliminarTipoEjercicio() {
+    if(this.idTipoEjercicio && this.confirmDeleteTipoEjercicio){
+      this.ocultarModal('eliminarTipoEjercicio');
+      this.showLoadingMessage(true, 'Eliminando')
+      this.ejercicioService.deleteTipoEjercicio(this.idTipoEjercicio).pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.showLoadingMessage(false, '');
+          switch (error.status) {
+            case 404:
+              this.showErrorMessage('Registro no encontrado');
+              break;
+            case 500:
+              this.showErrorMessage("Error de conexión");
+              break;
+            default:
+              this.showErrorMessage("Error inesperado");
+              console.log(error)
+          }
+          return "";
+        })
+      ).subscribe((data: any)=> {
+        this.showLoadingMessage(false, '');
+        this.idTipoEjercicio = undefined
+        this.confirmDeleteTipoEjercicio = false
+        setTimeout(() => { }, 100);
+        this.showMessageSucces(data.message);
+        this.getTiposEjercicio();
+      })
     }
   }
 
@@ -110,7 +178,7 @@ export class ConsultaEjerciciosComponent {
         title: title,
         didOpen: () => {
           Swal.disableButtons();
-          Swal.showLoading(Swal.getConfirmButton());
+          Swal.showLoading();
         }
       });
     }

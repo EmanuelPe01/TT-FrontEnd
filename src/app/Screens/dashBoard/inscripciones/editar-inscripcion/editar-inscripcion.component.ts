@@ -140,7 +140,7 @@ export class EditarInscripcionComponent {
         title: 'Actualizando información',
         didOpen: () => {
           Swal.disableButtons();
-          Swal.showLoading(Swal.getConfirmButton());
+          Swal.showLoading();
         }
       });
     }

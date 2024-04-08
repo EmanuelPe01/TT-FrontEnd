@@ -76,8 +76,7 @@
                     --bs-btn-active-color: #000;
                     --bs-btn-active-bg: #fff;
                     --bs-btn-active-border-color: #000;
-                " 
-                data-bs-toggle="modal" data-bs-target="#nuevoTipoEjercicio">
+                " data-bs-toggle="modal" data-bs-target="#nuevoTipoEjercicio">
                     Agregar tipo de ejercicio
                 </a>
             </div>
@@ -98,7 +97,7 @@
                     --bs-btn-active-color: #000;
                     --bs-btn-active-bg: #fff;
                     --bs-btn-active-border-color: #000;
-                " routerLink="nuevaInscripcion">
+                " data-bs-toggle="modal" data-bs-target="#editarTipoEjercicio">
                     Editar tipo de ejercicio
                 </a>
             </div>
@@ -119,8 +118,8 @@
                     --bs-btn-active-color: #000;
                     --bs-btn-active-bg: #fff;
                     --bs-btn-active-border-color: #000;
-                " routerLink="nuevaInscripcion">
-                    Eliminar tipo de ejercicios
+                " data-bs-toggle="modal" data-bs-target="#eliminarTipoEjercicio">
+                    Eliminar tipo de ejercicio
                 </a>
             </div>
         </div>
@@ -155,19 +154,147 @@
 <!-- Modales -->
 
 <!-- Nuevo tipo de ejercicio -->
-<div class="modal fade" id="nuevoTipoEjercicio" tabindex="-1" aria-labelledby="nuevoTipoEjercicioLabel" aria-hidden="true">
+<div class="modal fade" id="nuevoTipoEjercicio" tabindex="-1" aria-labelledby="nuevoTipoEjercicioLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="nuevoTipoEjercicioLabel">Agregar tipo de ejercicio</h1>
             </div>
             <div class="modal-body">
-                <input placeholder="Nombre del ejercicio" type="text" class="textInput"
-                    [(ngModel)]="nuevoTipoEjercicio">
+                <div class="textInputWrapper">
+                    <input placeholder="Nombre del tipo de ejercicio" type="text" class="textInput"
+                        [(ngModel)]="nuevoTipoEjercicio">
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="createTipoEjercicio()">Aceptar</button>
+                <button type="button" class="btn btn-outline-dark" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                " data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                    --bs-btn-color: #fff;
+                    --bs-btn-bg: #000;
+                    --bs-btn-border-color: #fff;
+                    --bs-btn-hover-color: #000;
+                    --bs-btn-hover-bg: #fff;
+                    --bs-btn-hover-border-color: #000;
+                    --bs-btn-active-color: #000;
+                    --bs-btn-active-bg: #fff;
+                    --bs-btn-active-border-color: #000;
+                " (click)="createTipoEjercicio()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Editar tipo de ejercicio -->
+<div class="modal fade" id="editarTipoEjercicio" tabindex="-1" aria-labelledby="nuevoTipoEjercicioLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editarTipoEjercicioLabel">Editar tipo de ejercicio</h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col col-4">
+                        <div class="input-container">
+                            <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
+                            <select id="tipoEjercicio" class="select-estatus" [(ngModel)]="idTipoEjercicio">
+                                <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.id">
+                                    {{tEjercicio.nombre_tipo}}</option>
+                            </select>
+                            <div class="underline"></div>
+                        </div>
+                    </div>
+                    <div class="col col-8">
+                        <div class="textInputWrapper">
+                            <input placeholder="Nombre del tipo de ejercicio" type="text" class="textInput"
+                                [(ngModel)]="nuevoTipoEjercicio">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                " data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                    --bs-btn-color: #fff;
+                    --bs-btn-bg: #000;
+                    --bs-btn-border-color: #fff;
+                    --bs-btn-hover-color: #000;
+                    --bs-btn-hover-bg: #fff;
+                    --bs-btn-hover-border-color: #000;
+                    --bs-btn-active-color: #000;
+                    --bs-btn-active-bg: #fff;
+                    --bs-btn-active-border-color: #000;
+                " (click)="editarTipoEjercicio()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Eliminar tipo de ejercicio -->
+<div class="modal fade" id="eliminarTipoEjercicio" tabindex="-1" aria-labelledby="eliminarTipoEjercicioLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="eliminarTipoEjercicioLabel">Eliminar tipo de ejercicio</h1>
+            </div>
+            <div class="modal-body">
+                <div class="input-container">
+                    <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
+                    <select id="tipoEjercicio" class="select-estatus" [(ngModel)]="idTipoEjercicio">
+                        <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.id">
+                            {{tEjercicio.nombre_tipo}}</option>
+                    </select>
+                    <div class="underline"></div>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                        ¿Seguro que desea eliminar?
+                      </label>
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="confirmDeleteTipoEjercicio" id="flexCheckIndeterminate">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                " data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                    --bs-btn-color: #fff;
+                    --bs-btn-bg: #000;
+                    --bs-btn-border-color: #fff;
+                    --bs-btn-hover-color: #000;
+                    --bs-btn-hover-bg: #fff;
+                    --bs-btn-hover-border-color: #000;
+                    --bs-btn-active-color: #000;
+                    --bs-btn-active-bg: #fff;
+                    --bs-btn-active-border-color: #000;
+                " (click)="eliminarTipoEjercicio()">Aceptar</button>
             </div>
         </div>
     </div>

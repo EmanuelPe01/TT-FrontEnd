@@ -89,7 +89,7 @@ export class ConsultaInscripcionesComponent {
         title: 'Espera un momento',
         didOpen: () => {
           Swal.disableButtons();
-          Swal.showLoading(Swal.getConfirmButton());
+          Swal.showLoading();
         }
       });
     }

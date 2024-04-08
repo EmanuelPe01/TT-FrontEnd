@@ -134,7 +134,7 @@ export class RegisterComponent {
         title: 'Registrando',
         didOpen: () => {
           Swal.disableButtons();
-          Swal.showLoading(Swal.getConfirmButton());
+          Swal.showLoading();
         }
       });
     }

@@ -155,7 +155,7 @@ export class NuevaInscripcionComponent {
         title: 'Registrando',
         didOpen: () => {
           Swal.disableButtons();
-          Swal.showLoading(Swal.getConfirmButton());
+          Swal.showLoading();
         }
       });
     }

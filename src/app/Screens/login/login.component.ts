@@ -143,7 +143,7 @@ export class LoginComponent {
         title: 'Enviando correo',
         didOpen: () => {
           Swal.disableButtons();
-          Swal.showLoading(Swal.getConfirmButton());
+          Swal.showLoading();
         }
       });
     }
