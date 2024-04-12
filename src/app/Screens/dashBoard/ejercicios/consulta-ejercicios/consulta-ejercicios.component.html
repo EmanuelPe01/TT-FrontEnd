@@ -38,7 +38,7 @@
                                     --bs-btn-active-bg: #fff;
                                     --bs-btn-active-border-color: #000;
                                 " (click)="filterByParams()">
-                            <i class="fa-regular fa-address-card"></i>
+                            <i class="fa-solid fa-magnifying-glass"></i>
                             Buscar
                         </a>
                     </div>
@@ -50,7 +50,7 @@
                             --bs-btn-padding-y: .4rem; 
                             --bs-btn-padding-x: .6rem;
                             text-decoration: none;
-                        " routerLink="nuevaInscripcion">
+                        " data-bs-toggle="modal" data-bs-target="#agregarEjercicio">
                             <i class="fa-regular fa-plus"></i>
                             Agregar
                         </a>
@@ -295,6 +295,73 @@
                     --bs-btn-active-bg: #fff;
                     --bs-btn-active-border-color: #000;
                 " (click)="eliminarTipoEjercicio()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Agregar ejercicio -->
+<div class="modal fade" id="agregarEjercicio" tabindex="-1" aria-labelledby="agregarEjercicioLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="agregarEjercicioLabel">Agregar ejercicio</h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col col-4">
+                        <div class="input-container">
+                            <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
+                            <select id="tipoEjercicio" class="select-estatus" [(ngModel)]="idTipoEjercicio">
+                                <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.id">
+                                    {{tEjercicio.nombre_tipo}}</option>
+                            </select>
+                            <div class="underline"></div>
+                        </div>
+                    </div>
+                    <div class="col col-5">
+                        <div class="textInputWrapper">
+                            <input placeholder="Nombre del ejercicio" type="text" class="textInput"
+                                [(ngModel)]="nuevoTipoEjercicio">
+                        </div>
+                    </div>
+                    <div class="col col-3">
+                        <div class="textInputWrapper">
+                            <input placeholder="Unidad de medida" type="text" class="textInput"
+                                [(ngModel)]="nuevoTipoEjercicio">
+                        </div>
+                    </div>
+                    <div class="col col-12">
+                        <div class="textInputWrapper">
+                            <input placeholder="Demostración" type="text" class="textInput"
+                                [(ngModel)]="nuevoTipoEjercicio">
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                " data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" style="
+                    --bs-btn-font-size: 1rem;
+                    --bs-btn-padding-y: .4rem; 
+                    --bs-btn-padding-x: .6rem;
+                    text-decoration: none;
+                    --bs-btn-color: #fff;
+                    --bs-btn-bg: #000;
+                    --bs-btn-border-color: #fff;
+                    --bs-btn-hover-color: #000;
+                    --bs-btn-hover-bg: #fff;
+                    --bs-btn-hover-border-color: #000;
+                    --bs-btn-active-color: #000;
+                    --bs-btn-active-bg: #fff;
+                    --bs-btn-active-border-color: #000;
+                ">Aceptar</button>
             </div>
         </div>
     </div>
