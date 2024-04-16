@@ -15,7 +15,7 @@
                     <div class="input-container">
                         <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
                         <select id="tipoEjercicio" class="select-estatus" [(ngModel)]="criterioTipoEjercicio">
-                            <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.nombre_tipo">
+                            <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.id">
                                 {{tEjercicio.nombre_tipo}}</option>
                         </select>
                         <div class="underline"></div>
@@ -37,9 +37,9 @@
                                     --bs-btn-active-color: #000;
                                     --bs-btn-active-bg: #fff;
                                     --bs-btn-active-border-color: #000;
-                                " (click)="filterByParams()">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            Buscar
+                                " (click)="limpiarForm()">
+                            <i class="fa-solid fa-eraser"></i>
+                            Limpiar campos
                         </a>
                     </div>
                 </div>
@@ -142,8 +142,45 @@
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody class="table-group-divider">
-
+                    <tbody class="table-group-divider">     
+                        <tr
+                            *ngFor="let ejercicio of filterByParams(detalleEjercicios, criterioEjercicio, criterioTipoEjercicio)">
+                            <td>{{ejercicio.tipo_ejercicio.nombre_tipo}}</td>
+                            <td>{{ejercicio.nombre_ejercicio}} </td>
+                            <td>{{ejercicio.demo_ejercicio}}</td>
+                            <td>{{ejercicio.unidad_medida}}</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col col-4">
+                                        <a class="btn btn-outline-dark" style="
+                                                --bs-btn-font-size: 1rem;
+                                                --bs-btn-padding-y: .4rem; 
+                                                --bs-btn-padding-x: .6rem;
+                                            ">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col col-4">
+                                        <a class="btn btn-outline-dark" style="
+                                                --bs-btn-font-size: 1rem;
+                                                --bs-btn-padding-y: .4rem; 
+                                                --bs-btn-padding-x: .6rem;
+                                            ">
+                                            <i class="fa-solid fa-circle-info"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col col-4">
+                                        <a class="btn btn-outline-dark" style="
+                                                --bs-btn-font-size: 1rem;
+                                                --bs-btn-padding-y: .4rem; 
+                                                --bs-btn-padding-x: .6rem;
+                                            ">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>                    
                     </tbody>
                 </table>
             </div>
@@ -269,8 +306,9 @@
                 <div class="form-check">
                     <label class="form-check-label" for="flexCheckIndeterminate">
                         ¿Seguro que desea eliminar?
-                      </label>
-                    <input class="form-check-input" type="checkbox" [(ngModel)]="confirmDeleteTipoEjercicio" id="flexCheckIndeterminate">
+                    </label>
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="confirmDeleteTipoEjercicio"
+                        id="flexCheckIndeterminate">
                 </div>
             </div>
             <div class="modal-footer">
@@ -301,53 +339,78 @@
 </div>
 
 <!-- Agregar ejercicio -->
-<div class="modal fade" id="agregarEjercicio" tabindex="-1" aria-labelledby="agregarEjercicioLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="agregarEjercicio" tabindex="-1" aria-labelledby="agregarEjercicioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="agregarEjercicioLabel">Agregar ejercicio</h1>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col col-4">
-                        <div class="input-container">
-                            <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
-                            <select id="tipoEjercicio" class="select-estatus" [(ngModel)]="idTipoEjercicio">
-                                <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.id">
-                                    {{tEjercicio.nombre_tipo}}</option>
-                            </select>
-                            <div class="underline"></div>
+            <form (ngSubmit)="storeEjercicio()" [formGroup]="formCrearEjercicio">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="agregarEjercicioLabel">Agregar ejercicio</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-md-center">
+                        <div class="col col-3">
+                            <div class="input-container">
+                                <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
+                                <select id="tipoEjercicio" class="select-estatus" formControlName="id_tipo_ejercicio">
+                                    <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.id">
+                                        {{tEjercicio.nombre_tipo}}</option>
+                                </select>
+                                <div class="underline"></div>
+                            </div>
+                            <div
+                                *ngIf="formCrearEjercicio.get('id_tipo_ejercicio')?.hasError('required') && formCrearEjercicio.get('id_tipo_ejercicio')?.touched;">
+                                <p class="errorText">Campo requerido *</p>
+                            </div>
+                        </div>
+                        <div class="col col-5">
+                            <div class="textInputWrapper">
+                                <input placeholder="Nombre del ejercicio" type="text" class="textInput"
+                                    formControlName="nombre_ejercicio">
+                            </div>
+                            <div
+                                *ngIf="formCrearEjercicio.get('nombre_ejercicio')?.hasError('required') && formCrearEjercicio.get('nombre_ejercicio')?.touched;">
+                                <p class="errorText">Campo requerido *</p>
+                            </div>
+                        </div>
+                        <div class="col col-4">
+                            <div class="textInputWrapper">
+                                <input placeholder="Unidad de medida" type="text" class="textInput"
+                                    formControlName="unidad_medida">
+                            </div>
+                            <div
+                                *ngIf="formCrearEjercicio.get('unidad_medida')?.hasError('required') && formCrearEjercicio.get('unidad_medida')?.touched;">
+                                <p class="errorText">Campo requerido *</p>
+                            </div>
+                        </div>
+                        <div class="col col-12">
+                            <div class="textInputWrapper">
+                                <input placeholder="Demostración" type="text" class="textInput"
+                                    formControlName="demo_ejercicio" (input)="cargarVideo()">
+                            </div>
+                            <div
+                                *ngIf="formCrearEjercicio.get('demo_ejercicio')?.hasError('required') && formCrearEjercicio.get('demo_ejercicio')?.touched;">
+                                <p class="errorText">Campo requerido *</p>
+                            </div>
+                            <div *ngIf="formCrearEjercicio.get('demo_ejercicio')?.errors?.['pattern'];">
+                                <p class="errorText">Debe ser un vídeo de YouTube *</p>
+                            </div>
+                        </div>
+                        <div *ngIf="showVideo" class="col col-10">
+                            <iframe class="YouTubeVideo"
+                                [src]="urlYoutubeGenerada"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"></iframe>
                         </div>
                     </div>
-                    <div class="col col-5">
-                        <div class="textInputWrapper">
-                            <input placeholder="Nombre del ejercicio" type="text" class="textInput"
-                                [(ngModel)]="nuevoTipoEjercicio">
-                        </div>
-                    </div>
-                    <div class="col col-3">
-                        <div class="textInputWrapper">
-                            <input placeholder="Unidad de medida" type="text" class="textInput"
-                                [(ngModel)]="nuevoTipoEjercicio">
-                        </div>
-                    </div>
-                    <div class="col col-12">
-                        <div class="textInputWrapper">
-                            <input placeholder="Demostración" type="text" class="textInput"
-                                [(ngModel)]="nuevoTipoEjercicio">
-                        </div>
-                    </div>
-                </div>                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" style="
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" style="
                     --bs-btn-font-size: 1rem;
                     --bs-btn-padding-y: .4rem; 
                     --bs-btn-padding-x: .6rem;
                     text-decoration: none;
-                " data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" style="
+                " data-bs-dismiss="modal" (click)="limpiarForm()">Cancelar</button>
+                    <button class="btn btn-primary" style="
                     --bs-btn-font-size: 1rem;
                     --bs-btn-padding-y: .4rem; 
                     --bs-btn-padding-x: .6rem;
@@ -362,7 +425,8 @@
                     --bs-btn-active-bg: #fff;
                     --bs-btn-active-border-color: #000;
                 ">Aceptar</button>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

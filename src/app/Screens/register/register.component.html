@@ -114,7 +114,7 @@
                                             <p class="errorText">Campo requerido*</p>
                                         </div>
                                         <ng-template #ErrorLength>  
-                                            <div *ngIf="formRegistro.get('password')?.hasError('minlength') && formRegistro.get('conf_pass')?.touched">
+                                            <div *ngIf="formRegistro.get('password')?.hasError('minlength') && formRegistro.get('password')?.touched">
                                                 <p class="errorText">Debe contener más de 8 caracteres</p>
                                             </div>
                                         </ng-template>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tipoEjercicio, url } from '../Models';
+import { detalleEjercicio, getDetalleEjercicio, tipoEjercicio, url } from '../Models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -26,5 +26,13 @@ export class EjercicioService {
 
   deleteTipoEjercicio(idTipoEjercicio: number) {
     return this.http.delete(url + 'deleteTypeTrining/' + idTipoEjercicio);
+  }
+
+  createEjercicio(detalleEjercicio: detalleEjercicio) {
+    return this.http.post(url + 'createEjercicio', detalleEjercicio);
+  }
+
+  getAllEjercicios(): Observable<getDetalleEjercicio[]> {
+    return this.http.get<getDetalleEjercicio[]> (url + 'getAllEjercicios')
   }
 }
