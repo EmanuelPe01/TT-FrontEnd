@@ -22,6 +22,12 @@ import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/ed
 import { VerInscripcionComponent } from './Screens/dashboard/inscripciones/ver-inscripcion/ver-inscripcion.component';
 import { EjerciciosComponent } from './Screens/dashboard/ejercicios/ejercicios.component';
 import { ConsultaEjerciciosComponent } from './Screens/dashboard/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
+import { NuevoTipoEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-tipoEjercicio/nuevoTipoEjercicio';
+import { EditarTipoEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-tipoEjercicio/editarTipoEjercicio';
+import { EliminarTipoEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-tipoEjercicio/eliminarTipoEjercicio';
+import { NuevoEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-ejercicio/nuevoEjercicio';
+import { DetalleEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-ejercicio/detalleEjercicio';
+import { EditarEjericicioComponent } from './Screens/dashboard/ejercicios/acciones-ejercicio/editarEjercicio';
 
 @NgModule({
   declarations: [
@@ -39,7 +45,13 @@ import { ConsultaEjerciciosComponent } from './Screens/dashboard/ejercicios/cons
     EditarInscripcionComponent,
     VerInscripcionComponent,
     EjerciciosComponent,
-    ConsultaEjerciciosComponent
+    ConsultaEjerciciosComponent,
+    NuevoTipoEjercicioComponent,
+    EditarTipoEjercicioComponent,
+    EliminarTipoEjercicioComponent,
+    NuevoEjercicioComponent,
+    DetalleEjercicioComponent,
+    EditarEjericicioComponent
   ],
   imports: [
     BrowserModule,
