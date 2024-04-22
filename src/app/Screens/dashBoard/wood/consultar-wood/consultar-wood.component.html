@@ -1,1 +1,76 @@
-<p>consultar-wood works!</p>
+<div class="container">
+    <div class="card mt-2">
+        <div class="card-header">
+            Búsqueda de woods por cliente
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col col-12 col-md-4 mt-1 ps-3">
+                    <div class="textInputWrapper">
+                        <input placeholder="Nombre del cliente" type="text" class="textInput"
+                            [(ngModel)]="criterioCliente">
+                    </div>
+                </div>
+                <div class="col col-12 col-md-2">
+                    <div class="textInputWrapper">
+                        <input 
+                            required="required"
+                            placeholder="Fecha inicio" 
+                            type="text"  
+                            class="textInput" 
+                            onfocus="(this.type='date')" 
+                            onblur="(this.type='text')"
+                        >
+                    </div>
+                </div>
+                <div class="col col-12 col-md-2">
+                    <div class="textInputWrapper">
+                        <input 
+                            required="required"
+                            placeholder="Fecha fin" 
+                            type="text"  
+                            class="textInput" 
+                            onfocus="(this.type='date')" 
+                            onblur="(this.type='text')"
+                        >
+                    </div>
+                </div>
+                <div class="col col-12 col-md-2 mt-1">
+                    <div class="d-grid">
+                        <a class="btn btn-primary" style="
+                                    --bs-btn-font-size: 1rem;
+                                    --bs-btn-padding-y: .4rem; 
+                                    --bs-btn-padding-x: .6rem;
+                                    text-decoration: none;
+                                    --bs-btn-color: #fff;
+                                    --bs-btn-bg: #000;
+                                    --bs-btn-border-color: #fff;
+                                    --bs-btn-hover-color: #000;
+                                    --bs-btn-hover-bg: #fff;
+                                    --bs-btn-hover-border-color: #000;
+                                    --bs-btn-active-color: #000;
+                                    --bs-btn-active-bg: #fff;
+                                    --bs-btn-active-border-color: #000;
+                                ">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            Buscar
+                        </a>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-2 mt-1">
+                    <div class="d-grid">
+                        <a class="btn btn-outline-dark" style="
+                            --bs-btn-font-size: 1rem;
+                            --bs-btn-padding-y: .4rem; 
+                            --bs-btn-padding-x: .6rem;
+                            text-decoration: none;
+                        " data-bs-toggle="modal" data-bs-target="#agregarEjercicio">
+                            <i class="fa-regular fa-plus"></i>
+                            Agregar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

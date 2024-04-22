@@ -82,6 +82,30 @@ export class ConsultaEjerciciosComponent {
     }
   }
 
+  deleteEjercicio(nameEjercicio: string, id: number) {
+    Swal.fire({
+      title: "¿Estas seguro?",
+      text: `Se eliminará ${nameEjercicio}` ,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#6E1300",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.showLoadingMessage(true, 'Eliminando');
+        this.ejercicioService.deleteEjercicio(id).
+        pipe().
+        subscribe((data) => {
+          this.showLoadingMessage(false, '');
+          this.showMessageSucces('Registro eliminado');
+          this.getAllEjercicios();
+        })
+      }
+    });
+  }
+
   filterByParams(ejercicios: getDetalleEjercicio[] | undefined, nombre: string, tipo: string) {
     if ((tipo || nombre.length >=3) && ejercicios) {
       return ejercicios.filter(

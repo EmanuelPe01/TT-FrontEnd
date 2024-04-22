@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./consultar-wood.component.css']
 })
 export class ConsultarWoodComponent {
-
+  criterioCliente: string = ''
 }

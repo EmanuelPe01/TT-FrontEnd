@@ -34,8 +34,12 @@
             <div class="offcanvas-body fs-5">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li *ngFor="let item of urls" class="nav-item">
-                        <a routerLink="{{item.url}}" class="nav-link" (click)="setItemName(item.nombre)">{{ item.nombre
-                            }}</a>
+                        <a 
+                            routerLink="{{item.url}}" 
+                            class="nav-link" 
+                            (click)="setItemName(item.nombre)"
+                            type="button" data-bs-dismiss="offcanvas"
+                        >{{ item.nombre}}</a>
                     </li>
                 </ul>
             </div>

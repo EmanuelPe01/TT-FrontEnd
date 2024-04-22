@@ -14,8 +14,6 @@ import { RecoveryPasswordComponent } from './Screens/recovery-password/recovery-
 import { NavBarComponent } from './Screens/dashBoard/nav-bar/nav-bar.component';
 import { ScreenControllerComponent } from './Screens/dashBoard/screen-controller/screen-controller.component';
 import { InscripcionesComponent } from './Screens/dashBoard/inscripciones/inscripciones.component';
-import { GestionWoodComponent } from './Screens/dashboard/wood/gestion-wood/gestion-wood.component';
-import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/consultar-wood.component';
 import { NuevaInscripcionComponent } from './Screens/dashBoard/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
 import { ConsultaInscripcionesComponent } from './Screens/dashboard/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
 import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/editar-inscripcion/editar-inscripcion.component';
@@ -28,6 +26,8 @@ import { EliminarTipoEjercicioComponent } from './Screens/dashboard/ejercicios/a
 import { NuevoEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-ejercicio/nuevoEjercicio';
 import { DetalleEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-ejercicio/detalleEjercicio';
 import { EditarEjericicioComponent } from './Screens/dashboard/ejercicios/acciones-ejercicio/editarEjercicio';
+import { WoodComponent } from './Screens/dashboard/wood/woods.component';
+import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/consultar-wood.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,6 @@ import { EditarEjericicioComponent } from './Screens/dashboard/ejercicios/accion
     NavBarComponent,
     ScreenControllerComponent,
     InscripcionesComponent,
-    GestionWoodComponent,
     ConsultarWoodComponent,
     NuevaInscripcionComponent,
     ConsultaInscripcionesComponent,
@@ -51,7 +50,8 @@ import { EditarEjericicioComponent } from './Screens/dashboard/ejercicios/accion
     EliminarTipoEjercicioComponent,
     NuevoEjercicioComponent,
     DetalleEjercicioComponent,
-    EditarEjericicioComponent
+    EditarEjericicioComponent,
+    WoodComponent
   ],
   imports: [
     BrowserModule,

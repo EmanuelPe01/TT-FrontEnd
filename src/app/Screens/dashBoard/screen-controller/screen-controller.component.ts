@@ -42,7 +42,7 @@ export class ScreenControllerComponent {
     let rutaNavegacion: string = ''
     this.labelNavBar = "Hola " + this.userInformation?.user.name
     if (this.inscriptionInformation && (this.inscriptionInformation.detalle.estado === 1 || this.inscriptionInformation.rol.id >= 2)) {
-      this.navBarBrand = 'Rutinas';
+      this.navBarBrand = 'Woods';
       switch (this.userInformation?.user.rol.id) {
         case 1:
           rutaNavegacion = '/dash-board/user'
@@ -57,9 +57,9 @@ export class ScreenControllerComponent {
           ]
           break;
         case 3:
-          rutaNavegacion = '/dash-board/admin/ejercicios'
+          rutaNavegacion = '/dash-board/admin/woods'
           this.urls = [
-            { nombre: 'Rutinas', url: '/dash-board/admin' },
+            { nombre: 'Woods', url: '/dash-board/admin/woods' },
             { nombre: 'Inscripciones', url: '/dash-board/admin/inscripciones' },
             { nombre: 'Ejercicios', url: '/dash-board/admin/ejercicios'}
           ]

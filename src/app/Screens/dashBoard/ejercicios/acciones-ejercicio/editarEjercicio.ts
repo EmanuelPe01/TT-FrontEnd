@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { SafeResourceUrl, DomSanitizer } from "@angular/platform-browser";
+import { catchError } from "rxjs";
 import { detalleEjercicio, getDetalleEjercicio, tipoEjercicio } from "src/app/Models";
 import { EjercicioService } from "src/app/Services/ejercicio.service";
 import Swal from "sweetalert2";
@@ -131,7 +133,18 @@ export class EditarEjericicioComponent implements OnChanges{
             const ejercicioEditado: detalleEjercicio = this.formEditarEjercicio.value
             ejercicioEditado.id_tipo_ejercicio = Number(this.formEditarEjercicio.get('id_tipo_ejercicio')?.value)
             this.ejercicioService.editEjercicio(ejercicioEditado, this.detalleEjercicio.id).
-            pipe().subscribe((data:any) => {
+            pipe(
+                catchError((error: HttpErrorResponse) => {
+                    this.showLoadingMessage(false, '');
+                    if (error.status == 403) 
+                        this.showErrorMessage("El nombre del ejercicio ya existe");            
+                    else if (error.status == 500 )
+                        this.showErrorMessage("Error en el servidor, intente más tarde");
+                    else if(error.status == 404) 
+                        this.showErrorMessage("No se encontró el registro");
+                    return "";
+                })
+            ).subscribe((data:any) => {
                 this.showLoadingMessage(false, '')
                 this.formEditarEjercicio.reset()
                 this.showMessageSucces(data.message)

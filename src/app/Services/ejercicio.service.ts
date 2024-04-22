@@ -40,4 +40,7 @@ export class EjercicioService {
     return this.http.put(url + 'updateEjercicio/' + idEjercicio, detalleEjercicio);
   }
 
+  deleteEjercicio(idEjercicio: number) {
+    return this.http.delete(url + 'deleteEjercicio/' + idEjercicio);
+  }
 }
