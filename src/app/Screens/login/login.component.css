@@ -1,4 +1,17 @@
+.contenedor-body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../assets/bg.png'); /* Agrega la imagen de fondo y la superposición transparente */
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: brightness(10%);
+  z-index: -1;
+}
+
 .center-card {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,18 +71,14 @@
 .btn-31:before {
   --progress: 100%;
   background: #fff;
-  -webkit-clip-path: polygon(
-    100% 0,
-    var(--progress) var(--progress),
-    0 100%,
-    100% 100%
-  );
-  clip-path: polygon(
-    100% 0,
-    var(--progress) var(--progress),
-    0 100%,
-    100% 100%
-  );
+  -webkit-clip-path: polygon(100% 0,
+      var(--progress) var(--progress),
+      0 100%,
+      100% 100%);
+  clip-path: polygon(100% 0,
+      var(--progress) var(--progress),
+      0 100%,
+      100% 100%);
   content: "";
   inset: 0;
   position: absolute;
@@ -137,103 +146,104 @@
 }
 
 .wave-group {
-    position: relative;
-    margin-bottom: 1em;
+  position: relative;
+  margin-bottom: 1em;
 }
-  
+
 .wave-group .input {
-    font-size: 16px;
-    padding: 10px 10px 10px 5px;
-    display: block;
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #515151;
-    background: transparent;
+  font-size: 16px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #515151;
+  background: transparent;
 }
-  
+
 .wave-group .input:focus {
-   outline: none;
+  outline: none;
 }
-  
+
 .wave-group .label {
-    color: #999;
-    font-size: 18px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    display: flex;
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  display: flex;
 }
-  
+
 .wave-group .label-char {
-    transition: 0.2s ease all;
-    transition-delay: calc(var(--index) * .05s);
+  transition: 0.2s ease all;
+  transition-delay: calc(var(--index) * .05s);
 }
-  
-.wave-group .input:focus ~ label .label-char,
-.wave-group .input:valid ~ label .label-char {
-    transform: translateY(-20px);
-    font-size: 14px;
-    color: #000000;
+
+.wave-group .input:focus~label .label-char,
+.wave-group .input:valid~label .label-char {
+  transform: translateY(-20px);
+  font-size: 14px;
+  color: #000000;
 }
-  
+
 .wave-group .bar {
-    position: relative;
-    display: block;
-    width: 100%;
+  position: relative;
+  display: block;
+  width: 100%;
 }
-  
-.wave-group .bar:before,.wave-group .bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #000000;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
+
+.wave-group .bar:before,
+.wave-group .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #000000;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
 }
 
 .wave-group .bar:before {
-    left: 50%;
+  left: 50%;
 }
 
 .wave-group .bar:after {
-    right: 50%;
+  right: 50%;
 }
 
-.wave-group .input:focus ~ .bar:before,
-.wave-group .input:focus ~ .bar:after {
-    width: 50%;
+.wave-group .input:focus~.bar:before,
+.wave-group .input:focus~.bar:after {
+  width: 50%;
 }
 
-a{
-    text-decoration: none;
-    color: #000;
+a {
+  text-decoration: none;
+  color: #000;
 }
 
-a:hover{
-    text-decoration:underline;
+a:hover {
+  text-decoration: underline;
 }
 
-.errorText{
+.errorText {
   text-align: left;
   color: red;
   font-size: 10px;
-}  
+}
 
 @media (max-width: 768px) {
-    .input {
-        max-width: 20em;
-    }
-     
-    .btn-31 {
-        max-width: 15em;
-    }
+  .input {
+    max-width: 20em;
+  }
 
-    .card{
-        max-width: 23em;
-    }
+  .btn-31 {
+    max-width: 15em;
+  }
+
+  .card {
+    max-width: 23em;
+  }
 }

@@ -110,6 +110,7 @@
     display: flex;
     align-items: center;
 }
+
 .list span {
     margin-left: 0.5rem;
 }
@@ -180,4 +181,47 @@
 .button:focus .button-box {
     transition: .4s;
     transform: translateX(-56px);
+}
+
+.input-container {
+    position: relative;
+    margin: 0.5em auto;
+    width: 100%;
+}
+
+.input-container .label {
+    position: absolute;
+    top: -20px;
+    font-size: 16px;
+    color: #333;
+    left: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.input-container .underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #333;
+    transform: scaleX(0);
+    transition: all 0.3s ease;
+}
+
+.input-container input[type="date"] {
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 5px 0;
+    background-color: transparent;
+    outline: none;
+}
+
+
+.input-container input[type="date"]:focus~.underline,
+.input-container input[type="date"]:valid~.underline {
+    transform: scaleX(1);
 }

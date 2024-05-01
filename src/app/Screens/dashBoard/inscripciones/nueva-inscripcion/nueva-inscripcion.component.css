@@ -179,16 +179,6 @@
   width: 100%;
 }
 
-.input-container input[type="text"] {
-  font-size: 16px;
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid #ccc;
-  padding: 5px 0;
-  background-color: transparent;
-  outline: none;
-}
-
 .input-container .label {
   position: absolute;
   top: 0;
@@ -196,14 +186,6 @@
   color: #ccc;
   transition: all 0.3s ease;
   pointer-events: none;
-}
-
-.input-container input[type="text"]:focus~.label,
-.input-container input[type="text"]:valid~.label,
-.input-container input[type="text"]:read-only~.label {
-  top: -20px;
-  font-size: 16px;
-  color: #333;
 }
 
 .input-container .underline {
@@ -215,6 +197,24 @@
   background-color: #333;
   transform: scaleX(0);
   transition: all 0.3s ease;
+}
+
+.input-container input[type="text"] {
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.input-container input[type="text"]:focus~.label,
+.input-container input[type="text"]:valid~.label,
+.input-container input[type="text"]:read-only~.label {
+  top: -20px;
+  font-size: 16px;
+  color: #333;
 }
 
 .input-container input[type="text"]:focus~.underline,
@@ -234,11 +234,13 @@
 }
 
 .input-container input[type="date"]:focus~.label,
-.input-container input[type="date"]:valid~.label {
+.input-container input[type="date"]:valid~.label,
+.input-container input[type="date"].focused~.label {
   top: -20px;
   font-size: 16px;
   color: #333;
 }
+
 
 .input-container input[type="date"]:focus~.underline,
 .input-container input[type="date"]:valid~.underline {

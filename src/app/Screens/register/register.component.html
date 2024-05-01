@@ -173,11 +173,11 @@
                                             <input 
                                                 required="required"
                                                 placeholder="Fecha de nacimiento" 
-                                                type="text"  
+                                                [type] = "inputFecha"  
                                                 class="textInput" 
                                                 formControlName="fecha_nacimiento"
-                                                onfocus="(this.type='date')" 
-                                                onblur="(this.type='text')"
+                                                (focus)="onFocus()"
+                                                (blur)="onBlur()"
                                             >
                                         </div> 
                                         <div *ngIf="formRegistro.get('fecha_nacimiento')?.hasError('required') && formRegistro.get('fecha_nacimiento')?.touched; else ErrorMatch">

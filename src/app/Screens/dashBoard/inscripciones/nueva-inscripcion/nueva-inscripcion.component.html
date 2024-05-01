@@ -177,8 +177,9 @@
                                                 <div class="col col-12 col-md-2">
                                                     <div class="input-container">
                                                         <input required="" formControlName="fecha_inicio"
-                                                            id="input-fecha-inicio" type="text"
-                                                            onfocus="(this.type='date')" onblur="(this.type='text')" />
+                                                            id="input-fecha-inicio" [type]="inputFecha"
+                                                            (focus)="onFocus()" (blur)="onBlur()"
+                                                            />
                                                         <label class="label" for="input-fecha-inicio">Fecha de
                                                             inicio</label>
                                                         <div class="underline"></div>

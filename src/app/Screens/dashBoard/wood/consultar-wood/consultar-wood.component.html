@@ -4,68 +4,74 @@
             Búsqueda de woods por cliente
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col col-12 col-md-4 mt-1 ps-3">
-                    <div class="textInputWrapper">
-                        <input placeholder="Nombre del cliente" type="text" class="textInput"
-                            [(ngModel)]="criterioCliente">
+            <form [formGroup]="formBusquedaWoods" (ngSubmit)="consultarWoods()">
+                <div class="row">
+                    <div class="col col-12 col-md-4 mt-1 ps-3">
+                        <div class="textInputWrapper">
+                            <input placeholder="Nombre del cliente" type="text" class="textInput"
+                                formControlName="id_user_cliente">
+                        </div>
                     </div>
-                </div>
-                <div class="col col-12 col-md-2">
-                    <div class="textInputWrapper">
-                        <input required="required" placeholder="Fecha inicio" type="text" class="textInput"
-                            onfocus="(this.type='date')" onblur="(this.type='text')">
+                    <div class="col col-12 col-md-2">
+                        <div class="input-container">
+                            <input required="required" type="date" class="textInput"
+                                [min]="minDate" (input)="filterInput($event)" formControlName="fecha_inicio" />
+                            <label class="label" for="input-fecha-inicio">Fecha inicio</label>
+                            <div class="underline"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col col-12 col-md-2">
-                    <div class="textInputWrapper">
-                        <input required="required" placeholder="Fecha fin" type="text" class="textInput"
-                            onfocus="(this.type='date')" onblur="(this.type='text')">
+                    <div class="col col-12 col-md-2">
+                        <div class="input-container">
+                            <input required="required" type="date" class="textInput"
+                            [min]="maxDate" readonly formControlName="fecha_fin" />
+                            <label class="label" for="input-fecha-inicio">Fecha fin</label>
+                            <div class="underline"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col col-12 col-md-2 mt-1">
-                    <div class="d-grid">
-                        <a class="btn btn-primary" style="
-                                    --bs-btn-font-size: 1rem;
-                                    --bs-btn-padding-y: .4rem; 
-                                    --bs-btn-padding-x: .6rem;
-                                    text-decoration: none;
-                                    --bs-btn-color: #fff;
-                                    --bs-btn-bg: #000;
-                                    --bs-btn-border-color: #fff;
-                                    --bs-btn-hover-color: #000;
-                                    --bs-btn-hover-bg: #fff;
-                                    --bs-btn-hover-border-color: #000;
-                                    --bs-btn-active-color: #000;
-                                    --bs-btn-active-bg: #fff;
-                                    --bs-btn-active-border-color: #000;
-                                ">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            Buscar
-                        </a>
+                    <div class="col col-12 col-md-2 mt-1">
+                        <div class="d-grid">
+                            <button class="btn btn-primary" style="
+                                        --bs-btn-font-size: 1rem;
+                                        --bs-btn-padding-y: .4rem; 
+                                        --bs-btn-padding-x: .6rem;
+                                        text-decoration: none;
+                                        --bs-btn-color: #fff;
+                                        --bs-btn-bg: #000;
+                                        --bs-btn-border-color: #fff;
+                                        --bs-btn-hover-color: #000;
+                                        --bs-btn-hover-bg: #fff;
+                                        --bs-btn-hover-border-color: #000;
+                                        --bs-btn-active-color: #000;
+                                        --bs-btn-active-bg: #fff;
+                                        --bs-btn-active-border-color: #000;
+                                    ">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                Buscar
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="col col-12 col-md-2 mt-1">
-                    <div class="d-grid">
-                        <a class="btn btn-outline-dark" style="
+                    <div class="col col-12 col-md-2 mt-1">
+                        <div class="d-grid">
+                            <a class="btn btn-outline-dark" style="
                             --bs-btn-font-size: 1rem;
                             --bs-btn-padding-y: .4rem; 
                             --bs-btn-padding-x: .6rem;
                             text-decoration: none;
                         " data-bs-toggle="modal" data-bs-target="#agregarEjercicio">
-                            <i class="fa-regular fa-plus"></i>
-                            Agregar
-                        </a>
+                                <i class="fa-regular fa-plus"></i>
+                                Agregar
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="container mt-2">
         <div class="row">
             <div class="col col-4 mt-3">
                 <div class="card-wood">
-                    <h5 style="color: #fff; text-align: center;">Fecha de tudey</h5>            
+                    <h5 style="color: #fff; text-align: center;">Fecha de tudey</h5>
                     <ul class="lists">
                         <li class="list">
                             <i class="fa-solid fa-check"></i>
@@ -96,7 +102,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>

@@ -23,6 +23,8 @@ export class NuevaInscripcionComponent {
   valueEntrenador: string = ''
   criterio_c_nombre: string = ''
   criterio_e_nombre: string = ''
+  isFocused: boolean = false;
+  inputFecha: string = 'text'
 
   constructor (
     private form: FormBuilder,
@@ -124,6 +126,15 @@ export class NuevaInscripcionComponent {
         this.router.navigate(["dash-board/admin/inscripciones"]);
       });
     }
+  }
+
+  onBlur(){
+    const fecha = this.formRegistro.get('fecha_inicio')?.value
+    fecha ? this.inputFecha = 'date' : this.inputFecha = 'text'     
+  }
+
+  onFocus() {
+    this.inputFecha = 'date'
   }
 
   setInputReadOnly(id: string, flag: boolean) {

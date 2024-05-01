@@ -20,13 +20,14 @@ export class RegisterComponent {
   flagShowPass_conf: boolean = false;
   inputTypePass_conf: string = "password";
   iconButton_conf: string = "fa-regular fa-eye";
+  inputFecha: string = 'text'
 
   constructor(
-    private form: FormBuilder,
+    private _form: FormBuilder,
     private user_service: UserServiceService,
     private router: Router
   ) {
-    this.formRegistro = this.form.group({
+    this.formRegistro = this._form.group({
       name: ['', [Validators.required]],
       firstSurname: ['', [Validators.required]],
       secondSurname: ['', [Validators.required]],
@@ -86,6 +87,15 @@ export class RegisterComponent {
     } else {
       return null;
     }
+  }
+
+  onBlur(){
+    const fecha = this.formRegistro.get('fecha_nacimiento')?.value
+    fecha ? this.inputFecha = 'date' : this.inputFecha = 'text'     
+  }
+
+  onFocus() {
+    this.inputFecha = 'date'
   }
 
   showPassword() {
