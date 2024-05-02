@@ -19,6 +19,7 @@ import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/ed
 //Ejercicios
 import { EjerciciosComponent } from './Screens/dashboard/ejercicios/ejercicios.component';
 import { ConsultaEjerciciosComponent } from './Screens/dashboard/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
+import { NuevoWoodComponent } from './Screens/dashBoard/wood/nuevo-wood/nuevo-wood.component';
 
 
 const routes: Routes = [
@@ -31,9 +32,12 @@ const routes: Routes = [
     children: [
       {
         path: 'admin', children: [
-          {path: '', component: WoodComponent, children: [
-            {path: 'woods', component: ConsultarWoodComponent}
-          ]},
+          {
+            path: 'rutinas', component: WoodComponent, children: [
+              {path: '', component: ConsultarWoodComponent},
+              {path: 'nuevaRutina', component: NuevoWoodComponent}
+          ]
+          },
           {
             path: 'inscripciones', component: InscripcionesComponent, children: [
               {path: '', component: ConsultaInscripcionesComponent},

@@ -6,7 +6,7 @@
   background-image: url('../../../assets/bg.png'); /* Agrega la imagen de fondo y la superposición transparente */
   background-repeat: no-repeat;
   background-size: cover;
-  filter: brightness(10%);
+  filter: brightness(30%);
   z-index: -1;
 }
 

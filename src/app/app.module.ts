@@ -28,6 +28,7 @@ import { DetalleEjercicioComponent } from './Screens/dashboard/ejercicios/accion
 import { EditarEjericicioComponent } from './Screens/dashboard/ejercicios/acciones-ejercicio/editarEjercicio';
 import { WoodComponent } from './Screens/dashboard/wood/woods.component';
 import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/consultar-wood.component';
+import { NuevoWoodComponent } from './Screens/dashBoard/wood/nuevo-wood/nuevo-wood.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/
     NuevoEjercicioComponent,
     DetalleEjercicioComponent,
     EditarEjericicioComponent,
-    WoodComponent
+    WoodComponent,
+    NuevoWoodComponent
   ],
   imports: [
     BrowserModule,

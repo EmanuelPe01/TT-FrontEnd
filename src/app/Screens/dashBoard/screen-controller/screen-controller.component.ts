@@ -57,9 +57,9 @@ export class ScreenControllerComponent {
           ]
           break;
         case 3:
-          rutaNavegacion = '/dash-board/admin/woods'
+          rutaNavegacion = '/dash-board/admin/rutinas/nuevaRutina'
           this.urls = [
-            { nombre: 'Woods', url: '/dash-board/admin/woods' },
+            { nombre: 'Rutinas', url: '/dash-board/admin/rutinas' },
             { nombre: 'Inscripciones', url: '/dash-board/admin/inscripciones' },
             { nombre: 'Ejercicios', url: '/dash-board/admin/ejercicios'}
           ]
