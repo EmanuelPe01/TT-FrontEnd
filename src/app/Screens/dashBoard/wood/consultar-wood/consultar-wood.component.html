@@ -6,7 +6,7 @@
         <div class="card-body">
             <form [formGroup]="formBusquedaWoods" (ngSubmit)="consultarWoods()">
                 <div class="row">
-                    <div class="col col-12 col-md-4 mt-1 ps-3">
+                    <div class="col col-12 col-md-3 mt-1 ps-3">
                         <div class="input-container" style="margin-top: -0.9rem;">
                             <label class="label-select" for="nombreCliente">Cliente</label>
                             <select id="nombreCliente" class="select-estatus" (change)="activarAgregar($event)" formControlName="id_inscripcion">
@@ -32,6 +32,15 @@
                             [min]="maxDate" readonly formControlName="fecha_fin" />
                             <label class="label" for="input-fecha-inicio">Fecha fin</label>
                             <div class="underline"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="col col-12 col-md-1">
+                        <p>Halterofilia</p>
+                        <div class="container_switch">
+                            <input type="checkbox" name="checkbox_switch" formControlName="halterofilia"
+                                (change)="changeTiposEjercicios($event)" id="checkbox_switch">
+                            <label for="checkbox_switch" class="label_switch"></label>
                         </div>
                     </div>
                     <div class="col col-12 col-md-2 mt-1">
@@ -65,7 +74,7 @@
                             text-decoration: none;
                             " 
                             [routerLink]="['nuevaRutina/inscripcion']" 
-                            
+                            [queryParams]="{id: id_inscripcion}"
                             >
                                 <i class="fa-regular fa-plus"></i>
                                 Agregar

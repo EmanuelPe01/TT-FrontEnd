@@ -51,7 +51,7 @@ export class ConsultarWoodComponent {
 
   initializeDates() {
     const today = moment();
-    const sunday = today.clone().startOf('week'); // Obtener el domingo de la semana actual
+    const sunday = today.clone().startOf('week').day(1); // Obtener el domingo de la semana actual
     const saturday = today.clone().startOf('week').day(6);
 
     this.minDate = sunday.format('YYYY-MM-DD');
@@ -68,6 +68,10 @@ export class ConsultarWoodComponent {
         fecha_fin: this.maxDate
       })
     }
+  }
+
+  changeTiposEjercicios(event: Event) {
+    
   }
 
   consultarWoods() {
