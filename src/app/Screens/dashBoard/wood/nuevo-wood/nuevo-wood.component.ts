@@ -18,7 +18,7 @@ import Swal from "sweetalert2";
 })
 
 export class NuevoWoodComponent {
-    idInscripcion: number = 0
+    idInscripcion: number = 3
     minDate: string = '';
     inputFecha: string = 'text';
     formRutina: FormGroup;
@@ -38,9 +38,9 @@ export class NuevoWoodComponent {
         private route: ActivatedRoute,
         private router: Router
     ) {
-        this.route.queryParams.subscribe(params => {
-            this.idInscripcion = params['id'];
-        });
+        // this.route.queryParams.subscribe(params => {
+        //     this.idInscripcion = params['id'];
+        // });
         this.formRutina = this.form.group({
             id_inscripcion: [this.idInscripcion, Validators.required],
             fecha_rutina: ['', Validators.required],
@@ -48,7 +48,7 @@ export class NuevoWoodComponent {
             tiempo: ['', Validators.required],
             peso: ['', Validators.required],
             halterofilia: [false, Validators.required],
-            ejercicios: [this.ejerciciosRutina]
+            ejercicios: [Validators.required]
         })
         this.formEjercicio = this.form.group({
             id_tipo_ejercicio: ['', Validators.required],
@@ -90,10 +90,18 @@ export class NuevoWoodComponent {
             singleEjercicio.unidad_medida = this.unidadMedida
             this.ejerciciosRutina.push(singleEjercicio)
             this.formEjercicio.reset()
+            if (this.onlyHalterofilia)
+                this.formEjercicio.patchValue({
+                    id_tipo_ejercicio: this.tipoEjercicio
+                })
+            console.log(this.ejerciciosRutina)
         }
     }
 
     saveRutina() {
+        this.formRutina.patchValue({
+            ejercicios: this.ejerciciosRutina
+        })
         if (this.formRutina.valid) {
             const rutinaNueva: rutinaGenerada = this.formRutina.value
             this.showLoadingMessage(true);
@@ -104,7 +112,7 @@ export class NuevoWoodComponent {
                         if (error.status == 400)
                             this.showErrorMessage("Error en la petición");
                         else if (error.status == 500)
-                            this.showErrorMessage("Error en la base de datos");
+                            this.showErrorMessage("Error en el servidor");
 
                         console.log(error)
                         return "";
@@ -115,6 +123,23 @@ export class NuevoWoodComponent {
                     this.showMessageSucces("Registro exitoso");
                     this.router.navigate(["dash-board/admin/rutinas"]);
                 })
+        }
+    }
+
+    modificarEjercicio(ejercicio: ejercicioRutina) {
+        this.formEjercicio.patchValue({
+            id_tipo_ejercicio: ejercicio.id_tipo_ejercicio,
+            id_ejercicio: ejercicio.id_ejercicio,
+            cantidad_ejercicio: ejercicio.cantidad_ejercicio,
+        })
+        this.unidadMedida = ejercicio.unidad_medida
+        this.eliminarEjercicioRutina(ejercicio)
+    }
+
+    eliminarEjercicioRutina(ejercicio: ejercicioRutina) {
+        const index = this.ejerciciosRutina.findIndex(ejercicioModificado => ejercicioModificado.id_ejercicio === ejercicio.id_ejercicio);
+        if (index !== -1) {
+            this.ejerciciosRutina.splice(index, 1);
         }
     }
 
@@ -142,6 +167,9 @@ export class NuevoWoodComponent {
             this.onlyHalterofilia = true
             const tipoHalterofilia = this.tiposEjercicio.find(tEjercicio => tEjercicio.nombre_tipo.toLowerCase() === "halterofilia")
             if (tipoHalterofilia) this.tipoEjercicio = tipoHalterofilia.id.toString()
+            this.formEjercicio.patchValue({
+                id_tipo_ejercicio: this.tipoEjercicio
+            })
             this.ejerciciosRutina = []
             this.unidadMedida = 'Cantidad'
         }

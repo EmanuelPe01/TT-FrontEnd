@@ -8,8 +8,8 @@
                 <div class="row">
                     <div class="col col-12 col-md-4 mt-1 ps-3">
                         <div class="input-container" style="margin-top: -0.9rem;">
-                            <label class="label-select" for="tipoEjercicio">Ejercicio</label>
-                            <select id="tipoEjercicio" class="select-estatus" (change)="activarAgregar($event)" formControlName="id_inscripcion">
+                            <label class="label-select" for="nombreCliente">Cliente</label>
+                            <select id="nombreCliente" class="select-estatus" (change)="activarAgregar($event)" formControlName="id_inscripcion">
                                 <option style="color: darkgrey;" selected>Selecciona a un cliente </option>
                                 <option *ngFor="let inscripcion of inscripcionesActivas" [value]="inscripcion.id">
                                     {{inscripcion.cliente.name}} {{inscripcion.cliente.firstSurname}} {{inscripcion.cliente.secondSurname}}
@@ -65,7 +65,8 @@
                             text-decoration: none;
                             " 
                             [routerLink]="['nuevaRutina/inscripcion']" 
-                            [queryParams]="{ id: id_inscripcion }">
+                            
+                            >
                                 <i class="fa-regular fa-plus"></i>
                                 Agregar
                             </button>
