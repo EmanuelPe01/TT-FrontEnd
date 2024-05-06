@@ -210,6 +210,51 @@
     transition: all 0.3s ease;
 }
 
+.select-estatus {
+    margin-top: -1em;
+}
+
+.input-container input[type="text"],
+.input-container input[type="date"],
+.select-estatus {
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 5px 0;
+    background-color: transparent;
+    outline: none;
+}
+
+.input-container input[type="text"] {
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 5px 0;
+    background-color: transparent;
+    outline: none;
+}
+
+.input-container input[type="text"]:focus~.label,
+.input-container input[type="text"]:valid~.label,
+.input-container input[type="text"]:read-only~.label {
+    top: -20px;
+    font-size: 16px;
+    color: #333;
+}
+
+.input-container input[type="text"]:focus~.underline,
+.input-container input[type="text"]:valid~.underline,
+.input-container input[type="text"]:read-only~.underline,
+.input-container select:valid~.underline {
+    transform: scaleX(1);
+}
+
+.input-container select:focus~.underline {
+    transform: scaleX(0);
+}
+
 .input-container input[type="date"] {
     font-size: 16px;
     width: 100%;

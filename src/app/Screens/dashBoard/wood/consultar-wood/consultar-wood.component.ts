@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { InscripcionesActivas } from 'src/app/Models';
+import { IncripcionService } from 'src/app/Services/incripcion.service';
 
 @Component({
   selector: 'app-consultar-wood',
@@ -12,16 +14,39 @@ export class ConsultarWoodComponent {
   formBusquedaWoods: FormGroup;
   minDate: string = '';
   maxDate: string = '';
+  agregarRutina: boolean = true
+  id_inscripcion: number = 0
+  inscripcionesActivas: InscripcionesActivas[] = []
 
   constructor(
     private form: FormBuilder,
+    private inscripcionService: IncripcionService
   ) {
     this.initializeDates();
+    this.getActiveInscription();
     this.formBusquedaWoods = this.form.group({
-      id_user_cliente: ['', Validators.required],
+      id_inscripcion: ['', Validators.required],
       fecha_inicio: [this.minDate, Validators.required],
       fecha_fin: [this.maxDate, Validators.required]
     })
+  }
+
+  getActiveInscription() {
+    this.inscripcionService.getActiveInscription().
+    pipe().
+    subscribe((data: InscripcionesActivas[]) => {
+      this.inscripcionesActivas = data
+    })
+  }
+
+  activarAgregar(event: Event) {
+    const inscripcionSeleccionada = event.target as HTMLSelectElement
+    if(!isNaN(Number(inscripcionSeleccionada.value))){
+      this.agregarRutina = false
+      this.id_inscripcion = Number(inscripcionSeleccionada.value)
+    }
+    else 
+      this.agregarRutina = true
   }
 
   initializeDates() {

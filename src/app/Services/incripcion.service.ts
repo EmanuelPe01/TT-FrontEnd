@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GenerateInscription, SingleInscription, url } from 'src/app/Models';
+import { GenerateInscription, InscripcionesActivas, SingleInscription, url } from 'src/app/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +30,9 @@ export class IncripcionService {
 
   deleteInsctiption(id: number) {
     return this.http.delete(url + 'deleteInscription/' + id);
+  }
+
+  getActiveInscription(): Observable<InscripcionesActivas[]> {
+    return this.http.get<InscripcionesActivas[]>(url + 'getActiveInscription');
   }
 }

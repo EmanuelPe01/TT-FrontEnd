@@ -36,6 +36,10 @@ export class EjercicioService {
     return this.http.get<getDetalleEjercicio[]> (url + 'getAllEjercicios')
   }
 
+  getInfoBasicEjercicios(): Observable<any[]> {
+    return this.http.get<any[]> (url + 'getInfoBasicEjercicios')
+  }
+ 
   editEjercicio(detalleEjercicio: detalleEjercicio, idEjercicio: number) {
     return this.http.put(url + 'updateEjercicio/' + idEjercicio, detalleEjercicio);
   }

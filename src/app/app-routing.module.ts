@@ -35,7 +35,7 @@ const routes: Routes = [
           {
             path: 'rutinas', component: WoodComponent, children: [
               {path: '', component: ConsultarWoodComponent},
-              {path: 'nuevaRutina', component: NuevoWoodComponent}
+              {path: 'nuevaRutina/inscripcion', component: NuevoWoodComponent}
           ]
           },
           {

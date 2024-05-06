@@ -7,9 +7,15 @@
             <form [formGroup]="formBusquedaWoods" (ngSubmit)="consultarWoods()">
                 <div class="row">
                     <div class="col col-12 col-md-4 mt-1 ps-3">
-                        <div class="textInputWrapper">
-                            <input placeholder="Nombre del cliente" type="text" class="textInput"
-                                formControlName="id_user_cliente">
+                        <div class="input-container" style="margin-top: -0.9rem;">
+                            <label class="label-select" for="tipoEjercicio">Ejercicio</label>
+                            <select id="tipoEjercicio" class="select-estatus" (change)="activarAgregar($event)" formControlName="id_inscripcion">
+                                <option style="color: darkgrey;" selected>Selecciona a un cliente </option>
+                                <option *ngFor="let inscripcion of inscripcionesActivas" [value]="inscripcion.id">
+                                    {{inscripcion.cliente.name}} {{inscripcion.cliente.firstSurname}} {{inscripcion.cliente.secondSurname}}
+                                </option>
+                            </select>
+                            <div class="underline"></div>
                         </div>
                     </div>
                     <div class="col col-12 col-md-2">
@@ -52,15 +58,17 @@
                     </div>
                     <div class="col col-12 col-md-2 mt-1">
                         <div class="d-grid">
-                            <a class="btn btn-outline-dark" style="
+                            <button type="button" [disabled]="agregarRutina" class="btn btn-outline-dark" style="
                             --bs-btn-font-size: 1rem;
                             --bs-btn-padding-y: .4rem; 
                             --bs-btn-padding-x: .6rem;
                             text-decoration: none;
-                            " routerLink="nuevaRutina">
+                            " 
+                            [routerLink]="['nuevaRutina/inscripcion']" 
+                            [queryParams]="{ id: id_inscripcion }">
                                 <i class="fa-regular fa-plus"></i>
                                 Agregar
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
