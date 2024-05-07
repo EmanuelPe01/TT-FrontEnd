@@ -16,6 +16,8 @@ export class ConsultarWoodComponent {
   maxDate: string = '';
   agregarRutina: boolean = true
   id_inscripcion: number = 0
+  nombreCliente_inscripcion: string = ''
+  pesoMaximo_inscripcion: string = ''
   inscripcionesActivas: InscripcionesActivas[] = []
 
   constructor(
@@ -42,8 +44,13 @@ export class ConsultarWoodComponent {
   activarAgregar(event: Event) {
     const inscripcionSeleccionada = event.target as HTMLSelectElement
     if(!isNaN(Number(inscripcionSeleccionada.value))){
-      this.agregarRutina = false
-      this.id_inscripcion = Number(inscripcionSeleccionada.value)
+      const inscripcionInfo = this.inscripcionesActivas.find(insAct => insAct.id == Number(inscripcionSeleccionada.value))
+      if(inscripcionInfo) {
+        this.id_inscripcion = inscripcionInfo.id
+        this.nombreCliente_inscripcion = inscripcionInfo.cliente.name + ' ' + inscripcionInfo.cliente.firstSurname + ' ' + inscripcionInfo.cliente.secondSurname
+        this.pesoMaximo_inscripcion = inscripcionInfo.peso_maximo.toString()
+        this.agregarRutina = false
+      }
     }
     else 
       this.agregarRutina = true

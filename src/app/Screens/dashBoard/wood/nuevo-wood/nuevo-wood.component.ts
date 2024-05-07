@@ -18,7 +18,9 @@ import Swal from "sweetalert2";
 })
 
 export class NuevoWoodComponent {
-    idInscripcion: number = 3
+    idInscripcion: number = 0;
+    nombreCliente: string = '';
+    pesoMaximo: string = '';
     minDate: string = '';
     inputFecha: string = 'text';
     formRutina: FormGroup;
@@ -38,9 +40,11 @@ export class NuevoWoodComponent {
         private route: ActivatedRoute,
         private router: Router
     ) {
-        // this.route.queryParams.subscribe(params => {
-        //     this.idInscripcion = params['id'];
-        // });
+        this.route.queryParams.subscribe(params => {
+            this.idInscripcion = params['id'];
+            this.nombreCliente = params['nombreCliente'];
+            this.pesoMaximo = params['pesoMaximo'];
+        });
         this.formRutina = this.form.group({
             id_inscripcion: [this.idInscripcion, Validators.required],
             fecha_rutina: ['', Validators.required],

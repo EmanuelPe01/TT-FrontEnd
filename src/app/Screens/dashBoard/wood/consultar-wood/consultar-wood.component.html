@@ -74,7 +74,11 @@
                             text-decoration: none;
                             " 
                             [routerLink]="['nuevaRutina/inscripcion']" 
-                            [queryParams]="{id: id_inscripcion}"
+                            [queryParams]="{
+                                id: id_inscripcion,
+                                nombreCliente: nombreCliente_inscripcion,
+                                pesoMaximo: pesoMaximo_inscripcion
+                            }"
                             >
                                 <i class="fa-regular fa-plus"></i>
                                 Agregar
