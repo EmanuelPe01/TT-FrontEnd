@@ -11,24 +11,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 import { RecoveryPasswordComponent } from './Screens/recovery-password/recovery-password.component';
-import { NavBarComponent } from './Screens/dashBoard/nav-bar/nav-bar.component';
-import { ScreenControllerComponent } from './Screens/dashBoard/screen-controller/screen-controller.component';
-import { InscripcionesComponent } from './Screens/dashBoard/inscripciones/inscripciones.component';
-import { NuevaInscripcionComponent } from './Screens/dashBoard/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
-import { ConsultaInscripcionesComponent } from './Screens/dashboard/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
-import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/editar-inscripcion/editar-inscripcion.component';
-import { VerInscripcionComponent } from './Screens/dashboard/inscripciones/ver-inscripcion/ver-inscripcion.component';
-import { EjerciciosComponent } from './Screens/dashboard/ejercicios/ejercicios.component';
-import { ConsultaEjerciciosComponent } from './Screens/dashboard/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
-import { NuevoTipoEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-tipoEjercicio/nuevoTipoEjercicio';
-import { EditarTipoEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-tipoEjercicio/editarTipoEjercicio';
-import { EliminarTipoEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-tipoEjercicio/eliminarTipoEjercicio';
-import { NuevoEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-ejercicio/nuevoEjercicio';
-import { DetalleEjercicioComponent } from './Screens/dashboard/ejercicios/acciones-ejercicio/detalleEjercicio';
-import { EditarEjericicioComponent } from './Screens/dashboard/ejercicios/acciones-ejercicio/editarEjercicio';
-import { WoodComponent } from './Screens/dashboard/wood/woods.component';
-import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/consultar-wood.component';
-import { NuevoWoodComponent } from './Screens/dashBoard/wood/nuevo-wood/nuevo-wood.component';
+import { NavBarComponent } from './Screens/dashBoard/common/nav-bar/nav-bar.component';
+import { ScreenControllerComponent } from './Screens/dashBoard/common/screen-controller/screen-controller.component';
+import { InscripcionesComponent } from './Screens/dashBoard/admin/inscripciones/inscripciones.component';
+import { NuevaInscripcionComponent } from './Screens/dashBoard/admin/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
+import { ConsultaInscripcionesComponent } from './Screens/dashboard/admin/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
+import { EditarInscripcionComponent } from './Screens/dashboard/admin/inscripciones/editar-inscripcion/editar-inscripcion.component';
+import { VerInscripcionComponent } from './Screens/dashboard/admin/inscripciones/ver-inscripcion/ver-inscripcion.component';
+import { EjerciciosComponent } from './Screens/dashboard/admin/ejercicios/ejercicios.component';
+import { ConsultaEjerciciosComponent } from './Screens/dashboard/admin/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
+import { NuevoTipoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/nuevoTipoEjercicio';
+import { EditarTipoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/editarTipoEjercicio';
+import { EliminarTipoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/eliminarTipoEjercicio';
+import { NuevoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-ejercicio/nuevoEjercicio';
+import { DetalleEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-ejercicio/detalleEjercicio';
+import { EditarEjericicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-ejercicio/editarEjercicio';
+import { RutinasComponent } from './Screens/dashBoard/common/rutinas/rutinas.component';
+import { ConsultarRutinasComponent } from './Screens/dashBoard/common/rutinas/consultar-rutina/consultar-rutina.component';
+import { NuevaRutinaComponent } from './Screens/dashBoard/common/rutinas/nueva-rutina/nueva-rutina.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,6 @@ import { NuevoWoodComponent } from './Screens/dashBoard/wood/nuevo-wood/nuevo-wo
     NavBarComponent,
     ScreenControllerComponent,
     InscripcionesComponent,
-    ConsultarWoodComponent,
     NuevaInscripcionComponent,
     ConsultaInscripcionesComponent,
     EditarInscripcionComponent,
@@ -52,8 +51,9 @@ import { NuevoWoodComponent } from './Screens/dashBoard/wood/nuevo-wood/nuevo-wo
     NuevoEjercicioComponent,
     DetalleEjercicioComponent,
     EditarEjericicioComponent,
-    WoodComponent,
-    NuevoWoodComponent
+    RutinasComponent,
+    ConsultarRutinasComponent,
+    NuevaRutinaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,35 +1,42 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { InscripcionesActivas } from 'src/app/Models';
+import { DetalleRutina, InscripcionesActivas } from 'src/app/Models';
 import { IncripcionService } from 'src/app/Services/incripcion.service';
+import { RutinaService } from 'src/app/Services/rutina.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-consultar-wood',
-  templateUrl: './consultar-wood.component.html',
-  styleUrls: ['./consultar-wood.component.css']
+  templateUrl: './consultar-rutina.component.html',
+  styleUrls: ['./consultar-rutina.component.css']
 })
-export class ConsultarWoodComponent {
+export class ConsultarRutinasComponent {
   criterioCliente: string = ''
   formBusquedaWoods: FormGroup;
   minDate: string = '';
   maxDate: string = '';
   agregarRutina: boolean = true
+  showRutinas: boolean = false
+  isLoading: boolean = true
   id_inscripcion: number = 0
   nombreCliente_inscripcion: string = ''
   pesoMaximo_inscripcion: string = ''
   inscripcionesActivas: InscripcionesActivas[] = []
+  rutinas: DetalleRutina[] = []
 
   constructor(
     private form: FormBuilder,
-    private inscripcionService: IncripcionService
+    private inscripcionService: IncripcionService,
+    private rutinaService: RutinaService
   ) {
     this.initializeDates();
     this.getActiveInscription();
     this.formBusquedaWoods = this.form.group({
       id_inscripcion: ['', Validators.required],
       fecha_inicio: [this.minDate, Validators.required],
-      fecha_fin: [this.maxDate, Validators.required]
+      fecha_fin: [this.maxDate, Validators.required],
+      halterofilia: [false, Validators.required]
     })
   }
 
@@ -78,11 +85,68 @@ export class ConsultarWoodComponent {
   }
 
   changeTiposEjercicios(event: Event) {
-    
+    const checkHalterfilia = event.target as HTMLInputElement
+    this.formBusquedaWoods.patchValue({
+      halterofilia: checkHalterfilia.checked
+    })
   }
 
   consultarWoods() {
-    console.log(this.formBusquedaWoods.value)
+    this.showRutinas = true
+    this.isLoading = true
+    if(this.formBusquedaWoods.valid){
+      this.rutinaService.consultRutina(this.formBusquedaWoods.value).
+      pipe().
+      subscribe((data: DetalleRutina[]) => {
+        this.rutinas = data
+        this.isLoading = false
+      })
+    }
+  }
+
+  deleteRutina(diaRutina: string, id: number) {
+    Swal.fire({
+      title: "¿Estas seguro?",
+      text: `Se eliminará la rutina del ${diaRutina}` ,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#6E1300",
+      confirmButtonText: "Confirmar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.showLoadingMessage(true);
+        this.rutinaService.deleteRutina(id).
+        pipe().
+        subscribe((data) => {
+          this.showLoadingMessage(false);
+          this.showMessageSucces('Registro eliminado');
+          this.consultarWoods()
+        })
+      }
+    });
+  }
+
+  showMessageSucces(message: string) {
+    Swal.fire({
+      icon: 'success',
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  showLoadingMessage(flag: boolean) {
+    if (flag) {
+      Swal.fire({
+        title: 'Espera un momento',
+        didOpen: () => {
+          Swal.disableButtons();
+          Swal.showLoading();
+        }
+      });
+    }
   }
 
 }

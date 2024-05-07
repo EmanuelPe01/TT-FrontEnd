@@ -28,7 +28,7 @@
                                 <p><strong>Cliente:</strong> {{nombreCliente}}</p>
                             </div>
                             <div class="col col-4">
-                                <p><strong>Peso máximo:</strong> {{pesoMaximo}} Lb</p>
+                                <p><strong>Peso máximo:</strong> {{pesoMaximo}} lb</p>
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                 <div class="row justify-content-center">
                     <div class="col col-10">
                         <div class="row">
-                            <div class="col col-4">
+                            <div class="col col-3">
                                 <div class="input-container">
                                     <input required="required" formControlName="fecha_rutina" id="input-fecha-inicio"
                                         [type]="inputFecha" [min]="minDate" (focus)="onFocus()" (blur)="onBlur()" />
@@ -44,11 +44,22 @@
                                     <div class="underline"></div>
                                 </div>
                             </div>
-                            <div class="col col-2">
-                                <div class="input-container">
-                                    <input required="" type="text" id="peso-rutina" formControlName="peso">
-                                    <label class="label" for="peso-rutina">Peso (LB)</label>
-                                    <div class="underline"></div>
+                            <div class="col col-3">
+                                <div class="row">
+                                    <div class="col col-10">
+                                        <div class="input-container">
+                                            <input required="" type="text" id="peso-rutina" formControlName="peso">
+                                            <label class="label" for="peso-rutina">Peso ({{unidadPeso}})</label>
+                                            <div class="underline"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-2">
+                                        <div class="tooltip-custom">
+                                            <div class="icon">i</div>
+                                            <div class="tooltiptext">Cuando la rutina es de halterofilia, se especifica
+                                                el porcentaje del peso máximo a cargar.</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col col-2">
@@ -67,10 +78,20 @@
                             </div>
                             <div class="col col-2">
                                 <p>¿Es halterofilia?</p>
-                                <div class="container_switch">
-                                    <input type="checkbox" name="checkbox_switch" formControlName="halterofilia"
-                                        (change)="changeTiposEjercicios($event)" id="checkbox_switch">
-                                    <label for="checkbox_switch" class="label_switch"></label>
+                                <div class="row justify-content-center">
+                                    <div class="col col-10">
+                                        <div class="container_switch">
+                                            <input type="checkbox" name="checkbox_switch" formControlName="halterofilia"
+                                                (change)="changeTiposEjercicios($event)" id="checkbox_switch">
+                                            <label for="checkbox_switch" class="label_switch"></label>
+                                        </div>
+                                    </div>
+                                    <div class="col col-2" style="margin-top: -2rem; margin-left: -2rem;">
+                                        <div class="tooltip-custom">
+                                            <div class="icon">i</div>
+                                            <div class="tooltiptext">Ajusta la rutina para asignar únicamente ejercicios de halterofilia.</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -184,7 +205,8 @@
                                                                 --bs-btn-padding-x: .6rem;
                                                                 --bs-btn-hover-bg: rgb(235, 33, 33);
                                                                 --bs-btn-hover-border-color: rgb(235, 33, 33);
-                                                            " type="button" (click)="eliminarEjercicioRutina(ejercicio)">
+                                                            " type="button"
+                                                                (click)="eliminarEjercicioRutina(ejercicio)">
                                                                 <i class="fa-solid fa-trash"></i>
                                                             </button>
                                                         </div>

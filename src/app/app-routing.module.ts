@@ -3,23 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Screens/login/login.component';
 import { RegisterComponent } from './Screens/register/register.component';
 import { RecoveryPasswordComponent } from './Screens/recovery-password/recovery-password.component';
-import { ScreenControllerComponent } from './Screens/dashBoard/screen-controller/screen-controller.component';
+import { ScreenControllerComponent } from './Screens/dashBoard/common/screen-controller/screen-controller.component';
 
 //Inscripciones
-import { InscripcionesComponent } from './Screens/dashBoard/inscripciones/inscripciones.component';
-import { ConsultaInscripcionesComponent } from './Screens/dashboard/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
-import { NuevaInscripcionComponent } from './Screens/dashBoard/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
-import { VerInscripcionComponent } from './Screens/dashboard/inscripciones/ver-inscripcion/ver-inscripcion.component';
+import { InscripcionesComponent } from './Screens/dashBoard/admin/inscripciones/inscripciones.component';
+import { ConsultaInscripcionesComponent } from './Screens/dashboard/admin/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
+import { NuevaInscripcionComponent } from './Screens/dashBoard/admin/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
+import { VerInscripcionComponent } from './Screens/dashboard/admin/inscripciones/ver-inscripcion/ver-inscripcion.component';
+import { EditarInscripcionComponent } from './Screens/dashboard/admin/inscripciones/editar-inscripcion/editar-inscripcion.component';
 
 //Woods
-import { WoodComponent } from './Screens/dashboard/wood/woods.component';
-import { ConsultarWoodComponent } from './Screens/dashboard/wood/consultar-wood/consultar-wood.component';
-import { EditarInscripcionComponent } from './Screens/dashboard/inscripciones/editar-inscripcion/editar-inscripcion.component';
+import { RutinasComponent } from './Screens/dashBoard/common/rutinas/rutinas.component';
+import { ConsultarRutinasComponent } from './Screens/dashBoard/common/rutinas/consultar-rutina/consultar-rutina.component';
+import { NuevaRutinaComponent } from './Screens/dashBoard/common/rutinas/nueva-rutina/nueva-rutina.component';
 
 //Ejercicios
-import { EjerciciosComponent } from './Screens/dashboard/ejercicios/ejercicios.component';
-import { ConsultaEjerciciosComponent } from './Screens/dashboard/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
-import { NuevoWoodComponent } from './Screens/dashBoard/wood/nuevo-wood/nuevo-wood.component';
+import { EjerciciosComponent } from './Screens/dashboard/admin/ejercicios/ejercicios.component';
+import { ConsultaEjerciciosComponent } from './Screens/dashboard/admin/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
 
 
 const routes: Routes = [
@@ -33,9 +33,9 @@ const routes: Routes = [
       {
         path: 'admin', children: [
           {
-            path: 'rutinas', component: WoodComponent, children: [
-              {path: '', component: ConsultarWoodComponent},
-              {path: 'nuevaRutina/inscripcion', component: NuevoWoodComponent}
+            path: 'rutinas', component: RutinasComponent, children: [
+              {path: '', component: ConsultarRutinasComponent},
+              {path: 'nuevaRutina/inscripcion', component: NuevaRutinaComponent}
           ]
           },
           {
@@ -55,7 +55,7 @@ const routes: Routes = [
       },
       {
         path: 'user', children: [
-          {path: '', component: ConsultarWoodComponent}
+          {path: '', component: ConsultarRutinasComponent}
         ]
       }
     ],

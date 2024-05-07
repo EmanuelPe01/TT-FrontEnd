@@ -115,6 +115,13 @@
     margin-left: 0.5rem;
 }
 
+.separator {
+    height: 1px;
+    width: 90%;
+    margin-left: 5%;
+    background-color: #ffffff;
+}
+
 .button {
     display: block;
     position: relative;
@@ -338,4 +345,118 @@
     left: 0;
     -webkit-transition: 0.4s;
     transition: 0.4s;
+}
+
+.tooltip-custom {
+    margin: 0;
+    padding: 0;
+    margin-top: 1rem;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-family: "Arial", sans-serif;
+}
+
+.tooltip-custom:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    top: 135%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #000000 transparent;
+}
+
+.tooltip-custom .icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1rem;
+}
+
+.loader {
+    position: relative;
+    left: 50%;
+    width: 4px;
+    color: #000;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    box-shadow:
+        19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+        19px 0 0 5px, 38px 0 0 5px, 57px 0 0 5px,
+        19px 19px 0 0px, 38px 19px 0 0px, 57px 19px 0 0px;
+    transform: translateX(-38px);
+    animation: l26 2s infinite linear;
+}
+
+@keyframes l26 {
+    12.5% {
+        box-shadow:
+            19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 5px,
+            19px 0 0 5px, 38px 0 0 0px, 57px 0 0 5px,
+            19px 19px 0 0px, 38px 19px 0 0px, 57px 19px 0 0px
+    }
+
+    25% {
+        box-shadow:
+            19px -19px 0 5px, 38px -19px 0 0px, 57px -19px 0 5px,
+            19px 0 0 0px, 38px 0 0 0px, 57px 0 0 0px,
+            19px 19px 0 0px, 38px 19px 0 5px, 57px 19px 0 0px
+    }
+
+    50% {
+        box-shadow:
+            19px -19px 0 5px, 38px -19px 0 5px, 57px -19px 0 0px,
+            19px 0 0 0px, 38px 0 0 0px, 57px 0 0 0px,
+            19px 19px 0 0px, 38px 19px 0 0px, 57px 19px 0 5px
+    }
+
+    62.5% {
+        box-shadow:
+            19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+            19px 0 0 5px, 38px 0 0 0px, 57px 0 0 0px,
+            19px 19px 0 0px, 38px 19px 0 5px, 57px 19px 0 5px
+    }
+
+    75% {
+        box-shadow:
+            19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+            19px 0 0 0px, 38px 0 0 0px, 57px 0 0 5px,
+            19px 19px 0 0px, 38px 19px 0 0px, 57px 19px 0 5px
+    }
+
+    87.5% {
+        box-shadow:
+            19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+            19px 0 0 0px, 38px 0 0 5px, 57px 0 0 0px,
+            19px 19px 0 5px, 38px 19px 0 0px, 57px 19px 0 0px
+    }
 }

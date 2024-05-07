@@ -12,15 +12,15 @@ import { RutinaService } from "src/app/Services/rutina.service";
 import Swal from "sweetalert2";
 
 @Component({
-    selector: 'nuevo-wood',
-    templateUrl: './nuevo-wood.component.html',
-    styleUrls: ['./nuevo-wood.component.css']
+    selector: 'nueva-rutina',
+    templateUrl: './nueva-rutina.component.html',
+    styleUrls: ['./nueva-rutina.component.css']
 })
 
-export class NuevoWoodComponent {
+export class NuevaRutinaComponent {
     idInscripcion: number = 0;
     nombreCliente: string = '';
-    pesoMaximo: string = '';
+    pesoMaximo: number = 0;
     minDate: string = '';
     inputFecha: string = 'text';
     formRutina: FormGroup;
@@ -31,6 +31,7 @@ export class NuevoWoodComponent {
     unidadMedida: string = 'Cantidad';
     onlyHalterofilia: boolean = false;
     detalleEjercicios: any[] = [];
+    unidadPeso: string = 'lb'
     ejerciciosRutina: ejercicioRutina[] = []
 
     constructor(
@@ -107,7 +108,12 @@ export class NuevoWoodComponent {
             ejercicios: this.ejerciciosRutina
         })
         if (this.formRutina.valid) {
-            const rutinaNueva: rutinaGenerada = this.formRutina.value
+            let rutinaNueva: rutinaGenerada = this.formRutina.value
+            if (this.onlyHalterofilia) {
+                let pesoRutina: number = Number(this.formRutina.get('peso')?.value);
+                pesoRutina *= this.pesoMaximo / 100;
+                rutinaNueva.peso = pesoRutina
+            }
             this.showLoadingMessage(true);
             this.rutinaService.saveRutina(rutinaNueva).
                 pipe(
@@ -166,7 +172,8 @@ export class NuevoWoodComponent {
             this.onlyHalterofilia = false
             this.ejerciciosRutina = []
             this.tipoEjercicio = ''
-            this.unidadMedida = ''
+            this.unidadMedida = 'Cantidad'
+            this.unidadPeso = 'lb'
         } else {
             this.onlyHalterofilia = true
             const tipoHalterofilia = this.tiposEjercicio.find(tEjercicio => tEjercicio.nombre_tipo.toLowerCase() === "halterofilia")
