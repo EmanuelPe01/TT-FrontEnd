@@ -183,6 +183,7 @@ export class NuevaRutinaComponent {
             })
             this.ejerciciosRutina = []
             this.unidadMedida = 'Cantidad'
+            this.unidadPeso = '%'
         }
     }
 

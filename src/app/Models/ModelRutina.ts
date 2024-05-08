@@ -13,7 +13,7 @@ export interface rutinaGenerada {
 export interface DetalleRutina {
     id:             number
     id_inscripcion:     number
-    fecha_rutina:       Date
+    fecha_rutina:       Date | string
     rondas:             number
     tiempo:             number
     peso:               number

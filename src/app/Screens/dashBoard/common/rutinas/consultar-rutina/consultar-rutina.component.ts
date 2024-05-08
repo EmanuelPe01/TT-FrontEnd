@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { DetalleRutina, InscripcionesActivas } from 'src/app/Models';
 import { IncripcionService } from 'src/app/Services/incripcion.service';
@@ -28,7 +29,8 @@ export class ConsultarRutinasComponent {
   constructor(
     private form: FormBuilder,
     private inscripcionService: IncripcionService,
-    private rutinaService: RutinaService
+    private rutinaService: RutinaService,
+    private router: Router
   ) {
     this.initializeDates();
     this.getActiveInscription();
@@ -102,6 +104,10 @@ export class ConsultarRutinasComponent {
         this.isLoading = false
       })
     }
+  }
+
+  updateRutina(rutina: DetalleRutina) {
+    this.router.navigate(['/dash-board/admin/rutinas/modificarRutina', { objeto: JSON.stringify(rutina)}]);
   }
 
   deleteRutina(diaRutina: string, id: number) {

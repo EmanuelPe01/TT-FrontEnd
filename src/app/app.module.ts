@@ -29,6 +29,7 @@ import { EditarEjericicioComponent } from './Screens/dashboard/admin/ejercicios/
 import { RutinasComponent } from './Screens/dashBoard/common/rutinas/rutinas.component';
 import { ConsultarRutinasComponent } from './Screens/dashBoard/common/rutinas/consultar-rutina/consultar-rutina.component';
 import { NuevaRutinaComponent } from './Screens/dashBoard/common/rutinas/nueva-rutina/nueva-rutina.component';
+import { ModificarRutinaComponent } from './Screens/dashBoard/common/rutinas/modificar-rutina/modificar-rutina.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { NuevaRutinaComponent } from './Screens/dashBoard/common/rutinas/nueva-r
     EditarEjericicioComponent,
     RutinasComponent,
     ConsultarRutinasComponent,
-    NuevaRutinaComponent
+    NuevaRutinaComponent,
+    ModificarRutinaComponent
   ],
   imports: [
     BrowserModule,
