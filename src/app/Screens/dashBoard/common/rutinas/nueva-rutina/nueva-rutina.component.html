@@ -71,8 +71,8 @@
                             </div>
                             <div class="col col-2">
                                 <div class="input-container">
-                                    <input required="required" type="text" id="tiempo-rutina" formControlName="tiempo">
-                                    <label class="label" for="tiempo-rutina">Tiempo</label>
+                                    <input required="required" [min]="1" [max]="59" type="number" id="tiempo-rutina" formControlName="tiempo">
+                                    <label class="label" for="tiempo-rutina">Tiempo (minutos)</label>
                                     <div class="underline"></div>
                                 </div>
                             </div>
