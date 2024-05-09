@@ -25,6 +25,7 @@ export class ConsultarRutinasComponent {
   pesoMaximo_inscripcion: string = ''
   inscripcionesActivas: InscripcionesActivas[] = []
   rutinas: DetalleRutina[] = []
+  notEmptyRutinas: boolean = true
 
   constructor(
     private form: FormBuilder,
@@ -102,12 +103,20 @@ export class ConsultarRutinasComponent {
       subscribe((data: DetalleRutina[]) => {
         this.rutinas = data
         this.isLoading = false
+        if(this.rutinas.length == 0)
+          this.notEmptyRutinas = false
+        else 
+          this.notEmptyRutinas = true
       })
     }
   }
 
   updateRutina(rutina: DetalleRutina) {
-    this.router.navigate(['/dash-board/admin/rutinas/modificarRutina', { objeto: JSON.stringify(rutina)}]);
+    this.router.navigate(['/dash-board/admin/rutinas/modificarRutina', { 
+      rutina: JSON.stringify(rutina),
+      nombreCliente: this.nombreCliente_inscripcion,
+      pesoMaximo: this.pesoMaximo_inscripcion
+    }]);
   }
 
   deleteRutina(diaRutina: string, id: number) {

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Renderer2 } from '@angular/core';
 import { catchError } from 'rxjs';
 import { EjercicioService } from 'src/app/Services/ejercicio.service';
 import Swal from 'sweetalert2';
@@ -55,6 +55,7 @@ export class NuevoTipoEjercicioComponent {
 
   constructor(
     private ejercicioService: EjercicioService,
+    private renderer: Renderer2
   ){}
 
   createTipoEjercicio() {
@@ -93,15 +94,15 @@ export class NuevoTipoEjercicioComponent {
 
   ocultarModal(idModal: string) {
     const modalElement = document.getElementById(idModal)
-    const modalBackdrop = document.getElementsByClassName('modal-backdrop')
+    const modalBackdrops = document.querySelectorAll('.modal-backdrop');
     if (modalElement) {
       modalElement.classList.remove('show')
       modalElement.setAttribute('aria-hidden', 'true')
       modalElement.setAttribute('style', 'display: none')
     }
-    if (modalBackdrop[0]) {
-      document.body.removeChild(modalBackdrop[0])
-    }
+    modalBackdrops.forEach(backdrop => {
+      this.renderer.removeChild(document.body, backdrop);
+    });
   }
 
   showMessageSucces(message: string) {

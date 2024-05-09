@@ -1,11 +1,20 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { parse } from "date-fns";
 import * as moment from "moment";
-import { DetalleRutina, tipoEjercicio, ejercicioRutina } from "src/app/Models";
+import { catchError } from "rxjs";
+import { DetalleRutina, tipoEjercicio, ejercicioRutina, rutinaGenerada } from "src/app/Models";
 import { EjercicioService } from "src/app/Services/ejercicio.service";
+import { RutinaService } from "src/app/Services/rutina.service";
 import Swal from "sweetalert2";
+
+enum acciones {
+    agregar,
+    modificar,
+    eliminar
+}
 
 @Component({
     selector: 'modificar-rutina',
@@ -14,11 +23,14 @@ import Swal from "sweetalert2";
 })
 
 export class ModificarRutinaComponent {
+    isLoading: boolean = true
     rutina: DetalleRutina | undefined
-    nombreCliente: string = '';
-    pesoMaximo: number = 0;
+    idRutina: number = 0
+    idEjercicio: number = 0
+    nombreCliente: string | undefined
+    pesoMaximo: number | undefined 
     minDate: string = '';
-    inputFecha: string = 'text';
+    inputFecha: string = 'date';
     formRutina: FormGroup;
     formEjercicio: FormGroup;
     tiposEjercicio: tipoEjercicio[] = [];
@@ -29,12 +41,16 @@ export class ModificarRutinaComponent {
     detalleEjercicios: any[] = [];
     unidadPeso: string = 'lb'
     ejerciciosRutina: ejercicioRutina[] = []
+    ejerciciosAlterados: ejercicioRutina[] = []
+    accionRegistro: string = acciones[0]
 
 
     constructor(
         private route: ActivatedRoute,
         private form: FormBuilder,
-        private ejercicioService: EjercicioService
+        private ejercicioService: EjercicioService,
+        private rutinaService: RutinaService,
+        private router: Router
     ) {
         this.formRutina = this.form.group({
             fecha_rutina: ['', Validators.required],
@@ -52,29 +68,99 @@ export class ModificarRutinaComponent {
     }
 
     ngOnInit() {
+        const objetoString = this.route.snapshot.paramMap.get('rutina');
+        this.nombreCliente = this.route.snapshot.paramMap.get('nombreCliente')?.toString();
+        this.pesoMaximo = Number(this.route.snapshot.paramMap.get('pesoMaximo'));
+        if (objetoString) this.rutina = JSON.parse(objetoString)
         this.initializeDates()
         this.getTiposEjercicio()
-        const objetoString = this.route.snapshot.paramMap.get('objeto');
-        if (objetoString) this.rutina = JSON.parse(objetoString)
     }
 
     saveRutina() {
-
+        this.formRutina.patchValue({
+            ejercicios: this.ejerciciosRutina
+        })
+        if(this.formRutina.valid){
+            if (this.formRutina.valid) {
+                let rutinaNueva: rutinaGenerada = this.formRutina.value
+                this.showLoadingMessage(true);
+                this.rutinaService.updateRutina(rutinaNueva, this.idRutina).
+                    pipe(
+                        catchError((error: HttpErrorResponse) => {
+                            this.showLoadingMessage(false);
+                            if (error.status == 400)
+                                this.showErrorMessage("Error en la petición");
+                            else if (error.status == 500)
+                                this.showErrorMessage("Error en el servidor");
+    
+                            console.log(error)
+                            return "";
+                        })
+                    ).
+                    subscribe((data: any) => {
+                        this.showLoadingMessage(false);
+                        this.showMessageSucces("Registro exitoso");
+                        this.router.navigate(["dash-board/admin/rutinas"]);
+                    })
+            }
+        }
     }
 
     modificarEjercicio(ejercicio: ejercicioRutina) {
-
+        this.formEjercicio.patchValue({
+            id_tipo_ejercicio: ejercicio.id_tipo_ejercicio,
+            id_ejercicio: ejercicio.id_ejercicio,
+            cantidad_ejercicio: ejercicio.cantidad_ejercicio,
+        })
+        this.tipoEjercicio = ejercicio.id_tipo_ejercicio.toString()
+        this.unidadMedida = ejercicio.unidad_medida
+        this.eliminarEjercicioRutina(ejercicio, 2)
+        this.accionRegistro = acciones[1]
     }
 
-    eliminarEjercicioRutina(ejercicio: ejercicioRutina) {
-
+    eliminarEjercicioRutina(ejercicio: ejercicioRutina, accion: number) {
+        const index = this.ejerciciosRutina.findIndex(ejercicioModificado => ejercicioModificado.id_ejercicio === ejercicio.id_ejercicio);
+        if (index !== -1)
+            switch(accion){
+                case 1:
+                    this.ejerciciosRutina[index].accion = acciones[2];
+                    console.log(this.ejerciciosRutina)
+                    break
+                case 2:
+                    this.idEjercicio = Number(this.ejerciciosRutina[index].id)
+                    this.ejerciciosRutina.splice(index, 1);
+                    break
+            }        
     }
+
+    addEjercicio() {
+        const singleEjercicio: ejercicioRutina = this.formEjercicio.value
+        const nombre_tEjercicio = this.tiposEjercicio.find(tEjercicio => tEjercicio.id == singleEjercicio.id_tipo_ejercicio)
+        const nombre_ejercicio = this.detalleEjercicios.find(ejercicio => ejercicio.id == singleEjercicio.id_ejercicio)
+
+        if (this.formEjercicio.valid && nombre_ejercicio && nombre_tEjercicio) {
+            singleEjercicio.nombre_ejercicio = nombre_ejercicio.nombre_ejercicio
+            singleEjercicio.nombre_tEjercicio = nombre_tEjercicio.nombre_tipo
+            singleEjercicio.unidad_medida = this.unidadMedida
+            singleEjercicio.accion = this.accionRegistro
+            if(this.accionRegistro == 'modificar') singleEjercicio.id = this.idEjercicio
+            this.ejerciciosRutina.push(singleEjercicio)
+            this.formEjercicio.reset()
+            if (this.onlyHalterofilia)
+                this.formEjercicio.patchValue({
+                    id_tipo_ejercicio: this.tipoEjercicio
+                })
+            this.accionRegistro = acciones[0]
+        }
+    }
+
 
     setFormRutina() {
         if (this.rutina) {
             const ejercicios = this.rutina.detalle_rutina
             const fechaNormal:string = this.rutina.fecha_rutina.toString()
             const fechaConvertida = this.convertirFecha(fechaNormal)
+            this.idRutina = this.rutina.id
             
             ejercicios?.forEach((ejercicio) => {
                 const tipoEjercicio = this.tiposEjercicio.find((tEjercicio) => tEjercicio.id == ejercicio.detalle_ejercicio.id_tipo_ejercicio)
@@ -86,6 +172,7 @@ export class ModificarRutinaComponent {
                     nombre_ejercicio: ejercicio.detalle_ejercicio.nombre_ejercicio,
                     cantidad_ejercicio: ejercicio.cantidad_ejercicio,
                     unidad_medida: ejercicio.detalle_ejercicio.unidad_medida,
+                    accion: "---"
                 }
                 this.ejerciciosRutina.push(ejercicioRutina)
             })
@@ -120,46 +207,6 @@ export class ModificarRutinaComponent {
         ejercicioSeleccionado ? this.unidadMedida = ejercicioSeleccionado.unidad_medida : this.unidadMedida = 'Cantidad'
     }
 
-    changeTiposEjercicios(event: Event) {
-        const checkHalterofilia = event.target as HTMLInputElement;
-        if (!checkHalterofilia.checked) {
-            this.onlyHalterofilia = false
-            this.ejerciciosRutina = []
-            this.tipoEjercicio = ''
-            this.unidadMedida = 'Cantidad'
-            this.unidadPeso = 'lb'
-        } else {
-            this.onlyHalterofilia = true
-            const tipoHalterofilia = this.tiposEjercicio.find(tEjercicio => tEjercicio.nombre_tipo.toLowerCase() === "halterofilia")
-            if (tipoHalterofilia) this.tipoEjercicio = tipoHalterofilia.id.toString()
-            this.formEjercicio.patchValue({
-                id_tipo_ejercicio: this.tipoEjercicio
-            })
-            this.ejerciciosRutina = []
-            this.unidadMedida = 'Cantidad'
-            this.unidadPeso = '%'
-        }
-    }
-
-    addEjercicio() {
-        const singleEjercicio: ejercicioRutina = this.formEjercicio.value
-        const nombre_tEjercicio = this.tiposEjercicio.find(tEjercicio => tEjercicio.id == singleEjercicio.id_tipo_ejercicio)
-        const nombre_ejercicio = this.detalleEjercicios.find(ejercicio => ejercicio.id == singleEjercicio.id_ejercicio)
-
-        if (this.formEjercicio.valid && nombre_ejercicio && nombre_tEjercicio) {
-            singleEjercicio.nombre_ejercicio = nombre_ejercicio.nombre_ejercicio
-            singleEjercicio.nombre_tEjercicio = nombre_tEjercicio.nombre_tipo
-            singleEjercicio.unidad_medida = this.unidadMedida
-            this.ejerciciosRutina.push(singleEjercicio)
-            this.formEjercicio.reset()
-            if (this.onlyHalterofilia)
-                this.formEjercicio.patchValue({
-                    id_tipo_ejercicio: this.tipoEjercicio
-                })
-            console.log(this.ejerciciosRutina)
-        }
-    }
-
     filterEjercicios(detalleEjercicios: any[], tipoEjercicio: string) {
         if (tipoEjercicio) {
             detalleEjercicios = this.detalleEjercicios
@@ -184,6 +231,8 @@ export class ModificarRutinaComponent {
                 this.tiposEjercicio = data
                 this.getEjercicios()
                 this.setFormRutina()
+                setTimeout(() => { }, 100)
+                this.isLoading = false
             })
     }
 

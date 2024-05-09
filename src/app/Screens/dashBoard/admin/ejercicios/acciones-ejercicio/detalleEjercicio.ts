@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, Input, OnChanges, Renderer2, SimpleChanges } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { getDetalleEjercicio } from "src/app/Models";
 
@@ -62,7 +62,8 @@ export class DetalleEjercicioComponent implements OnChanges {
     urlYoutubeGenerada: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl('')
 
     constructor(
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private renderer: Renderer2
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {

@@ -26,6 +26,7 @@ export class ScreenControllerComponent {
   async ngOnInit() {
     this.userInformation = await this.userService.isAuthenticated().toPromise().
       then((data) => {return data}).catch((data) => {
+        this.userService.deleteToken()
         this.route.navigate(['/']);
         return undefined
       });

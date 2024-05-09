@@ -177,13 +177,17 @@ export class NuevaRutinaComponent {
         } else {
             this.onlyHalterofilia = true
             const tipoHalterofilia = this.tiposEjercicio.find(tEjercicio => tEjercicio.nombre_tipo.toLowerCase() === "halterofilia")
-            if (tipoHalterofilia) this.tipoEjercicio = tipoHalterofilia.id.toString()
-            this.formEjercicio.patchValue({
-                id_tipo_ejercicio: this.tipoEjercicio
-            })
-            this.ejerciciosRutina = []
-            this.unidadMedida = 'Cantidad'
-            this.unidadPeso = '%'
+            if (tipoHalterofilia) {
+                this.tipoEjercicio = tipoHalterofilia.id.toString()
+                this.formEjercicio.patchValue({
+                    id_tipo_ejercicio: this.tipoEjercicio
+                })
+                this.ejerciciosRutina = []
+                this.unidadMedida = 'Cantidad'
+                this.unidadPeso = '%'
+            } else {
+                this.showErrorMessage('No se ha registrado el tipo de ejercicios \'Halterofilia\' en el sistema ')
+            }
         }
     }
 

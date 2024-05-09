@@ -30,4 +30,8 @@ export class RutinaService {
   deleteRutina(idRutina: number) {
     return this.http.delete(url + 'deleteRutina/' + idRutina);
   }
+
+  updateRutina(rutina: rutinaGenerada, id: number) {
+    return this.http.put(url + 'updateRutina/' + id, rutina)
+  }
 }

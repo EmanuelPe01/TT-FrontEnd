@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, Output, Renderer2, SimpleChanges } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { SafeResourceUrl, DomSanitizer } from "@angular/platform-browser";
 import { catchError } from "rxjs";
@@ -105,7 +105,7 @@ import Swal from "sweetalert2";
     styleUrls: ['./style.css']
 })
 
-export class EditarEjericicioComponent implements OnChanges{
+export class EditarEjericicioComponent implements OnChanges {
     formEditarEjercicio: FormGroup
     showVideo: boolean = true
     urlYoutubeGenerada: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl('')
@@ -116,7 +116,8 @@ export class EditarEjericicioComponent implements OnChanges{
     constructor(
         private ejercicioService: EjercicioService,
         private form: FormBuilder,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private renderer: Renderer2
     ) {
         this.formEditarEjercicio = this.form.group({
             id_tipo_ejercicio: ['', Validators.required],
@@ -127,29 +128,29 @@ export class EditarEjericicioComponent implements OnChanges{
     }
 
     storeEjercicio() {
-        if(this.formEditarEjercicio.valid && this.detalleEjercicio){
+        if (this.formEditarEjercicio.valid && this.detalleEjercicio) {
             this.ocultarModal('editarEjercicio')
             this.showLoadingMessage(true, 'Guardando')
             const ejercicioEditado: detalleEjercicio = this.formEditarEjercicio.value
             ejercicioEditado.id_tipo_ejercicio = Number(this.formEditarEjercicio.get('id_tipo_ejercicio')?.value)
             this.ejercicioService.editEjercicio(ejercicioEditado, this.detalleEjercicio.id).
-            pipe(
-                catchError((error: HttpErrorResponse) => {
-                    this.showLoadingMessage(false, '');
-                    if (error.status == 403) 
-                        this.showErrorMessage("El nombre del ejercicio ya existe");            
-                    else if (error.status == 500 )
-                        this.showErrorMessage("Error en el servidor, intente más tarde");
-                    else if(error.status == 404) 
-                        this.showErrorMessage("No se encontró el registro");
-                    return "";
+                pipe(
+                    catchError((error: HttpErrorResponse) => {
+                        this.showLoadingMessage(false, '');
+                        if (error.status == 403)
+                            this.showErrorMessage("El nombre del ejercicio ya existe");
+                        else if (error.status == 500)
+                            this.showErrorMessage("Error en el servidor, intente más tarde");
+                        else if (error.status == 404)
+                            this.showErrorMessage("No se encontró el registro");
+                        return "";
+                    })
+                ).subscribe((data: any) => {
+                    this.showLoadingMessage(false, '')
+                    this.formEditarEjercicio.reset()
+                    this.showMessageSucces(data.message)
+                    this.actualizarListaEjercicios.emit();
                 })
-            ).subscribe((data:any) => {
-                this.showLoadingMessage(false, '')
-                this.formEditarEjercicio.reset()
-                this.showMessageSucces(data.message)
-                this.actualizarListaEjercicios.emit();
-            } )
         }
     }
 
@@ -189,44 +190,44 @@ export class EditarEjericicioComponent implements OnChanges{
 
     ocultarModal(idModal: string) {
         const modalElement = document.getElementById(idModal)
-        const modalBackdrop = document.getElementsByClassName('modal-backdrop')
+        const modalBackdrops = document.querySelectorAll('.modal-backdrop');
         if (modalElement) {
-          modalElement.classList.remove('show')
-          modalElement.setAttribute('aria-hidden', 'true')
-          modalElement.setAttribute('style', 'display: none')
+            modalElement.classList.remove('show')
+            modalElement.setAttribute('aria-hidden', 'true')
+            modalElement.setAttribute('style', 'display: none')
         }
-        if (modalBackdrop[0]) {
-          document.body.removeChild(modalBackdrop[0])
-        }
-      }
+        modalBackdrops.forEach(backdrop => {
+            this.renderer.removeChild(document.body, backdrop);
+        });
+    }
 
     showMessageSucces(message: string) {
         Swal.fire({
-          icon: 'success',
-          title: message,
-          showConfirmButton: false,
-          timer: 1500
+            icon: 'success',
+            title: message,
+            showConfirmButton: false,
+            timer: 1500
         })
-      }
-    
-      showErrorMessage(message: string) {
+    }
+
+    showErrorMessage(message: string) {
         Swal.fire({
-          icon: 'error',
-          title: message,
-          confirmButtonColor: "#000",
-          confirmButtonText: "Aceptar",
+            icon: 'error',
+            title: message,
+            confirmButtonColor: "#000",
+            confirmButtonText: "Aceptar",
         })
-      }
-    
-      showLoadingMessage(flag: boolean, title: string) {
+    }
+
+    showLoadingMessage(flag: boolean, title: string) {
         if (flag) {
-          Swal.fire({
-            title: title,
-            didOpen: () => {
-              Swal.disableButtons()
-              Swal.showLoading()
-            }
-          })
+            Swal.fire({
+                title: title,
+                didOpen: () => {
+                    Swal.disableButtons()
+                    Swal.showLoading()
+                }
+            })
         }
-      }
+    }
 }

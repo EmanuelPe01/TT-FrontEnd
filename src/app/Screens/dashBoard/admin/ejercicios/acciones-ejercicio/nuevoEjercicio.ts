@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, Renderer2 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { tipoEjercicio, getDetalleEjercicio, detalleEjercicio } from "src/app/Models";
@@ -113,7 +113,8 @@ export class NuevoEjercicioComponent {
   constructor(
     private ejercicioService: EjercicioService,
     private form: FormBuilder,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private renderer: Renderer2
   ) {
     this.formCrearEjercicio = this.form.group({
       id_tipo_ejercicio: ['', Validators.required],
@@ -162,15 +163,15 @@ export class NuevoEjercicioComponent {
 
   ocultarModal(idModal: string) {
     const modalElement = document.getElementById(idModal)
-    const modalBackdrop = document.getElementsByClassName('modal-backdrop')
+    const modalBackdrops = document.querySelectorAll('.modal-backdrop');
     if (modalElement) {
       modalElement.classList.remove('show')
       modalElement.setAttribute('aria-hidden', 'true')
       modalElement.setAttribute('style', 'display: none')
     }
-    if (modalBackdrop[0]) {
-      document.body.removeChild(modalBackdrop[0])
-    }
+    modalBackdrops.forEach(backdrop => {
+      this.renderer.removeChild(document.body, backdrop);
+    });
   }
 
   showMessageSucces(message: string) {

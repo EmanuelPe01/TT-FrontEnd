@@ -17,228 +17,214 @@
                     </a>
                 </div>
                 <div class="col col-10">
-                    <h3>Creación de una rutina</h3>
+                    <h3>Modificar rutina</h3>
                 </div>
             </div>
-            <form [formGroup]="formRutina" (ngSubmit)="saveRutina()">
-                <div class="row justify-content-center">
-                    <div class="col col-10">
-                        <div class="row">
-                            <div class="col col-7">
-                                <p><strong>Cliente:</strong> {{nombreCliente}}</p>
-                            </div>
-                            <div class="col col-4">
-                                <p><strong>Peso máximo:</strong> {{pesoMaximo}} lb</p>
-                            </div>
-                        </div>
-                    </div>
+            <div *ngIf="isLoading else showInfo">
+                <div class="pt-5 pb-5">
+                    <div class="loader"></div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col col-10">
-                        <div class="row">
-                            <div class="col col-3">
-                                <div class="input-container">
-                                    <input required="required" formControlName="fecha_rutina" id="input-fecha-inicio"
-                                        [type]="inputFecha" [min]="minDate" (focus)="onFocus()" (blur)="onBlur()" />
-                                    <label class="label" for="input-fecha-inicio">Día de rutina</label>
-                                    <div class="underline"></div>
+            </div>
+            <ng-template #showInfo>
+                <form [formGroup]="formRutina" (ngSubmit)="saveRutina()">
+                    <div class="row justify-content-center">
+                        <div class="col col-10">
+                            <div class="row">
+                                <div class="col col-7">
+                                    <p><strong>Cliente:</strong> {{nombreCliente}}</p>
                                 </div>
-                            </div>
-                            <div class="col col-3">
-                                <div class="row">
-                                    <div class="col col-10">
-                                        <div class="input-container">
-                                            <input required="" type="text" id="peso-rutina" formControlName="peso">
-                                            <label class="label" for="peso-rutina">Peso ({{unidadPeso}})</label>
-                                            <div class="underline"></div>
-                                        </div>
-                                    </div>
-                                    <div class="col col-2">
-                                        <div class="tooltip-custom">
-                                            <div class="icon">i</div>
-                                            <div class="tooltiptext">Cuando la rutina es de halterofilia, se especifica
-                                                el porcentaje del peso máximo a cargar.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-2">
-                                <div class="input-container">
-                                    <input required="required" type="text" id="rondas-rutina" formControlName="rondas">
-                                    <label class="label" for="rondas-rutina">Rondas</label>
-                                    <div class="underline"></div>
-                                </div>
-                            </div>
-                            <div class="col col-2">
-                                <div class="input-container">
-                                    <input required="required" type="text" id="tiempo-rutina" formControlName="tiempo">
-                                    <label class="label" for="tiempo-rutina">Tiempo</label>
-                                    <div class="underline"></div>
-                                </div>
-                            </div>
-                            <div class="col col-2">
-                                <p>¿Es halterofilia?</p>
-                                <div class="row justify-content-center">
-                                    <div class="col col-10">
-                                        <div class="container_switch">
-                                            <input type="checkbox" name="checkbox_switch" formControlName="halterofilia"
-                                                (change)="changeTiposEjercicios($event)" id="checkbox_switch">
-                                            <label for="checkbox_switch" class="label_switch"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-2" style="margin-top: -2rem; margin-left: -2rem;">
-                                        <div class="tooltip-custom">
-                                            <div class="icon">i</div>
-                                            <div class="tooltiptext">Ajusta la rutina para asignar únicamente ejercicios de halterofilia.</div>
-                                        </div>
-                                    </div>
+                                <div class="col col-4">
+                                    <p><strong>Peso máximo:</strong> {{pesoMaximo}} lb</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row mt-3 justify-content-center">
-                    <div class="col col-11">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                Ejercicios de la rutina
-                            </div>
-                            <div class="card-body">
-                                <form [formGroup]="formEjercicio" (ngSubmit)="addEjercicio()">
-                                    <div class="row" style="margin-top: -1.5rem;">
-                                        <div class="col col-12 col-md-3">
+                    <div class="row justify-content-center">
+                        <div class="col col-10">
+                            <div class="row">
+                                <div class="col col-4">
+                                    <div class="input-container">
+                                        <input required="required" formControlName="fecha_rutina" id="input-fecha-inicio"
+                                            [type]="inputFecha" [min]="minDate" (focus)="onFocus()" (blur)="onBlur()" />
+                                        <label class="label" for="input-fecha-inicio">Día de rutina</label>
+                                        <div class="underline"></div>
+                                    </div>
+                                </div>
+                                <div class="col col-4">
+                                    <div class="row">
+                                        <div class="col col-10">
                                             <div class="input-container">
-                                                <label class="label-select" for="tipoEjercicio">Tipo de
-                                                    ejercicio</label>
-                                                <div *ngIf="!onlyHalterofilia else OnlyHalterofiliaSelect">
+                                                <input required="" type="text" id="peso-rutina" formControlName="peso">
+                                                <label class="label" for="peso-rutina">Peso ({{unidadPeso}})</label>
+                                                <div class="underline"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col col-2">
+                                            <div class="tooltip-custom">
+                                                <div class="icon">i</div>
+                                                <div class="tooltiptext">Cuando la rutina es de halterofilia, se especifica
+                                                    el porcentaje del peso máximo a cargar.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-2">
+                                    <div class="input-container">
+                                        <input required="required" type="text" id="rondas-rutina" formControlName="rondas">
+                                        <label class="label" for="rondas-rutina">Rondas</label>
+                                        <div class="underline"></div>
+                                    </div>
+                                </div>
+                                <div class="col col-2">
+                                    <div class="input-container">
+                                        <input required="required" type="text" id="tiempo-rutina" formControlName="tiempo">
+                                        <label class="label" for="tiempo-rutina">Tiempo</label>
+                                        <div class="underline"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col col-11">
+                            <div class="card text-center">
+                                <div class="card-header">
+                                    Ejercicios de la rutina
+                                </div>
+                                <div class="card-body">
+                                    <form [formGroup]="formEjercicio" (ngSubmit)="addEjercicio()">
+                                        <div class="row" style="margin-top: -1.5rem;">
+                                            <div class="col col-12 col-md-3">
+                                                <div class="input-container">
+                                                    <label class="label-select" for="tipoEjercicio">Tipo de
+                                                        ejercicio</label>
+                                                    <div>
+                                                        <select id="tipoEjercicio" class="select-estatus"
+                                                            (change)="actualizarSeleccion($event)"
+                                                            formControlName="id_tipo_ejercicio">
+                                                            <option selected style="color: darkgrey;">Selecciona un tipo de
+                                                                ejercicio</option>
+                                                            <option *ngFor="let tEjercicio of tiposEjercicio"
+                                                                [value]="tEjercicio.id">
+                                                                {{tEjercicio.nombre_tipo}}</option>
+                                                        </select>
+                                                        <div class="underline"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col col-12 col-md-4">
+                                                <div class="input-container">
+                                                    <label class="label-select" for="tipoEjercicio">Ejercicio</label>
                                                     <select id="tipoEjercicio" class="select-estatus"
-                                                        (change)="actualizarSeleccion($event)"
-                                                        formControlName="id_tipo_ejercicio">
-                                                        <option selected style="color: darkgrey;">Selecciona un tipo de
-                                                            ejercicio</option>
-                                                        <option *ngFor="let tEjercicio of tiposEjercicio"
-                                                            [value]="tEjercicio.id">
-                                                            {{tEjercicio.nombre_tipo}}</option>
+                                                        (change)="actualizarSeleccionEjercicio($event)"
+                                                        formControlName="id_ejercicio">
+                                                        <option selected style="color: darkgrey;">Selecciona un ejercicio
+                                                        </option>
+                                                        <option
+                                                            *ngFor="let ejercicio of filterEjercicios(detalleEjercicios, tipoEjercicio)"
+                                                            [value]="ejercicio.id">
+                                                            {{ejercicio.nombre_ejercicio}}</option>
                                                     </select>
                                                     <div class="underline"></div>
                                                 </div>
-                                                <ng-template #OnlyHalterofiliaSelect>
-                                                    <select id="tipoEjercicio" class="select-estatus" disabled>
-                                                        <option selected [value]="tipoEjercicio">Halterofilia</option>
-                                                    </select>
-                                                </ng-template>
+                                            </div>
+                                            <div class="col col-12 col-md-3">
+                                                <div class="input-container" style="margin-top: 2rem;">
+                                                    <input required="" type="text" id="peso-rutina"
+                                                        formControlName="cantidad_ejercicio">
+                                                    <label class="label" for="peso-rutina">{{unidadMedida}}</label>
+                                                    <div class="underline"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col col-12 col-md-2">
+                                                <div class="d-grid">
+                                                    <button [disabled]="formEjercicio.invalid" class="btn btn-outline-dark"
+                                                        style="
+                                                    --bs-btn-font-size: 1rem;
+                                                    --bs-btn-padding-y: .4rem; 
+                                                    --bs-btn-padding-x: .6rem;
+                                                    text-decoration: none;
+                                                    margin-top: 1.5rem;
+                                                    ">
+                                                        <i class="fa-regular fa-plus"></i>
+                                                        Agregar
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col col-12 col-md-4">
-                                            <div class="input-container">
-                                                <label class="label-select" for="tipoEjercicio">Ejercicio</label>
-                                                <select id="tipoEjercicio" class="select-estatus"
-                                                    (change)="actualizarSeleccionEjercicio($event)"
-                                                    formControlName="id_ejercicio">
-                                                    <option selected style="color: darkgrey;">Selecciona un ejercicio
-                                                    </option>
-                                                    <option
-                                                        *ngFor="let ejercicio of filterEjercicios(detalleEjercicios, tipoEjercicio)"
-                                                        [value]="ejercicio.id">
-                                                        {{ejercicio.nombre_ejercicio}}</option>
-                                                </select>
-                                                <div class="underline"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col col-12 col-md-3">
-                                            <div class="input-container" style="margin-top: 2rem;">
-                                                <input required="" type="text" id="peso-rutina"
-                                                    formControlName="cantidad_ejercicio">
-                                                <label class="label" for="peso-rutina">{{unidadMedida}}</label>
-                                                <div class="underline"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col col-12 col-md-2">
-                                            <div class="d-grid">
-                                                <button [disabled]="formEjercicio.invalid" class="btn btn-outline-dark"
-                                                    style="
-                                                --bs-btn-font-size: 1rem;
-                                                --bs-btn-padding-y: .4rem; 
-                                                --bs-btn-padding-x: .6rem;
-                                                text-decoration: none;
-                                                margin-top: 1.5rem;
-                                                ">
-                                                    <i class="fa-regular fa-plus"></i>
-                                                    Agregar
-                                                </button>
-                                            </div>
-                                        </div>
+                                    </form>
+                                    <div class="table-wrapper">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Tipo</th>
+                                                    <th scope="col">Ejercicio</th>
+                                                    <th scope="col">Cantidad</th>
+                                                    <th scope="col">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="table-group-divider">
+                                                <ng-container *ngFor="let ejercicio of ejerciciosRutina">
+                                                    <tr *ngIf="ejercicio.accion !== 'eliminar'">
+                                                        <td>{{ejercicio.nombre_tEjercicio}}</td>
+                                                        <td>{{ejercicio.nombre_ejercicio}}</td>
+                                                        <td>{{ejercicio.cantidad_ejercicio}} {{ejercicio.unidad_medida}}</td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="col col-6">
+                                                                    <button class="btn btn-outline-dark" style="
+                                                                        --bs-btn-font-size: 1rem;
+                                                                        --bs-btn-padding-y: .4rem; 
+                                                                        --bs-btn-padding-x: .6rem;
+                                                                        --bs-btn-hover-bg: rgb(229, 212, 22);
+                                                                        --bs-btn-hover-border-color: rgb(229, 212, 22);
+                                                                    " type="button" (click)="modificarEjercicio(ejercicio)">
+                                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="col col-6">
+                                                                    <button class="btn btn-outline-dark" style="
+                                                                        --bs-btn-font-size: 1rem;
+                                                                        --bs-btn-padding-y: .4rem; 
+                                                                        --bs-btn-padding-x: .6rem;
+                                                                        --bs-btn-hover-bg: rgb(235, 33, 33);
+                                                                        --bs-btn-hover-border-color: rgb(235, 33, 33);
+                                                                    " type="button"
+                                                                        (click)="eliminarEjercicioRutina(ejercicio, 1)">
+                                                                        <i class="fa-solid fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </ng-container>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </form>
-                                <div class="table-wrapper">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Tipo</th>
-                                                <th scope="col">Ejercicio</th>
-                                                <th scope="col">Cantidad</th>
-                                                <th scope="col">Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="table-group-divider">
-                                            <tr *ngFor="let ejercicio of ejerciciosRutina">
-                                                <td>{{ejercicio.nombre_tEjercicio}}</td>
-                                                <td>{{ejercicio.nombre_ejercicio}}</td>
-                                                <td>{{ejercicio.cantidad_ejercicio}} {{ejercicio.unidad_medida}}</td>
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col col-6">
-                                                            <button class="btn btn-outline-dark" style="
-                                                                --bs-btn-font-size: 1rem;
-                                                                --bs-btn-padding-y: .4rem; 
-                                                                --bs-btn-padding-x: .6rem;
-                                                                --bs-btn-hover-bg: rgb(229, 212, 22);
-                                                                --bs-btn-hover-border-color: rgb(229, 212, 22);
-                                                            " type="button" (click)="modificarEjercicio(ejercicio)">
-                                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div class="col col-6">
-                                                            <button class="btn btn-outline-dark" style="
-                                                                --bs-btn-font-size: 1rem;
-                                                                --bs-btn-padding-y: .4rem; 
-                                                                --bs-btn-padding-x: .6rem;
-                                                                --bs-btn-hover-bg: rgb(235, 33, 33);
-                                                                --bs-btn-hover-border-color: rgb(235, 33, 33);
-                                                            " type="button"
-                                                                (click)="eliminarEjercicioRutina(ejercicio)">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row justify-content-center mt-2 mb-2">
-                    <div class="col col-6">
-                        <a routerLink="..">
-                            <button class="btn-32">
+                    <div class="row justify-content-center mt-2 mb-2">
+                        <div class="col col-6">
+                            <a routerLink="..">
+                                <button class="btn-32">
+                                    <span class="text-container">
+                                        <span class="text">Cancelar</span>
+                                    </span>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col col-6">
+                            <button class="btn-31" [disabled]="formRutina.invalid">
                                 <span class="text-container">
-                                    <span class="text">Cancelar</span>
+                                    <span class="text">Aceptar</span>
                                 </span>
                             </button>
-                        </a>
+                        </div>
                     </div>
-                    <div class="col col-6">
-                        <button class="btn-31" [disabled]="formRutina.invalid">
-                            <span class="text-container">
-                                <span class="text">Aceptar</span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </ng-template>
         </div>
     </div>
 </div>

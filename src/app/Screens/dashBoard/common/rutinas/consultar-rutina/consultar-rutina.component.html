@@ -126,55 +126,57 @@
                 </div>
             </div>
             <ng-template #showInfo>
-                <div class="row">
-                    <div class="col col-4 mt-3" *ngFor="let rutina of rutinas">
-                        <div class="card-wood">
-                            <h5 style="color: #fff; text-align: center;">{{rutina.fecha_rutina}}</h5>
-                            <div class="separator"></div>
-                            <ul class="lists" *ngFor="let ejercicio of rutina.detalle_rutina">
-                                <li class="list">
-                                    <i class="fa-solid fa-circle fa-2xs"></i>
-                                    <span> {{ejercicio.cantidad_ejercicio}} {{ejercicio.detalle_ejercicio.unidad_medida}} - {{ejercicio.detalle_ejercicio.nombre_ejercicio}}</span>
-                                </li>
-                            </ul>
-                            <div class="separator"></div>
-                            <div class="row">
-                                <div class="col col-8">
-                                    <ul class="lists">
-                                        <li class="list">
-                                            Peso: {{rutina.peso}}
-                                        </li>
-                                        <li class="list">
-                                            Rondas: {{rutina.rondas}}
-                                        </li>
-                                        <li class="list">
-                                            Tiempo: {{rutina.tiempo}}
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col col-4">
-                                    <div class="row mt-3">
-                                        <div class="col col-6">
-                                            <button class="btn btn-outline-light" style="
-                                                --bs-btn-font-size: 1rem;
-                                                --bs-btn-padding-y: .4rem; 
-                                                --bs-btn-padding-x: .6rem;
-                                                --bs-btn-hover-bg: rgb(229, 212, 22);
-                                                --bs-btn-hover-border-color: rgb(229, 212, 22);
-                                            " type="button" (click)="updateRutina(rutina)">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </button>
-                                        </div>
-                                        <div class="col col-6">
-                                            <button class="btn btn-outline-light" style="
-                                                --bs-btn-font-size: 1rem;
-                                                --bs-btn-padding-y: .4rem; 
-                                                --bs-btn-padding-x: .6rem;
-                                                --bs-btn-hover-bg: rgb(235, 33, 33);
-                                                --bs-btn-hover-border-color: rgb(235, 33, 33);
-                                            " type="button" (click)="deleteRutina(rutina.fecha_rutina.toString(), rutina.id)">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
+                <div *ngIf="notEmptyRutinas else emptyRutinas">
+                    <div class="row">
+                        <div class="col col-4 mt-3" *ngFor="let rutina of rutinas">
+                            <div class="card-wood">
+                                <h5 style="color: #fff; text-align: center;">{{rutina.fecha_rutina}}</h5>
+                                <div class="separator"></div>
+                                <ul class="lists" *ngFor="let ejercicio of rutina.detalle_rutina">
+                                    <li class="list">
+                                        <i class="fa-solid fa-circle fa-2xs"></i>
+                                        <span> {{ejercicio.cantidad_ejercicio}} {{ejercicio.detalle_ejercicio.unidad_medida}} - {{ejercicio.detalle_ejercicio.nombre_ejercicio}}</span>
+                                    </li>
+                                </ul>
+                                <div class="separator"></div>
+                                <div class="row">
+                                    <div class="col col-8">
+                                        <ul class="lists">
+                                            <li class="list">
+                                                Peso: {{rutina.peso}}
+                                            </li>
+                                            <li class="list">
+                                                Rondas: {{rutina.rondas}}
+                                            </li>
+                                            <li class="list">
+                                                Tiempo: {{rutina.tiempo}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col col-4">
+                                        <div class="row mt-3">
+                                            <div class="col col-6">
+                                                <button class="btn btn-outline-light" style="
+                                                    --bs-btn-font-size: 1rem;
+                                                    --bs-btn-padding-y: .4rem; 
+                                                    --bs-btn-padding-x: .6rem;
+                                                    --bs-btn-hover-bg: rgb(229, 212, 22);
+                                                    --bs-btn-hover-border-color: rgb(229, 212, 22);
+                                                " type="button" (click)="updateRutina(rutina)">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col col-6">
+                                                <button class="btn btn-outline-light" style="
+                                                    --bs-btn-font-size: 1rem;
+                                                    --bs-btn-padding-y: .4rem; 
+                                                    --bs-btn-padding-x: .6rem;
+                                                    --bs-btn-hover-bg: rgb(235, 33, 33);
+                                                    --bs-btn-hover-border-color: rgb(235, 33, 33);
+                                                " type="button" (click)="deleteRutina(rutina.fecha_rutina.toString(), rutina.id)">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -182,6 +184,11 @@
                         </div>
                     </div>
                 </div>
+                <ng-template #emptyRutinas>
+                    <h3 class="mt-5 text-center">
+                        No hay rutinas disponibles para este cliente.
+                    </h3>
+                </ng-template>
             </ng-template>        
         </div>
     </div>
