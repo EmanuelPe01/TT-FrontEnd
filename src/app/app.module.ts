@@ -20,6 +20,7 @@ import { EditarInscripcionComponent } from './Screens/dashboard/admin/inscripcio
 import { VerInscripcionComponent } from './Screens/dashboard/admin/inscripciones/ver-inscripcion/ver-inscripcion.component';
 import { EjerciciosComponent } from './Screens/dashboard/admin/ejercicios/ejercicios.component';
 import { ConsultaEjerciciosComponent } from './Screens/dashboard/admin/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
+import { GestionTiposEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/gestionTiposEjercicios';
 import { NuevoTipoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/nuevoTipoEjercicio';
 import { EditarTipoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/editarTipoEjercicio';
 import { EliminarTipoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/eliminarTipoEjercicio';
@@ -46,6 +47,7 @@ import { ModificarRutinaComponent } from './Screens/dashBoard/common/rutinas/mod
     VerInscripcionComponent,
     EjerciciosComponent,
     ConsultaEjerciciosComponent,
+    GestionTiposEjercicioComponent,
     NuevoTipoEjercicioComponent,
     EditarTipoEjercicioComponent,
     EliminarTipoEjercicioComponent,

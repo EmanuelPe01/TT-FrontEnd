@@ -21,7 +21,7 @@
                         <div class="underline"></div>
                     </div>
                 </div>
-                <div class="col col-12 col-md-2 mt-1">
+                <div class="col col-12 col-md-4 mt-1">
                     <div class="d-grid">
                         <a class="btn btn-primary" style="
                                     --bs-btn-font-size: 1rem;
@@ -40,19 +40,6 @@
                                 " (click)="limpiarForm()">
                             <i class="fa-solid fa-eraser"></i>
                             Limpiar campos
-                        </a>
-                    </div>
-                </div>
-                <div class="col col-12 col-md-2 mt-1">
-                    <div class="d-grid">
-                        <a class="btn btn-outline-dark" style="
-                            --bs-btn-font-size: 1rem;
-                            --bs-btn-padding-y: .4rem; 
-                            --bs-btn-padding-x: .6rem;
-                            text-decoration: none;
-                        " data-bs-toggle="modal" data-bs-target="#agregarEjercicio">
-                            <i class="fa-regular fa-plus"></i>
-                            Agregar
                         </a>
                     </div>
                 </div>
@@ -76,8 +63,9 @@
                     --bs-btn-active-color: #000;
                     --bs-btn-active-bg: #fff;
                     --bs-btn-active-border-color: #000;
-                " data-bs-toggle="modal" data-bs-target="#nuevoTipoEjercicio">
-                    Agregar tipo de ejercicio
+                " data-bs-toggle="modal" data-bs-target="#agregarEjercicio">
+                    <i class="fa-regular fa-plus"></i>
+                    Agregar ejercicio
                 </a>
             </div>
         </div>
@@ -97,8 +85,9 @@
                     --bs-btn-active-color: #000;
                     --bs-btn-active-bg: #fff;
                     --bs-btn-active-border-color: #000;
-                " data-bs-toggle="modal" data-bs-target="#editarTipoEjercicio">
-                    Editar tipo de ejercicio
+                " data-bs-toggle="modal" data-bs-target="#gestionTiposEjercicios">
+                    <i class="fa-solid fa-gears"></i>
+                    Administrar tipos de ejercicio
                 </a>
             </div>
         </div>
@@ -119,7 +108,8 @@
                     --bs-btn-active-bg: #fff;
                     --bs-btn-active-border-color: #000;
                 " data-bs-toggle="modal" data-bs-target="#eliminarTipoEjercicio">
-                    Eliminar tipo de ejercicio
+                    <i class="fa-solid fa-gears"></i>
+                    Administrar unidades de medida
                 </a>
             </div>
         </div>
@@ -195,6 +185,11 @@
 </div>
 
 <!-- Modales -->
+
+<gestionTiposEjercicio
+    [tiposEjercicio]="tiposEjercicio" 
+>
+</gestionTiposEjercicio>
 
 <!-- Nuevo tipo de ejercicio -->
 <nuevoTipoEjercicio 

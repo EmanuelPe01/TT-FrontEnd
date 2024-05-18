@@ -21,12 +21,11 @@ import Swal from 'sweetalert2';
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-dark" style="
-                        --bs-btn-font-size: 1rem;
-                        --bs-btn-padding-y: .4rem; 
-                        --bs-btn-padding-x: .6rem;
-                        text-decoration: none;
-                    " data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-outline-dark" style="text-decoration: none;" 
+                      data-bs-toggle="modal" data-bs-target="#gestionTiposEjercicios">
+                        <i class="fa-regular fa-plus"></i>
+                        Cancelar
+                    </button>
                     <button type="button" class="btn btn-primary" style="
                         --bs-btn-font-size: 1rem;
                         --bs-btn-padding-y: .4rem; 
