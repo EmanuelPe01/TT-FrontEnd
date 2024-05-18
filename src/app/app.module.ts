@@ -23,14 +23,18 @@ import { ConsultaEjerciciosComponent } from './Screens/dashboard/admin/ejercicio
 import { GestionTiposEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/gestionTiposEjercicios';
 import { NuevoTipoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/nuevoTipoEjercicio';
 import { EditarTipoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/editarTipoEjercicio';
-import { EliminarTipoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-tipoEjercicio/eliminarTipoEjercicio';
 import { NuevoEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-ejercicio/nuevoEjercicio';
 import { DetalleEjercicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-ejercicio/detalleEjercicio';
 import { EditarEjericicioComponent } from './Screens/dashboard/admin/ejercicios/acciones-ejercicio/editarEjercicio';
+import { NuevaUnidadMedidaComponent } from './Screens/dashboard/admin/ejercicios/acciones-unidadMedida/nuevaUnidadMedida';
+import { EditarUnidadMedidaComponent } from './Screens/dashboard/admin/ejercicios/acciones-unidadMedida/editarUnidadMedida';
+import { GestionUnidadMedidaComponent } from './Screens/dashboard/admin/ejercicios/acciones-unidadMedida/gestionUnidadMedida';
 import { RutinasComponent } from './Screens/dashBoard/common/rutinas/rutinas.component';
 import { ConsultarRutinasComponent } from './Screens/dashBoard/common/rutinas/consultar-rutina/consultar-rutina.component';
 import { NuevaRutinaComponent } from './Screens/dashBoard/common/rutinas/nueva-rutina/nueva-rutina.component';
 import { ModificarRutinaComponent } from './Screens/dashBoard/common/rutinas/modificar-rutina/modificar-rutina.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -50,21 +54,25 @@ import { ModificarRutinaComponent } from './Screens/dashBoard/common/rutinas/mod
     GestionTiposEjercicioComponent,
     NuevoTipoEjercicioComponent,
     EditarTipoEjercicioComponent,
-    EliminarTipoEjercicioComponent,
     NuevoEjercicioComponent,
     DetalleEjercicioComponent,
     EditarEjericicioComponent,
     RutinasComponent,
     ConsultarRutinasComponent,
     NuevaRutinaComponent,
-    ModificarRutinaComponent
+    ModificarRutinaComponent,
+    NuevaUnidadMedidaComponent,
+    EditarUnidadMedidaComponent,
+    GestionUnidadMedidaComponent
   ],
   imports: [
+    ModalModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

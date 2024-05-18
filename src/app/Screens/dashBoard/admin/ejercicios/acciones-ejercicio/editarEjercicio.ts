@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, Renderer2, SimpleCha
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { SafeResourceUrl, DomSanitizer } from "@angular/platform-browser";
 import { catchError } from "rxjs";
-import { detalleEjercicio, getDetalleEjercicio, tipoEjercicio } from "src/app/Models";
+import { detalleEjercicio, getDetalleEjercicio, tipoEjercicio, UnidadMedida } from "src/app/Models";
 import { EjercicioService } from "src/app/Services/ejercicio.service";
 import Swal from "sweetalert2";
 
@@ -44,9 +44,13 @@ import Swal from "sweetalert2";
                                     </div>
                                 </div>
                                 <div class="col col-4">
-                                    <div class="textInputWrapper">
-                                        <input placeholder="Unidad de medida" type="text" class="textInput"
-                                            formControlName="unidad_medida">
+                                    <div class="input-container">
+                                        <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
+                                        <select id="tipoEjercicio" class="select-estatus" formControlName="id_unidad_medida">
+                                            <option *ngFor="let uMedida of unidadesMedida" [value]="uMedida.id">
+                                                {{uMedida.unidad_medida}}</option>
+                                        </select>
+                                        <div class="underline"></div>
                                     </div>
                                     <div
                                         *ngIf="formEditarEjercicio.get('unidad_medida')?.hasError('required') && formEditarEjercicio.get('unidad_medida')?.touched;">
@@ -111,6 +115,7 @@ export class EditarEjericicioComponent implements OnChanges {
     urlYoutubeGenerada: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl('')
     @Input() detalleEjercicio: getDetalleEjercicio | undefined
     @Input() tiposEjercicio: tipoEjercicio[] = []
+    @Input() unidadesMedida: UnidadMedida[] = []
     @Output() actualizarListaEjercicios = new EventEmitter<any>();
 
     constructor(
@@ -122,7 +127,7 @@ export class EditarEjericicioComponent implements OnChanges {
         this.formEditarEjercicio = this.form.group({
             id_tipo_ejercicio: ['', Validators.required],
             nombre_ejercicio: ['', Validators.required],
-            unidad_medida: ['', Validators.required],
+            id_unidad_medida: ['', Validators.required],
             demo_ejercicio: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})(?:\?[^\s]*)?$/)]]
         })
     }

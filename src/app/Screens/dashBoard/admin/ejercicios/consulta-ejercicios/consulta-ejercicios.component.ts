@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { SafeResourceUrl } from '@angular/platform-browser'
-import { getDetalleEjercicio, tipoEjercicio } from 'src/app/Models'
+import { getDetalleEjercicio, tipoEjercicio, UnidadMedida } from 'src/app/Models'
 import { EjercicioService } from 'src/app/Services/ejercicio.service'
 import Swal from 'sweetalert2'
 
@@ -16,6 +16,7 @@ export class ConsultaEjerciciosComponent {
   criterioEjercicio: string = ''
   criterioTipoEjercicio: string = ''
   tiposEjercicio: tipoEjercicio[] = []
+  unidadesMedida: UnidadMedida[] = []
   showVideo: boolean = false
   urlYoutubeGenerada: SafeResourceUrl  = ''
   detalleEjercicios: getDetalleEjercicio[] = []
@@ -36,6 +37,7 @@ export class ConsultaEjerciciosComponent {
   ngOnInit() {
     this.getTiposEjercicio()
     this.getAllEjercicios()
+    this.getUnidadesMedida()
   }
 
   getTiposEjercicio() {
@@ -45,6 +47,14 @@ export class ConsultaEjerciciosComponent {
         this.tiposEjercicio = data
       })
   }
+
+  getUnidadesMedida() {
+    this.ejercicioService.getUnidadesMedida().
+        pipe().
+        subscribe((data: UnidadMedida[]) => {
+            this.unidadesMedida = data
+        })
+}
 
   getAllEjercicios() {
     this.isLoading = true

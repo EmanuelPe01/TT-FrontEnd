@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, Renderer2 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
-import { tipoEjercicio, getDetalleEjercicio, detalleEjercicio } from "src/app/Models";
+import { tipoEjercicio, getDetalleEjercicio, detalleEjercicio, UnidadMedida } from "src/app/Models";
 import { EjercicioService } from "src/app/Services/ejercicio.service";
 import Swal from "sweetalert2";
 
@@ -42,9 +42,13 @@ import Swal from "sweetalert2";
                                     </div>
                                 </div>
                                 <div class="col col-4">
-                                    <div class="textInputWrapper">
-                                        <input placeholder="Unidad de medida" type="text" class="textInput"
-                                            formControlName="unidad_medida">
+                                    <div class="input-container">
+                                        <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
+                                        <select id="tipoEjercicio" class="select-estatus" formControlName="id_unidad_medida">
+                                            <option *ngFor="let uMedida of unidadesMedida" [value]="uMedida.id">
+                                                {{uMedida.unidad_medida}}</option>
+                                        </select>
+                                        <div class="underline"></div>
                                     </div>
                                     <div
                                         *ngIf="formCrearEjercicio.get('unidad_medida')?.hasError('required') && formCrearEjercicio.get('unidad_medida')?.touched;">
@@ -108,6 +112,7 @@ export class NuevoEjercicioComponent {
   urlYoutubeGenerada: SafeResourceUrl = ''
   detalleEjercicios: getDetalleEjercicio[] = []
   @Input() tiposEjercicio: tipoEjercicio[] = []
+  @Input() unidadesMedida: UnidadMedida[] = []
   @Output() actualizarListaEjercicios = new EventEmitter<any>();
 
   constructor(
@@ -119,13 +124,14 @@ export class NuevoEjercicioComponent {
     this.formCrearEjercicio = this.form.group({
       id_tipo_ejercicio: ['', Validators.required],
       nombre_ejercicio: ['', Validators.required],
-      unidad_medida: ['', Validators.required],
+      id_unidad_medida: ['', Validators.required],
       demo_ejercicio: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})(?:\?[^\s]*)?$/)]]
     })
   }
 
   storeEjercicio() {
     if (this.formCrearEjercicio.valid) {
+      console.log(this.formCrearEjercicio.value)
       this.ocultarModal('agregarEjercicio')
       this.showLoadingMessage(true, 'Guardando')
       const detalleEjercicio: detalleEjercicio = this.formCrearEjercicio.value

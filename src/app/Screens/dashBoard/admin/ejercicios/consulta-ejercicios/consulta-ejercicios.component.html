@@ -70,48 +70,18 @@
             </div>
         </div>
         <div class="col col-12 col-md-4 mt-1">
-            <div class="d-grid">
-                <a class="btn btn-primary" style="
-                    --bs-btn-font-size: 1rem;
-                    --bs-btn-padding-y: .4rem; 
-                    --bs-btn-padding-x: .6rem;
-                    text-decoration: none;
-                    --bs-btn-color: #fff;
-                    --bs-btn-bg: #000;
-                    --bs-btn-border-color: #fff;
-                    --bs-btn-hover-color: #000;
-                    --bs-btn-hover-bg: #fff;
-                    --bs-btn-hover-border-color: #000;
-                    --bs-btn-active-color: #000;
-                    --bs-btn-active-bg: #fff;
-                    --bs-btn-active-border-color: #000;
-                " data-bs-toggle="modal" data-bs-target="#gestionTiposEjercicios">
-                    <i class="fa-solid fa-gears"></i>
-                    Administrar tipos de ejercicio
-                </a>
-            </div>
+            <gestionTiposEjercicio
+                [tiposEjercicio]="tiposEjercicio" 
+                (actualizarTiposEjercicios)="getTiposEjercicio()"
+                (actualizarTiposEjercicios)="getAllEjercicios()"
+            >
+            </gestionTiposEjercicio>
         </div>
         <div class="col col-12 col-md-4 mt-1">
-            <div class="d-grid">
-                <a class="btn btn-primary" style="
-                    --bs-btn-font-size: 1rem;
-                    --bs-btn-padding-y: .4rem; 
-                    --bs-btn-padding-x: .6rem;
-                    text-decoration: none;
-                    --bs-btn-color: #fff;
-                    --bs-btn-bg: #000;
-                    --bs-btn-border-color: #fff;
-                    --bs-btn-hover-color: #000;
-                    --bs-btn-hover-bg: #fff;
-                    --bs-btn-hover-border-color: #000;
-                    --bs-btn-active-color: #000;
-                    --bs-btn-active-bg: #fff;
-                    --bs-btn-active-border-color: #000;
-                " data-bs-toggle="modal" data-bs-target="#eliminarTipoEjercicio">
-                    <i class="fa-solid fa-gears"></i>
-                    Administrar unidades de medida
-                </a>
-            </div>
+            <gestionUnidadMedida
+                [unidadesMedida]="unidadesMedida"
+                (actualizarUnidadesMedida)="getUnidadesMedida()"
+            ></gestionUnidadMedida>
         </div>
     </div>
     <div class="row mt-3">
@@ -138,7 +108,7 @@
                             <td>{{ejercicio.tipo_ejercicio.nombre_tipo}}</td>
                             <td>{{ejercicio.nombre_ejercicio}} </td>
                             <td>{{ejercicio.demo_ejercicio}}</td>
-                            <td>{{ejercicio.unidad_medida}}</td>
+                            <td>{{ejercicio.unidad_medida.unidad_medida}}</td>
                             <td>
                                 <div class="row">
                                     <div class="col col-4">
@@ -186,32 +156,9 @@
 
 <!-- Modales -->
 
-<gestionTiposEjercicio
-    [tiposEjercicio]="tiposEjercicio" 
->
-</gestionTiposEjercicio>
-
-<!-- Nuevo tipo de ejercicio -->
-<nuevoTipoEjercicio 
-    (actualizarTiposEjercicios)="getTiposEjercicio()"
-></nuevoTipoEjercicio>
-
-<!-- Editar tipo de ejercicio -->
-<editarTipoEjercicio 
-    [tiposEjercicio]="tiposEjercicio" 
-    (actualizarTiposEjercicios)="getTiposEjercicio()"
-    (actualizarListaEjercicios)="getAllEjercicios()"
-></editarTipoEjercicio>
-
-<!-- Eliminar tipo de ejercicio -->
-<eliminarTipoEjercicio 
-    [tiposEjercicio]="tiposEjercicio" 
-    (actualizarTiposEjercicios)="getTiposEjercicio()"
-    (actualizarListaEjercicios)="getAllEjercicios()"
-></eliminarTipoEjercicio>
-
 <!-- Agregar ejercicio -->
 <nuevoEjercicio
+    [unidadesMedida]="unidadesMedida"
     [tiposEjercicio]="tiposEjercicio"
     (actualizarListaEjercicios)="getAllEjercicios()" 
 ></nuevoEjercicio>
@@ -223,6 +170,7 @@
 
 <!-- Editar ejercicio -->
 <editarEjercicio
+    [unidadesMedida]="unidadesMedida"
     [tiposEjercicio]="tiposEjercicio" 
     [detalleEjercicio]="detalleEjercicio"
     (actualizarListaEjercicios)="getAllEjercicios()" 

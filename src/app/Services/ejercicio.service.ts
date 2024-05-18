@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { detalleEjercicio, getDetalleEjercicio, tipoEjercicio, url } from '../Models';
+import { detalleEjercicio, getDetalleEjercicio, tipoEjercicio, UnidadMedida, url } from '../Models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -46,5 +46,21 @@ export class EjercicioService {
 
   deleteEjercicio(idEjercicio: number) {
     return this.http.delete(url + 'deleteEjercicio/' + idEjercicio);
+  }
+
+  getUnidadesMedida(): Observable<UnidadMedida[]> {
+    return this.http.get<UnidadMedida[]>(url + 'allUnidadesMedida');
+  }
+
+  createUnidadMedida(unidadMedida: any) {
+    return this.http.post(url + 'createUnidadMedida', unidadMedida);
+  }
+
+  updateUnidadMedida(id_unidadMedida: number, unidadMedida: any) {
+    return this.http.put(url + 'updateUnidadMedida/' + id_unidadMedida, unidadMedida);
+  }
+
+  deleteUnidadMedida(id_unidadMedida: number) {
+    return this.http.delete(url + 'deleteUnidadMedida/' + id_unidadMedida)
   }
 }

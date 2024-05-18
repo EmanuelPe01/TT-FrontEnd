@@ -1,37 +1,29 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { catchError } from 'rxjs';
-import { tipoEjercicio } from 'src/app/Models';
 import { EjercicioService } from 'src/app/Services/ejercicio.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'editarTipoEjercicio',
   template: `
-      <div class="modal fade" id="editarTipoEjercicio" tabindex="-1" aria-labelledby="nuevoTipoEjercicioLabel" aria-hidden="true">
+      <button class="btn btn-outline-dark" style="text-decoration: none;" 
+        (click)="childModal.show()">
+        <i class="fa-solid fa-pen-to-square"></i>
+      </button>
+      <div class="modal fade" bsModal #childModal="bs-modal" role="dialog" id="editarTipoEjercicio" tabindex="-1" aria-labelledby="nuevoTipoEjercicioLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content" style="-webkit-box-shadow: 9px 10px 59px 67px rgba(0,0,0,0.64); -moz-box-shadow: 9px 10px 59px 67px rgba(0,0,0,0.64);
+                box-shadow: 9px 10px 59px 67px rgba(0,0,0,0.64);">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="editarTipoEjercicioLabel">Editar tipo de ejercicio</h1>
+                    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="childModal.hide()"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col col-4">
-                            <div class="input-container">
-                                <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
-                                <select id="tipoEjercicio" class="select-estatus" [(ngModel)]="idTipoEjercicio">
-                                    <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.id">
-                                        {{tEjercicio.nombre_tipo}}</option>
-                                </select>
-                                <div class="underline"></div>
-                            </div>
-                        </div>
-                        <div class="col col-8">
-                            <div class="textInputWrapper">
-                                <input placeholder="Nombre del tipo de ejercicio" type="text" class="textInput"
-                                    [(ngModel)]="nuevoTipoEjercicio">
-                            </div>
-                        </div>
+                    <div class="textInputWrapper">
+                        <input placeholder="Nuevo nombre del tipo de ejercicio" type="text" class="textInput"
+                            [(ngModel)]="nombreTipoEjercicio">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -40,7 +32,7 @@ import Swal from 'sweetalert2';
                         --bs-btn-padding-y: .4rem; 
                         --bs-btn-padding-x: .6rem;
                         text-decoration: none;
-                    " data-bs-dismiss="modal">Cancelar</button>
+                    " (click)="childModal.hide()">Cancelar</button>
                     <button type="button" class="btn btn-primary" style="
                         --bs-btn-font-size: 1rem;
                         --bs-btn-padding-y: .4rem; 
@@ -64,23 +56,21 @@ import Swal from 'sweetalert2';
   styleUrls: ['./style.css']
 })
 export class EditarTipoEjercicioComponent {
-  idTipoEjercicio: number | undefined
-  nuevoTipoEjercicio: string = ''
-  @Input() tiposEjercicio: tipoEjercicio[] = []
+  @ViewChild('childModal', { static: false }) childModal?: ModalDirective;
+  @Input() nombreTipoEjercicio: string = ''
+  @Input() idTipoEjercicio: number = 0
   @Output() actualizarTiposEjercicios = new EventEmitter<any>();
-  @Output() actualizarListaEjercicios = new EventEmitter<any>();
 
   constructor(
     private ejercicioService: EjercicioService,
-    private renderer: Renderer2
   ){}
 
   editarTipoEjercicio() {
-    if(this.idTipoEjercicio && this.nuevoTipoEjercicio){
-      this.ocultarModal('editarTipoEjercicio')
+    if(this.idTipoEjercicio && this.nombreTipoEjercicio){
+      if(this.childModal) this.childModal.hide()
       this.showLoadingMessage(true, 'Actualizando')
       const nombre_tipo = {
-        'nombre_tipo': this.nuevoTipoEjercicio
+        'nombre_tipo': this.nombreTipoEjercicio
       }
       this.ejercicioService.editTipoEjercicio(this.idTipoEjercicio, nombre_tipo).pipe(
         catchError((error: HttpErrorResponse) => {
@@ -100,27 +90,13 @@ export class EditarTipoEjercicioComponent {
         })
       ).subscribe((data: any)=> {
         this.showLoadingMessage(false, '')
-        this.idTipoEjercicio = undefined
-        this.nuevoTipoEjercicio = ''
+        this.idTipoEjercicio = 0
+        this.nombreTipoEjercicio = ''
         setTimeout(() => { }, 100)
         this.showMessageSucces(data.message)
         this.actualizarTiposEjercicios.emit();
-        this.actualizarListaEjercicios.emit();
       })
     }
-  }
-
-  ocultarModal(idModal: string) {
-    const modalElement = document.getElementById(idModal)
-    const modalBackdrops = document.querySelectorAll('.modal-backdrop');
-    if (modalElement) {
-      modalElement.classList.remove('show')
-      modalElement.setAttribute('aria-hidden', 'true')
-      modalElement.setAttribute('style', 'display: none')
-    }
-    modalBackdrops.forEach(backdrop => {
-      this.renderer.removeChild(document.body, backdrop);
-    });
   }
 
   showMessageSucces(message: string) {

@@ -1,12 +1,13 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, ViewChild } from "@angular/core";
+import { ModalDirective } from "ngx-bootstrap/modal";
 import { catchError } from "rxjs";
-import { tipoEjercicio } from "src/app/Models";
+import { tipoEjercicio, UnidadMedida } from "src/app/Models";
 import { EjercicioService } from 'src/app/Services/ejercicio.service'
 import Swal from "sweetalert2";
 
 @Component({
-    selector: 'gestionTiposEjercicio',
+    selector: 'gestionUnidadMedida',
     template: `
         <button class="btn btn-primary" style="
             --bs-btn-font-size: 1rem;
@@ -25,14 +26,14 @@ import Swal from "sweetalert2";
             width: 100%;
         " (click)="parentModal.show()">
             <i class="fa-solid fa-gears"></i>
-            Administrar tipos de ejercicio
+            Administrar Unidades de medida
         </button>
         <div class="modal fade" bsModal #parentModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="dialog-nested-name1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="gestionTiposEjerciciosLabel">Aministrar tipos de ejercicios</h1>
-                        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="parentModal.hide()"></button>
+                        <h1 class="modal-title fs-5" id="gestionunidadesMedidaLabel">Aministrar unidades de medida</h1>
+                        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="cerrarModal()"></button>
                     </div>
                     <div class="modal-body">
                         <div class="table-responsive-xl">
@@ -45,16 +46,16 @@ import Swal from "sweetalert2";
                                 </thead>
                                 <tbody class="table-group-divider">     
                                     <tr
-                                        *ngFor="let tEjercicio of tiposEjercicio">
-                                        <td>{{tEjercicio.nombre_tipo}}</td>
+                                        *ngFor="let uMedida of unidadesMedida">
+                                        <td>{{uMedida.unidad_medida}}</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col col-4">
-                                                    <editarTipoEjercicio 
-                                                        [idTipoEjercicio]="tEjercicio.id"
-                                                        [nombreTipoEjercicio]="tEjercicio.nombre_tipo"
-                                                        (actualizarTiposEjercicios)="recargarInfo()"
-                                                    ></editarTipoEjercicio>
+                                                    <editarUnidadMedida 
+                                                        [idUnidadMedida]="uMedida.id"
+                                                        [nombreUnidadMedida]="uMedida.unidad_medida"
+                                                        (actualizarUnidadesMedida)="getUnidadesMedida()"
+                                                    ></editarUnidadMedida>
                                                 </div>
                                                 <div class="col col-4">
                                                     <a class="btn btn-outline-dark" style="
@@ -64,7 +65,7 @@ import Swal from "sweetalert2";
                                                         --bs-btn-hover-bg: rgb(235, 33, 33);
                                                         --bs-btn-hover-border-color: rgb(235, 33, 33);
                                                         "
-                                                        (click)="deleteTipoEjercicio(tEjercicio.id)">
+                                                        (click)="deleteUnidadMedida(uMedida.id)">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </a>
                                                 </div>
@@ -76,9 +77,9 @@ import Swal from "sweetalert2";
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <nuevoTipoEjercicio 
-                            (actualizarTiposEjercicios)="recargarInfo()"
-                        ></nuevoTipoEjercicio>
+                        <nuevoUnidadMedida 
+                            (actualizarUnidadesMedida)="getUnidadesMedida()"
+                        ></nuevoUnidadMedida>
                     </div>    
                 </div>
             </div>
@@ -87,27 +88,27 @@ import Swal from "sweetalert2";
     styleUrls: ['./style.css']
 })
 
-export class GestionTiposEjercicioComponent {
-    @Input() tiposEjercicio: tipoEjercicio[] = []
-    @Output() actualizarTiposEjercicios = new EventEmitter<any>();
-    @Output() actualizarEjercicios = new EventEmitter<any>();
+export class GestionUnidadMedidaComponent {
+    @ViewChild('parentModal', { static: false }) childModal?: ModalDirective;
+    @Input() unidadesMedida: UnidadMedida[] = []
+    @Output() actualizarUnidadesMedida = new EventEmitter<any>();
 
     constructor(
         private ejercicioService: EjercicioService
     ) { }
 
-    getTiposEjercicio() {
-        this.ejercicioService.getAllTiposEjercicio().
+    getUnidadesMedida() {
+        this.ejercicioService.getUnidadesMedida().
             pipe().
-            subscribe((data: tipoEjercicio[]) => {
-                this.tiposEjercicio = data
+            subscribe((data: UnidadMedida[]) => {
+                this.unidadesMedida = data
             })
     }
 
-    deleteTipoEjercicio(idTipoEjercicio: number) {
+    deleteUnidadMedida(idUnidadMedida: number) {
         Swal.fire({
             title: "¿Estas seguro?",
-            text: `Esta acción eliminará a todos los ejercicios que tengan esta categoría`,
+            text: `Esta acción eliminará a todos los ejercicios que tengan esta unidad de medida`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#000",
@@ -117,7 +118,7 @@ export class GestionTiposEjercicioComponent {
         }).then((result) => {
             if (result.isConfirmed) {
                 this.showLoadingMessage(true, 'Eliminando')
-                this.ejercicioService.deleteTipoEjercicio(idTipoEjercicio).pipe(
+                this.ejercicioService.deleteUnidadMedida(idUnidadMedida).pipe(
                     catchError((error: HttpErrorResponse) => {
                         this.showLoadingMessage(false, '')
                         switch (error.status) {
@@ -136,18 +137,18 @@ export class GestionTiposEjercicioComponent {
                 ).subscribe((data: any) => {
                     this.showLoadingMessage(false, '')
                     setTimeout(() => { }, 100)
-                    this.getTiposEjercicio()
-                    this.recargarInfo()
+                    this.getUnidadesMedida()
                     this.showMessageSucces(data.message)                    
                 })
             }
         });
     }
 
-    recargarInfo() {
-        this.getTiposEjercicio()
-        this.actualizarTiposEjercicios.emit();
-        this.actualizarEjercicios.emit();
+    cerrarModal() {
+        if(this.childModal) {
+            this.childModal.hide()
+            this.actualizarUnidadesMedida.emit()
+        }
     }
 
     showMessageSucces(message: string) {

@@ -6,28 +6,28 @@ import { EjercicioService } from 'src/app/Services/ejercicio.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'nuevoTipoEjercicio',
+  selector: 'nuevoUnidadMedida',
   template: `
       <button class="btn btn-outline-dark" style="text-decoration: none;" 
         (click)="childModal.show()">
         <i class="fa-regular fa-plus"></i>
-        Agregar tipo de ejercicio
+        Agregar unidad de medida
       </button>
-      <div class="modal fade" bsModal #childModal="bs-modal" role="dialog" id="nuevoTipoEjercicio" tabindex="-1" aria-labelledby="nuevoTipoEjercicioLabel"
+      <div class="modal fade" bsModal #childModal="bs-modal" role="dialog" id="nuevoUnidadMedida" tabindex="-1" aria-labelledby="nuevoUnidadMedidaLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="-webkit-box-shadow: 9px 10px 59px 67px rgba(0,0,0,0.64); -moz-box-shadow: 9px 10px 59px 67px rgba(0,0,0,0.64);
                 box-shadow: 9px 10px 59px 67px rgba(0,0,0,0.64);">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="nuevoTipoEjercicioLabel">Agregar tipo de ejercicio</h1>
+                    <h1 class="modal-title fs-5" id="nuevoUnidadMedidaLabel">Agregar unidad de medida</h1>
                     <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="childModal.hide()">
                       <span aria-hidden="true" class="visually-hidden">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="textInputWrapper">
-                        <input placeholder="Nombre del tipo de ejercicio" type="text" class="textInput"
-                            [(ngModel)]="nuevoTipoEjercicio">
+                        <input placeholder="Nombre de la unidad de medida" type="text" class="textInput"
+                            [(ngModel)]="nuevoUnidadMedida">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -49,7 +49,7 @@ import Swal from 'sweetalert2';
                         --bs-btn-active-color: #000;
                         --bs-btn-active-bg: #fff;
                         --bs-btn-active-border-color: #000;
-                    " (click)="createTipoEjercicio()">Aceptar</button>
+                    " (click)="createUnidadMedida()">Aceptar</button>
                 </div>
             </div>
         </div>
@@ -57,23 +57,23 @@ import Swal from 'sweetalert2';
   `,
   styleUrls: ['./style.css']
 })
-export class NuevoTipoEjercicioComponent {
+export class NuevaUnidadMedidaComponent {
   @ViewChild('childModal', { static: false }) childModal?: ModalDirective;
-  nuevoTipoEjercicio: string = ''
-  @Output() actualizarTiposEjercicios = new EventEmitter<any>();
+  nuevoUnidadMedida: string = ''
+  @Output() actualizarUnidadesMedida = new EventEmitter<any>();
 
   constructor(
     private ejercicioService: EjercicioService
   ){}
 
-  createTipoEjercicio() {
-    if (this.nuevoTipoEjercicio) {
+  createUnidadMedida() {
+    if (this.nuevoUnidadMedida) {
       if(this.childModal) this.childModal.hide()
       this.showLoadingMessage(true, 'Guardando')
-      const nombre_tipo = {
-        'nombre_tipo': this.nuevoTipoEjercicio
+      const unidad_medida = {
+        'unidad_medida': this.nuevoUnidadMedida
       }
-      this.ejercicioService.createTipoEjercicio(nombre_tipo).pipe(
+      this.ejercicioService.createUnidadMedida(unidad_medida).pipe(
         catchError((error: HttpErrorResponse) => {
           this.showLoadingMessage(false, '')
           switch (error.status) {
@@ -92,10 +92,10 @@ export class NuevoTipoEjercicioComponent {
       ).subscribe(
         (data: any) => {
           this.showLoadingMessage(false, '')
-          this.nuevoTipoEjercicio = ''
+          this.nuevoUnidadMedida = ''
           setTimeout(() => { }, 100)
           this.showMessageSucces(data.message)
-          this.actualizarTiposEjercicios.emit();
+          this.actualizarUnidadesMedida.emit();
         })
     }
   }
