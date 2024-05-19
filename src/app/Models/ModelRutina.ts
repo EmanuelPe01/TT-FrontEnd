@@ -1,4 +1,4 @@
-import { ejercicioRutina } from "./ModelEjercicio";
+import { ejercicioRutina, UnidadMedida } from "./ModelEjercicio";
 
 export interface rutinaGenerada {
     id_inscripcion:     number
@@ -26,9 +26,10 @@ export interface DetalleRutina {
             detalle_ejercicio: {
                 id:                     number
                 id_tipo_ejercicio:      number
+                id_unidad_medida:       number
                 nombre_ejercicio:       string
                 demo_ejercicio:         string
-                unidad_medida:          string
+                unidad_medida:          UnidadMedida
             }
         }
     ]

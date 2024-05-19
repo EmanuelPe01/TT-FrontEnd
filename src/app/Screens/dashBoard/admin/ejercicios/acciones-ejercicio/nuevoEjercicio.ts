@@ -131,7 +131,6 @@ export class NuevoEjercicioComponent {
 
   storeEjercicio() {
     if (this.formCrearEjercicio.valid) {
-      console.log(this.formCrearEjercicio.value)
       this.ocultarModal('agregarEjercicio')
       this.showLoadingMessage(true, 'Guardando')
       const detalleEjercicio: detalleEjercicio = this.formCrearEjercicio.value

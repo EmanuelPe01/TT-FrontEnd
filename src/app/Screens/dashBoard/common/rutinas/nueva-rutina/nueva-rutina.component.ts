@@ -163,7 +163,7 @@ export class NuevaRutinaComponent {
         const selectElement = event.target as HTMLSelectElement;
         const selectedId = Number(selectElement.value);
         const ejercicioSeleccionado = this.detalleEjercicios.find(ejercicio => ejercicio.id === selectedId);
-        ejercicioSeleccionado ? this.unidadMedida = ejercicioSeleccionado.unidad_medida : this.unidadMedida = 'Cantidad'
+        ejercicioSeleccionado ? this.unidadMedida = ejercicioSeleccionado.unidad_medida.unidad_medida : this.unidadMedida = 'Cantidad'
     }
 
     changeTiposEjercicios(event: Event) {

@@ -28,6 +28,7 @@ export interface getDetalleEjercicio {
 export interface ejercicioRutina {
     id?:                number
     id_tipo_ejercicio:  number
+    id_unidad_medida?:  number
     nombre_tEjercicio?:  string
     id_ejercicio:       number
     nombre_ejercicio:   string

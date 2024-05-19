@@ -138,6 +138,8 @@ export class EditarEjericicioComponent implements OnChanges {
             this.showLoadingMessage(true, 'Guardando')
             const ejercicioEditado: detalleEjercicio = this.formEditarEjercicio.value
             ejercicioEditado.id_tipo_ejercicio = Number(this.formEditarEjercicio.get('id_tipo_ejercicio')?.value)
+            ejercicioEditado.id_unidad_medida = Number(this.formEditarEjercicio.get('id_unidad_medida')?.value)
+            console.log(ejercicioEditado)
             this.ejercicioService.editEjercicio(ejercicioEditado, this.detalleEjercicio.id).
                 pipe(
                     catchError((error: HttpErrorResponse) => {
@@ -167,7 +169,7 @@ export class EditarEjericicioComponent implements OnChanges {
             this.formEditarEjercicio.setValue({
                 id_tipo_ejercicio: this.detalleEjercicio?.id_tipo_ejercicio,
                 nombre_ejercicio: this.detalleEjercicio?.nombre_ejercicio,
-                unidad_medida: this.detalleEjercicio?.unidad_medida,
+                id_unidad_medida: this.detalleEjercicio?.unidad_medida.id,
                 demo_ejercicio: this.detalleEjercicio?.demo_ejercicio
             })
         }

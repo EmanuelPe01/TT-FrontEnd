@@ -23,7 +23,7 @@ import { getDetalleEjercicio } from "src/app/Models";
                             </div>
                             <div class="col col-4"> 
                             <p class="tituloDetalle">Unidad de medida</p>
-                                <p>{{detalleEjercicio?.unidad_medida}}</p>
+                                <p>{{detalleEjercicio?.unidad_medida?.unidad_medida}}</p>
                             </div>
                             <div class="col col-10">
                             <iframe class="YouTubeVideo"

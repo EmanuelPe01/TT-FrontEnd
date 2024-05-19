@@ -171,7 +171,8 @@ export class ModificarRutinaComponent {
                     id_ejercicio: ejercicio.detalle_ejercicio.id,
                     nombre_ejercicio: ejercicio.detalle_ejercicio.nombre_ejercicio,
                     cantidad_ejercicio: ejercicio.cantidad_ejercicio,
-                    unidad_medida: ejercicio.detalle_ejercicio.unidad_medida,
+                    id_unidad_medida: ejercicio.detalle_ejercicio.unidad_medida.id,
+                    unidad_medida: ejercicio.detalle_ejercicio.unidad_medida.unidad_medida,
                     accion: "---"
                 }
                 this.ejerciciosRutina.push(ejercicioRutina)
