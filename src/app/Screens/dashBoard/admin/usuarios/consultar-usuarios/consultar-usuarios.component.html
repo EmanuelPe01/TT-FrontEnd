@@ -1,29 +1,11 @@
 <div class="container">
     <div class="card mt-2">
         <div class="card-header">
-            Búsqueda de ejercicios
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col col-12 col-md-5 mt-1 ps-3">
-                    <div class="textInputWrapper">
-                        <input placeholder="Nombre del ejercicio" type="text" class="textInput"
-                            [(ngModel)]="criterioEjercicio">
-                    </div>
+            <div class="row align-items-center">
+                <div class="col col-10">
+                    Búsqueda de usuarios
                 </div>
-                <div class="col col-12 col-md-3">
-                    <div class="input-container">
-                        <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
-                        <select id="tipoEjercicio" class="select-estatus" [(ngModel)]="criterioTipoEjercicio">
-                            <option selected style="color: darkgrey;">Selecciona un tipo de
-                                ejercicio</option>
-                            <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.id">
-                                {{tEjercicio.nombre_tipo}}</option>
-                        </select>
-                        <div class="underline"></div>
-                    </div>
-                </div>
-                <div class="col col-12 col-md-4 mt-1">
+                <div class="col col-2">
                     <div class="d-grid">
                         <a class="btn btn-primary" style="
                                     --bs-btn-font-size: 1rem;
@@ -47,28 +29,34 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-1">
-        <div class="col col-12 col-md-4 mt-1">
-            <nuevoEjercicio
-                [unidadesMedida]="unidadesMedida"
-                [tiposEjercicio]="tiposEjercicio"
-                (actualizarListaEjercicios)="getAllEjercicios()" 
-            ></nuevoEjercicio>
-        </div>
-        <div class="col col-12 col-md-4 mt-1">
-            <gestionTiposEjercicio
-                [tiposEjercicio]="tiposEjercicio" 
-                (actualizarTiposEjercicios)="getTiposEjercicio()"
-                (actualizarTiposEjercicios)="getAllEjercicios()"
-            >
-            </gestionTiposEjercicio>
-        </div>
-        <div class="col col-12 col-md-4 mt-1">
-            <gestionUnidadMedida
-                [unidadesMedida]="unidadesMedida"
-                (actualizarUnidadesMedida)="getUnidadesMedida()"
-            ></gestionUnidadMedida>
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col col-11 col-md-3 mt-1 ps-3">
+                    <div class="textInputWrapper">
+                        <input placeholder="Nombre(s)" type="text" class="textInput" [(ngModel)]="criterio_nombre">
+                    </div>
+                </div>
+                <div class="col col-11 col-md-3 mt-1 ">
+                    <div class="textInputWrapper">
+                        <input placeholder="Primer apellido" type="text" class="textInput" [(ngModel)]="criterio_p_a">
+                    </div>
+                </div>
+                <div class="col col-11 col-md-3 mt-1 ">
+                    <div class="textInputWrapper">
+                        <input placeholder="Segundo apellido" type="text" class="textInput" [(ngModel)]="criterio_s_a">
+                    </div>
+                </div>
+                <div class="col col-12 col-md-3 mt-1">
+                    <div class="input-container">
+                        <label class="label" for="Rol">Rol</label>
+                        <select id="Rol" class="select-estatus" [(ngModel)]="criterioRol">
+                            <option *ngFor="let rol of listRoles" [value]="rol.id">
+                                {{rol.rol_name}}</option>
+                        </select>
+                        <div class="underline"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row mt-3">
@@ -82,20 +70,22 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Ejercicio</th>
-                            <th scope="col">Demostración</th>
-                            <th scope="col">Unidad de medida</th>
-                            <th scope="col">Acciones</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Correo electrónico</th>
+                            <th scope="col">Fecha de nacimiento</th>
                         </tr>
                     </thead>
-                    <tbody class="table-group-divider">     
+                    <tbody class="table-group-divider">
                         <tr
-                            *ngFor="let ejercicio of filterByParams(detalleEjercicios, criterioEjercicio, criterioTipoEjercicio)">
-                            <td>{{ejercicio.tipo_ejercicio.nombre_tipo}}</td>
-                            <td>{{ejercicio.nombre_ejercicio}} </td>
-                            <td>{{ejercicio.demo_ejercicio}}</td>
-                            <td>{{ejercicio.unidad_medida.unidad_medida}}</td>
+                            *ngFor="let user of filterInscripciones(listUsers, criterio_nombre, criterio_p_a, criterio_s_a, criterioRol)">
+                            <td>{{user.name}} {{user.firstSurname}}
+                                {{user.secondSurname}}</td>
+                            <td>{{user.rol.rol_name}}</td>
+                            <td>{{user.telephone}}</td>
+                            <td>{{user.email}} lb</td>
+                            <td>{{user.fecha_nacimiento}}</td>
                             <td>
                                 <div class="row">
                                     <div class="col col-4">
@@ -105,7 +95,7 @@
                                                 --bs-btn-padding-x: .6rem;
                                                 --bs-btn-hover-bg: rgb(229, 212, 22);
                                                 --bs-btn-hover-border-color: rgb(229, 212, 22);
-                                            " (click)="setDetalleEjercicio(ejercicio)" data-bs-toggle="modal" data-bs-target="#editarEjercicio">
+                                            ">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
                                     </div>
@@ -116,7 +106,7 @@
                                                 --bs-btn-padding-x: .6rem;
                                                 --bs-btn-hover-bg: rgb(33, 110, 235);
                                                 --bs-btn-hover-border-color: rgb(33, 110, 235);
-                                            " (click)="setDetalleEjercicio(ejercicio)" data-bs-toggle="modal" data-bs-target="#detalleEjercicio">
+                                            ">
                                             <i class="fa-solid fa-circle-info"></i>
                                         </a>
                                     </div>
@@ -127,31 +117,16 @@
                                                 --bs-btn-padding-x: .6rem;
                                                 --bs-btn-hover-bg: rgb(235, 33, 33);
                                                 --bs-btn-hover-border-color: rgb(235, 33, 33);
-                                            " (click)="deleteEjercicio(ejercicio.nombre_ejercicio, ejercicio.id)">
+                                            ">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </div>
                                 </div>
                             </td>
-                        </tr>                    
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </ng-template>
     </div>
 </div>
-
-<!-- Modales -->
-
-<!-- Ver ejercicio -->
-<detalleEjercicio
-    [detalleEjercicio]="detalleEjercicio"
-></detalleEjercicio>
-
-<!-- Editar ejercicio -->
-<editarEjercicio
-    [unidadesMedida]="unidadesMedida"
-    [tiposEjercicio]="tiposEjercicio" 
-    [detalleEjercicio]="detalleEjercicio"
-    (actualizarListaEjercicios)="getAllEjercicios()" 
-></editarEjercicio>

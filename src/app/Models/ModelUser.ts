@@ -17,13 +17,14 @@ export interface LoginUsuario{
 }
 
 export interface InformacionUsuario {
-    id:             number
-    name:           string
-    firstSurname:   string
-    secondSurname:  string
-    telephone:      string
-    email:          string
-    rol:            Rol
+    id:                 number
+    name:               string
+    firstSurname:       string
+    secondSurname:      string
+    telephone:          string
+    email:              string
+    fecha_nacimiento?: string
+    rol:                Rol
 }
 
 export interface InfoBasicaUsuario {

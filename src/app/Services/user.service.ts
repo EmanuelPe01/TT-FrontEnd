@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { DetailInscription, InfoBasicaUsuario, InfoLogin, LoginUsuario, RegistrarUsuario, url } from 'src/app/Models';
+import { DetailInscription, InfoBasicaUsuario, InfoLogin, InformacionUsuario, LoginUsuario, RegistrarUsuario, url } from 'src/app/Models';
+import { Rol } from '../Models/ModelRol';
 
 
 @Injectable({
@@ -66,6 +67,14 @@ export class UserServiceService {
   }
 
   getUserByRole(id_rol: number): Observable<InfoBasicaUsuario[]> {
-    return this.http.get<InfoBasicaUsuario[]>(url + "usersByRole/" + id_rol)
+    return this.http.get<InfoBasicaUsuario[]>(url + 'usersByRole/' + id_rol)
+  }
+
+  getAllUsers(): Observable<InformacionUsuario[]> {
+    return this.http.get<InformacionUsuario[]>(url + 'allUsers')
+  }
+
+  getAllRoles(): Observable<Rol[]> {
+    return this.http.get<Rol[]>(url + 'allRoles')
   }
 }

@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output, ViewChild } from "@angular/core";
+import { ModalDirective } from "ngx-bootstrap/modal";
 import { catchError } from "rxjs";
 import { tipoEjercicio } from "src/app/Models";
 import { EjercicioService } from 'src/app/Services/ejercicio.service'
@@ -32,7 +33,7 @@ import Swal from "sweetalert2";
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="gestionTiposEjerciciosLabel">Aministrar tipos de ejercicios</h1>
-                        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="parentModal.hide()"></button>
+                        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="recargarInfo()"></button>
                     </div>
                     <div class="modal-body">
                         <div class="table-responsive-xl">
@@ -53,7 +54,7 @@ import Swal from "sweetalert2";
                                                     <editarTipoEjercicio 
                                                         [idTipoEjercicio]="tEjercicio.id"
                                                         [nombreTipoEjercicio]="tEjercicio.nombre_tipo"
-                                                        (actualizarTiposEjercicios)="recargarInfo()"
+                                                        (actualizarTiposEjercicios)="getTiposEjercicio()"
                                                     ></editarTipoEjercicio>
                                                 </div>
                                                 <div class="col col-4">
@@ -77,7 +78,7 @@ import Swal from "sweetalert2";
                     </div>
                     <div class="modal-footer">
                         <nuevoTipoEjercicio 
-                            (actualizarTiposEjercicios)="recargarInfo()"
+                            (actualizarTiposEjercicios)="getTiposEjercicio()"
                         ></nuevoTipoEjercicio>
                     </div>    
                 </div>
@@ -91,6 +92,7 @@ export class GestionTiposEjercicioComponent {
     @Input() tiposEjercicio: tipoEjercicio[] = []
     @Output() actualizarTiposEjercicios = new EventEmitter<any>();
     @Output() actualizarEjercicios = new EventEmitter<any>();
+    @ViewChild('parentModal', { static: false }) parentModal?: ModalDirective;
 
     constructor(
         private ejercicioService: EjercicioService
@@ -137,7 +139,6 @@ export class GestionTiposEjercicioComponent {
                     this.showLoadingMessage(false, '')
                     setTimeout(() => { }, 100)
                     this.getTiposEjercicio()
-                    this.recargarInfo()
                     this.showMessageSucces(data.message)                    
                 })
             }
@@ -145,9 +146,11 @@ export class GestionTiposEjercicioComponent {
     }
 
     recargarInfo() {
-        this.getTiposEjercicio()
-        this.actualizarTiposEjercicios.emit();
-        this.actualizarEjercicios.emit();
+        if(this.parentModal) {
+            this.parentModal.hide()
+            this.actualizarTiposEjercicios.emit();
+            this.actualizarEjercicios.emit();
+        }
     }
 
     showMessageSucces(message: string) {

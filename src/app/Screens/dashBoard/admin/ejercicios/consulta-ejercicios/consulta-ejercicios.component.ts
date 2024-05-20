@@ -11,7 +11,6 @@ import Swal from 'sweetalert2'
   styleUrls: ['./consulta-ejercicios.component.css']
 })
 export class ConsultaEjerciciosComponent {
-  formCrearEjercicio: FormGroup
   isLoading: boolean = true
   criterioEjercicio: string = ''
   criterioTipoEjercicio: string = ''
@@ -24,15 +23,7 @@ export class ConsultaEjerciciosComponent {
 
   constructor(
     private ejercicioService: EjercicioService,
-    private form: FormBuilder
-  ) {
-    this.formCrearEjercicio = this.form.group({
-      id_tipo_ejercicio: ['', Validators.required],
-      nombre_ejercicio: ['', Validators.required],
-      unidad_medida: ['', Validators.required],
-      demo_ejercicio: ['', [Validators.required, Validators.pattern(/^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/)]]
-    })
-  }
+  ) {  }
 
   ngOnInit() {
     this.getTiposEjercicio()
@@ -45,6 +36,7 @@ export class ConsultaEjerciciosComponent {
       pipe().
       subscribe((data: tipoEjercicio[]) => {
         this.tiposEjercicio = data
+        this.criterioEjercicio = ''
       })
   }
 
@@ -72,7 +64,6 @@ export class ConsultaEjerciciosComponent {
   }
 
   limpiarForm() {
-    this.formCrearEjercicio.reset()
     this.showVideo = false
     this.urlYoutubeGenerada = ''
     this.criterioEjercicio = ''

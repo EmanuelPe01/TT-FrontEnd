@@ -1,0 +1,13 @@
+/* Añade scroll si el contenido desborda */
+body {
+    overflow-x: hidden;
+    /* Evita el desbordamiento horizontal */
+}
+
+/* Estilo para colapsar el contenido */
+.collapsed {
+    height: 100vh;
+    /* Ajusta la altura al 100% del viewport */
+    overflow-y: auto;
+    /* Añade scroll vertical si es necesario */
+}

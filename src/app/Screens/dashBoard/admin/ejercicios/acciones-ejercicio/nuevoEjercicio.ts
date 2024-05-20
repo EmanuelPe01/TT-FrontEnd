@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output, Renderer2 } from "@angular/core";
+import { Component, EventEmitter, Input, Output, Renderer2, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import { ModalDirective } from "ngx-bootstrap/modal";
 import { tipoEjercicio, getDetalleEjercicio, detalleEjercicio, UnidadMedida } from "src/app/Models";
 import { EjercicioService } from "src/app/Services/ejercicio.service";
 import Swal from "sweetalert2";
@@ -8,7 +9,26 @@ import Swal from "sweetalert2";
 @Component({
   selector: 'nuevoEjercicio',
   template: `
-        <div class="modal fade" id="agregarEjercicio" tabindex="-1" aria-labelledby="agregarEjercicioLabel" aria-hidden="true">
+        <button class="btn btn-primary" style="
+            --bs-btn-font-size: 1rem;
+            --bs-btn-padding-y: .4rem; 
+            --bs-btn-padding-x: .6rem;
+            text-decoration: none;
+            --bs-btn-color: #fff;
+            --bs-btn-bg: #000;
+            --bs-btn-border-color: #fff;
+            --bs-btn-hover-color: #000;
+            --bs-btn-hover-bg: #fff;
+            --bs-btn-hover-border-color: #000;
+            --bs-btn-active-color: #000;
+            --bs-btn-active-bg: #fff;
+            --bs-btn-active-border-color: #000;
+            width: 100%;
+        " (click)="parentModal.show()">
+            <i class="fa-regular fa-plus"></i>
+            Agregar ejercicio
+        </button>
+        <div class="modal fade" bsModal #parentModal="bs-modal" role="dialog" id="agregarEjercicio" tabindex="-1" aria-labelledby="agregarEjercicioLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <form (ngSubmit)="storeEjercicio()" [formGroup]="formCrearEjercicio">
@@ -21,6 +41,8 @@ import Swal from "sweetalert2";
                                     <div class="input-container">
                                         <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
                                         <select id="tipoEjercicio" class="select-estatus" formControlName="id_tipo_ejercicio">
+                                          <option selected style="color: darkgrey;">Selecciona un tipo de
+                                                              ejercicio</option>
                                             <option *ngFor="let tEjercicio of tiposEjercicio" [value]="tEjercicio.id">
                                                 {{tEjercicio.nombre_tipo}}</option>
                                         </select>
@@ -45,6 +67,7 @@ import Swal from "sweetalert2";
                                     <div class="input-container">
                                         <label class="label" for="tipoEjercicio">Tipo de ejercicio</label>
                                         <select id="tipoEjercicio" class="select-estatus" formControlName="id_unidad_medida">
+                                        <option selected style="color: darkgrey;">Selecciona una unidad de medida</option>
                                             <option *ngFor="let uMedida of unidadesMedida" [value]="uMedida.id">
                                                 {{uMedida.unidad_medida}}</option>
                                         </select>
@@ -82,7 +105,7 @@ import Swal from "sweetalert2";
                             --bs-btn-padding-y: .4rem; 
                             --bs-btn-padding-x: .6rem;
                             text-decoration: none;
-                        " data-bs-dismiss="modal" (click)="limpiarForm()">Cancelar</button>
+                        " (click)="limpiarForm()">Cancelar</button>
                             <button class="btn btn-primary" style="
                             --bs-btn-font-size: 1rem;
                             --bs-btn-padding-y: .4rem; 
@@ -114,6 +137,7 @@ export class NuevoEjercicioComponent {
   @Input() tiposEjercicio: tipoEjercicio[] = []
   @Input() unidadesMedida: UnidadMedida[] = []
   @Output() actualizarListaEjercicios = new EventEmitter<any>();
+  @ViewChild('parentModal', { static: false }) parentModal?: ModalDirective;
 
   constructor(
     private ejercicioService: EjercicioService,
@@ -130,8 +154,8 @@ export class NuevoEjercicioComponent {
   }
 
   storeEjercicio() {
-    if (this.formCrearEjercicio.valid) {
-      this.ocultarModal('agregarEjercicio')
+    if (this.formCrearEjercicio.valid && this.parentModal) {
+      this.parentModal.hide()
       this.showLoadingMessage(true, 'Guardando')
       const detalleEjercicio: detalleEjercicio = this.formCrearEjercicio.value
       detalleEjercicio.id_tipo_ejercicio = Number(this.formCrearEjercicio.get('id_tipo_ejercicio')?.value)
@@ -140,6 +164,8 @@ export class NuevoEjercicioComponent {
         subscribe((data: any) => {
           this.showLoadingMessage(false, '')
           this.formCrearEjercicio.reset()
+          this.urlYoutubeGenerada = ''
+          this.showVideo = false
           this.showMessageSucces(data.message)
           this.actualizarListaEjercicios.emit();
         })
@@ -161,22 +187,13 @@ export class NuevoEjercicioComponent {
   }
 
   limpiarForm() {
-    this.formCrearEjercicio.reset()
-    this.showVideo = false
-    this.urlYoutubeGenerada = ''
-  }
-
-  ocultarModal(idModal: string) {
-    const modalElement = document.getElementById(idModal)
-    const modalBackdrops = document.querySelectorAll('.modal-backdrop');
-    if (modalElement) {
-      modalElement.classList.remove('show')
-      modalElement.setAttribute('aria-hidden', 'true')
-      modalElement.setAttribute('style', 'display: none')
+    if (this.parentModal) {
+      this.parentModal.hide()
+      this.formCrearEjercicio.reset()
+      this.showVideo = false
+      this.urlYoutubeGenerada = ''
     }
-    modalBackdrops.forEach(backdrop => {
-      this.renderer.removeChild(document.body, backdrop);
-    });
+
   }
 
   showMessageSucces(message: string) {

@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './Screens/login/login.component';
-import { RegisterComponent } from './Screens/register/register.component';
-
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+import { LoginComponent } from './Screens/login/login.component';
+import { RegisterComponent } from './Screens/register/register.component';
 import { RecoveryPasswordComponent } from './Screens/recovery-password/recovery-password.component';
 import { NavBarComponent } from './Screens/dashBoard/common/nav-bar/nav-bar.component';
 import { ScreenControllerComponent } from './Screens/dashBoard/common/screen-controller/screen-controller.component';
@@ -33,8 +34,8 @@ import { RutinasComponent } from './Screens/dashBoard/common/rutinas/rutinas.com
 import { ConsultarRutinasComponent } from './Screens/dashBoard/common/rutinas/consultar-rutina/consultar-rutina.component';
 import { NuevaRutinaComponent } from './Screens/dashBoard/common/rutinas/nueva-rutina/nueva-rutina.component';
 import { ModificarRutinaComponent } from './Screens/dashBoard/common/rutinas/modificar-rutina/modificar-rutina.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { UsuariosComponent } from './Screens/dashBoard/admin/usuarios/usuarios.component';
+import { ConsultarUsuariosComponent } from './Screens/dashBoard/admin/usuarios/consultar-usuarios/consultar-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ModificarRutinaComponent,
     NuevaUnidadMedidaComponent,
     EditarUnidadMedidaComponent,
-    GestionUnidadMedidaComponent
+    GestionUnidadMedidaComponent,
+    UsuariosComponent,
+    ConsultarUsuariosComponent
   ],
   imports: [
     ModalModule.forRoot(),

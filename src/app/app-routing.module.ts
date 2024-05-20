@@ -21,6 +21,8 @@ import { NuevaRutinaComponent } from './Screens/dashBoard/common/rutinas/nueva-r
 import { EjerciciosComponent } from './Screens/dashboard/admin/ejercicios/ejercicios.component';
 import { ConsultaEjerciciosComponent } from './Screens/dashboard/admin/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
 import { ModificarRutinaComponent } from './Screens/dashBoard/common/rutinas/modificar-rutina/modificar-rutina.component';
+import { UsuariosComponent } from './Screens/dashBoard/admin/usuarios/usuarios.component';
+import { ConsultarUsuariosComponent } from './Screens/dashBoard/admin/usuarios/consultar-usuarios/consultar-usuarios.component';
 
 
 const routes: Routes = [
@@ -51,6 +53,11 @@ const routes: Routes = [
           {
             path: 'ejercicios', component: EjerciciosComponent, children: [
               {path: '', component: ConsultaEjerciciosComponent}
+            ]
+          },
+          {
+            path: 'usuarios', component: UsuariosComponent, children: [
+              {path: '', component: ConsultarUsuariosComponent}
             ]
           }
         ]
