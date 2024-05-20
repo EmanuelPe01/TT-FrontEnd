@@ -48,6 +48,7 @@ export class RegisterComponent {
       delete datosForm.conf_pass;
       const usuario: RegistrarUsuario = datosForm
       usuario.id_rol = 1;
+      usuario.modo = 1;
 
       this.user_service.saveClient(usuario)
         .pipe(

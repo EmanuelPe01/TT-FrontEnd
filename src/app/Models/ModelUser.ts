@@ -9,6 +9,7 @@ export interface RegistrarUsuario{
     email:            string
     password:         string
     fecha_nacimiento: Date
+    modo:             number
 }
 
 export interface LoginUsuario{
