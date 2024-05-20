@@ -71,10 +71,20 @@ export class UserServiceService {
   }
 
   getAllUsers(): Observable<InformacionUsuario[]> {
-    return this.http.get<InformacionUsuario[]>(url + 'allUsers')
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.get<InformacionUsuario[]>(url + 'allUsers', { headers })
   }
 
   getAllRoles(): Observable<Rol[]> {
     return this.http.get<Rol[]>(url + 'allRoles')
+  }
+
+  deleteUser(idUser: number) {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.delete(url + 'deleteUsuario/' + idUser, { headers });
   }
 }

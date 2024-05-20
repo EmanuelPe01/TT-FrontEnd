@@ -32,6 +32,8 @@ export class ScreenControllerComponent {
       });
     this.inscriptionInformation = await this.userService.detailInscription().toPromise().
       then(data => { return data }).catch((data) => {
+        this.userService.deleteToken()
+        this.route.navigate(['/']);
         return undefined;
       });
     const rutaNavegacion = this.setTitles();

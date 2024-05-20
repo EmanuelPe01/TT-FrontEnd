@@ -84,21 +84,10 @@
                                 {{user.secondSurname}}</td>
                             <td>{{user.rol.rol_name}}</td>
                             <td>{{user.telephone}}</td>
-                            <td>{{user.email}} lb</td>
+                            <td>{{user.email}}</td>
                             <td>{{user.fecha_nacimiento}}</td>
                             <td>
                                 <div class="row">
-                                    <div class="col col-4">
-                                        <a class="btn btn-outline-dark" style="
-                                                --bs-btn-font-size: 1rem;
-                                                --bs-btn-padding-y: .4rem; 
-                                                --bs-btn-padding-x: .6rem;
-                                                --bs-btn-hover-bg: rgb(229, 212, 22);
-                                                --bs-btn-hover-border-color: rgb(229, 212, 22);
-                                            ">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
-                                    </div>
                                     <div class="col col-4">
                                         <a class="btn btn-outline-dark" style="
                                                 --bs-btn-font-size: 1rem;
@@ -117,7 +106,7 @@
                                                 --bs-btn-padding-x: .6rem;
                                                 --bs-btn-hover-bg: rgb(235, 33, 33);
                                                 --bs-btn-hover-border-color: rgb(235, 33, 33);
-                                            ">
+                                            " (click)="deleteUser(user.name, user.id)">
                                             <i class="fa-solid fa-trash"></i>
                                         </a>
                                     </div>
