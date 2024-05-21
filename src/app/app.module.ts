@@ -37,6 +37,7 @@ import { ModificarRutinaComponent } from './Screens/dashBoard/common/rutinas/mod
 import { UsuariosComponent } from './Screens/dashBoard/admin/usuarios/usuarios.component';
 import { ConsultarUsuariosComponent } from './Screens/dashBoard/admin/usuarios/consultar-usuarios/consultar-usuarios.component';
 import { NuevoUsuarioComponent } from './Screens/dashBoard/admin/usuarios/acciones-usuarios/nuevoUsuario';
+import { VerUsuarioComponent } from './Screens/dashBoard/admin/usuarios/acciones-usuarios/verUsuario';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { NuevoUsuarioComponent } from './Screens/dashBoard/admin/usuarios/accion
     GestionUnidadMedidaComponent,
     UsuariosComponent,
     ConsultarUsuariosComponent,
-    NuevoUsuarioComponent
+    NuevoUsuarioComponent,
+    VerUsuarioComponent
   ],
   imports: [
     ModalModule.forRoot(),

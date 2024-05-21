@@ -137,6 +137,63 @@
     transform: scaleX(0);
 }
 
+.detail-container {
+    position: relative;
+    margin: 15px auto;
+    width: 100%;
+}
+
+.detail-container input[type="text"] {
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    padding: 5px 0;
+    background-color: transparent;
+    outline: none;
+}
+
+.detail-container .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #ccc;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.detail-container input[type="text"]:focus~.label,
+.detail-container input[type="text"]:valid~.label,
+.detail-container input[type="text"]:read-only~.label,
+.detail-container input[type="date"]:focus~.label,
+.detail-container input[type="date"]:valid~.label,
+.detail-container input[type="date"]:read-only~.label {
+    top: -20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.detail-container .underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #333;
+    transform: scaleX(0);
+    transition: all 0.3s ease;
+}
+
+.detail-container input[type="date"],
+.select-estatus {
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    padding: 5px 0;
+    background-color: transparent;
+    outline: none;
+}
+
 .errorText {
     margin: 0;
     padding: 0;

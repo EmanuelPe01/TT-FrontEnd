@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, Input, OnChanges, SimpleChanges, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { catchError } from "rxjs";
@@ -180,6 +180,7 @@ import Swal from "sweetalert2";
 export class NuevoUsuarioComponent implements OnChanges {
     @Input() listRoles: Rol[] = []
     @ViewChild('parentModal', { static: false }) parentModal?: ModalDirective;
+    @Output() actualizarUsuarios = new EventEmitter<any>();
     formRegistro: FormGroup
     inputFecha: string = ''
 
