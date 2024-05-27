@@ -240,6 +240,7 @@ export class NuevoUsuarioComponent implements OnChanges {
                     (data) => {
                         this.showLoadingMessage(false);
                         this.showMessageSucces("Registro exitoso");
+                        this.actualizarUsuarios.emit()
                         this.limpiarForm()
                     })
         }
