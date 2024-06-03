@@ -139,7 +139,6 @@ export class EditarEjericicioComponent implements OnChanges {
             const ejercicioEditado: detalleEjercicio = this.formEditarEjercicio.value
             ejercicioEditado.id_tipo_ejercicio = Number(this.formEditarEjercicio.get('id_tipo_ejercicio')?.value)
             ejercicioEditado.id_unidad_medida = Number(this.formEditarEjercicio.get('id_unidad_medida')?.value)
-            console.log(ejercicioEditado)
             this.ejercicioService.editEjercicio(ejercicioEditado, this.detalleEjercicio.id).
                 pipe(
                     catchError((error: HttpErrorResponse) => {

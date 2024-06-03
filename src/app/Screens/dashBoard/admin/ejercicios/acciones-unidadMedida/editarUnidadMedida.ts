@@ -84,7 +84,6 @@ export class EditarUnidadMedidaComponent {
               break
             default:
               this.showErrorMessage("Error inesperado")
-              console.log(error)
           }
           return ""
         })

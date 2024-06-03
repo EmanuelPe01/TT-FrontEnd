@@ -32,13 +32,14 @@ export class LoginComponent {
 
   login() {
     if (this.formLogin.valid) {
+      this.showLoadingMessage(true, 'Iniciando sesión');
       const datosForm = this.formLogin.value;
       const cliente: LoginUsuario = datosForm
 
       this.user_service.login(cliente)
         .pipe(
           catchError((error) => {
-            this.showLoadingMessage(false);
+            this.showLoadingMessage(false, '');
             if (error instanceof HttpErrorResponse) {
               switch (error.status) {
                 case 401:
@@ -60,6 +61,7 @@ export class LoginComponent {
           })
         ).subscribe(
           (data: InfoLogin) => {
+            this.showMessageSucces('¡Bienvenido!');
             this.user_service.setToken(data.token);
             this.router.navigate(['dash-board']);
           })
@@ -79,13 +81,13 @@ export class LoginComponent {
       cancelButtonColor: "#6E1300"
     });
     if (userEmail) {
-      this.showLoadingMessage(true);
+      this.showLoadingMessage(true, 'Enviando correo');
       const email = {
         'email': userEmail
       }
       this.user_service.sendEmail(email).pipe(
         catchError((error: HttpErrorResponse) => {
-          this.showLoadingMessage(false);
+          this.showLoadingMessage(false, '');
           switch(error.status) {
             case 404:
               this.showErrorMessage("El email no está registrado");
@@ -95,13 +97,12 @@ export class LoginComponent {
               break;
             default:
               this.showErrorMessage("Error inesperado");
-              console.log(error)
           }           
           return "";
         })
       ).subscribe(
         (data: any) => {
-          this.showLoadingMessage(false);
+          this.showLoadingMessage(false, '');
           setTimeout(() => { }, 100);
           this.showMessageSucces('Correo enviado a ' + email.email);
         })
@@ -137,10 +138,10 @@ export class LoginComponent {
     })
   }
 
-  showLoadingMessage(flag: boolean) {
+  showLoadingMessage(flag: boolean, message: string) {
     if (flag) {
       Swal.fire({
-        title: 'Enviando correo',
+        title: message,
         didOpen: () => {
           Swal.disableButtons();
           Swal.showLoading();

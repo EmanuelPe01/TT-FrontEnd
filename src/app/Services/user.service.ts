@@ -87,4 +87,18 @@ export class UserServiceService {
     });
     return this.http.delete(url + 'deleteUsuario/' + idUser, { headers });
   }
+
+  changePassword(data: any) {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.patch(url + 'changePassword', data, { headers });
+  }
+
+  saveInfoPerfil(data: any, idUser: number) {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.patch(url + 'changeInfoProfile/' + idUser, data, { headers });
+  }
 }

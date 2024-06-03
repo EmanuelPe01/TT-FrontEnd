@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import * as moment from "moment";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { catchError } from "rxjs";
 import { RegistrarUsuario } from "src/app/Models";
@@ -135,6 +136,7 @@ import Swal from "sweetalert2";
                                             formControlName="fecha_nacimiento"
                                             (focus)="onFocus()"
                                             (blur)="onBlur()"
+                                            [max]="edadMinima"
                                         >
                                     </div> 
                                     <div *ngIf="formRegistro.get('fecha_nacimiento')?.hasError('required') && formRegistro.get('fecha_nacimiento')?.touched;">
@@ -183,6 +185,7 @@ export class NuevoUsuarioComponent implements OnChanges {
     @Output() actualizarUsuarios = new EventEmitter<any>();
     formRegistro: FormGroup
     inputFecha: string = ''
+    edadMinima: string = ''
 
     constructor(
         private _form: FormBuilder,
@@ -197,6 +200,7 @@ export class NuevoUsuarioComponent implements OnChanges {
             fecha_nacimiento: ['', Validators.required],
             id_rol: ['', Validators.required]
         });
+        this.edadMinima = this.calculateMinDate()
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -206,7 +210,7 @@ export class NuevoUsuarioComponent implements OnChanges {
     }
 
     limpiarForm() {
-        if(this.parentModal){
+        if (this.parentModal) {
             this.parentModal.hide()
             this.formRegistro.reset()
         }
@@ -244,6 +248,10 @@ export class NuevoUsuarioComponent implements OnChanges {
                         this.limpiarForm()
                     })
         }
+    }
+    
+    calculateMinDate(): string {
+        return moment().subtract(5, 'years').format('YYYY-MM-DD');
     }
 
     showMessageSucces(message: string) {

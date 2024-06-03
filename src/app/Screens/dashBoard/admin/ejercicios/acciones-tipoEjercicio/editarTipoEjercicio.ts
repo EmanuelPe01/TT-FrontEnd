@@ -84,7 +84,6 @@ export class EditarTipoEjercicioComponent {
               break
             default:
               this.showErrorMessage("Error inesperado")
-              console.log(error)
           }
           return ""
         })

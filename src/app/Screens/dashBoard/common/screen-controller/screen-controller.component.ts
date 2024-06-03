@@ -63,13 +63,14 @@ export class ScreenControllerComponent {
           rutaNavegacion = '/dash-board/admin/usuarios'
           this.urls = [
             { nombre: 'Rutinas', url: '/dash-board/admin/rutinas' },
-            { nombre: 'Inscripciones', url: '/dash-board/admin/inscripciones' },
             { nombre: 'Ejercicios', url: '/dash-board/admin/ejercicios'},
             { nombre: 'Usuarios', url: '/dash-board/admin/usuarios'},
+            { nombre: 'Inscripciones', url: '/dash-board/admin/inscripciones' },
+            { nombre: 'Perfil', url: '/dash-board/admin/perfil'}
           ]
           break;
         default:
-          console.log("Sin información");
+          this.showErrorMessage('Error en el sistema, intente más tarde')
       }
       this.showDashBoard = true;
     } else {

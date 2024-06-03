@@ -24,7 +24,7 @@ export interface InformacionUsuario {
     secondSurname:      string
     telephone:          string
     email:              string
-    fecha_nacimiento?: string
+    fecha_nacimiento?:  string
     rol:                Rol
 }
 

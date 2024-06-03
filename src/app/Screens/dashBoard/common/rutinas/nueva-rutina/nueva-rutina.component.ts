@@ -99,7 +99,6 @@ export class NuevaRutinaComponent {
                 this.formEjercicio.patchValue({
                     id_tipo_ejercicio: this.tipoEjercicio
                 })
-            console.log(this.ejerciciosRutina)
         }
     }
 
@@ -123,8 +122,6 @@ export class NuevaRutinaComponent {
                             this.showErrorMessage("Error en la petición");
                         else if (error.status == 500)
                             this.showErrorMessage("Error en el servidor");
-
-                        console.log(error)
                         return "";
                     })
                 ).

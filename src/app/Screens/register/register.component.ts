@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { catchError } from 'rxjs';
 import { RegistrarUsuario } from 'src/app/Models';
 import { UserServiceService } from 'src/app/Services/user.service';
@@ -21,6 +22,7 @@ export class RegisterComponent {
   inputTypePass_conf: string = "password";
   iconButton_conf: string = "fa-regular fa-eye";
   inputFecha: string = 'text'
+  edadMinima: string = ''
 
   constructor(
     private _form: FormBuilder,
@@ -39,6 +41,7 @@ export class RegisterComponent {
     }, {
       validator: this.passwordMatchValidator
     });
+    this.edadMinima = this.calculateMinDate()
   }
 
   saveClient() {
@@ -54,9 +57,9 @@ export class RegisterComponent {
         .pipe(
           catchError((error: HttpErrorResponse) => {
             this.showLoadingMessage(false);
-            if (error.status == 400) 
-              this.showErrorMessage("Este correo electrónico ya esta registrado");            
-            else if (error.status == 500 )
+            if (error.status == 400)
+              this.showErrorMessage("Este correo electrónico ya esta registrado");
+            else if (error.status == 500)
               this.showErrorMessage("Error en el servidor, intente más tarde");
             return "";
           })
@@ -65,7 +68,7 @@ export class RegisterComponent {
             this.showLoadingMessage(false);
             this.showMessageSucces("Registro exitoso");
             this.router.navigate(["/"]);
-        })
+          })
     }
   }
 
@@ -90,9 +93,13 @@ export class RegisterComponent {
     }
   }
 
-  onBlur(){
+  calculateMinDate(): string {
+    return moment().subtract(5, 'years').format('YYYY-MM-DD');
+  }
+
+  onBlur() {
     const fecha = this.formRegistro.get('fecha_nacimiento')?.value
-    fecha ? this.inputFecha = 'date' : this.inputFecha = 'text'     
+    fecha ? this.inputFecha = 'date' : this.inputFecha = 'text'
   }
 
   onFocus() {

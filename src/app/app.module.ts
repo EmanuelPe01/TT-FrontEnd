@@ -39,6 +39,9 @@ import { ConsultarUsuariosComponent } from './Screens/dashBoard/admin/usuarios/c
 import { NuevoUsuarioComponent } from './Screens/dashBoard/admin/usuarios/acciones-usuarios/nuevoUsuario';
 import { VerUsuarioComponent } from './Screens/dashBoard/admin/usuarios/acciones-usuarios/verUsuario';
 import { EditarPerfilComponent } from './Screens/dashBoard/common/editar-perfil/editar-perfil.component';
+import { MostrarInfoPerfilComponent } from './Screens/dashBoard/common/editar-perfil/mostrar-info-perfil/mostrar-info-perfil.component';
+import { CambiarPasswordComponent } from './Screens/dashBoard/common/editar-perfil/acciones-perfil/cambiar-pass.component';
+import { CambiarInfoPerfilComponent } from './Screens/dashBoard/common/editar-perfil/acciones-perfil/cambiar-info-perfil.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,10 @@ import { EditarPerfilComponent } from './Screens/dashBoard/common/editar-perfil/
     ConsultarUsuariosComponent,
     NuevoUsuarioComponent,
     VerUsuarioComponent,
-    EditarPerfilComponent
+    EditarPerfilComponent,
+    MostrarInfoPerfilComponent,
+    CambiarPasswordComponent,
+    CambiarInfoPerfilComponent
   ],
   imports: [
     ModalModule.forRoot(),

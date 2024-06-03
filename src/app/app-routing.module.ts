@@ -23,6 +23,8 @@ import { ConsultaEjerciciosComponent } from './Screens/dashboard/admin/ejercicio
 import { ModificarRutinaComponent } from './Screens/dashBoard/common/rutinas/modificar-rutina/modificar-rutina.component';
 import { UsuariosComponent } from './Screens/dashBoard/admin/usuarios/usuarios.component';
 import { ConsultarUsuariosComponent } from './Screens/dashBoard/admin/usuarios/consultar-usuarios/consultar-usuarios.component';
+import { EditarPerfilComponent } from './Screens/dashBoard/common/editar-perfil/editar-perfil.component';
+import { MostrarInfoPerfilComponent } from './Screens/dashBoard/common/editar-perfil/mostrar-info-perfil/mostrar-info-perfil.component';
 
 
 const routes: Routes = [
@@ -59,12 +61,33 @@ const routes: Routes = [
             path: 'usuarios', component: UsuariosComponent, children: [
               {path: '', component: ConsultarUsuariosComponent}
             ]
+          },
+          {
+            path: 'perfil', component: EditarPerfilComponent, children: [
+              {path:'', component: MostrarInfoPerfilComponent}
+            ]
           }
         ]
       },
       {
-        path: 'user', children: [
-          {path: '', component: ConsultarRutinasComponent}
+        path: 'trainer', children: [
+          {
+            path: 'rutinas', component: RutinasComponent, children: [
+              {path: '', component: ConsultarRutinasComponent},
+              {path: 'nuevaRutina', component: NuevaRutinaComponent},
+              {path: 'modificarRutina', component: ModificarRutinaComponent},
+          ]
+          },
+          {
+            path: 'ejercicios', component: EjerciciosComponent, children: [
+              {path: '', component: ConsultaEjerciciosComponent}
+            ]
+          },
+          {
+            path: 'perfil', component: EditarPerfilComponent, children: [
+              {path:'', component: MostrarInfoPerfilComponent}
+            ]
+          }
         ]
       }
     ],

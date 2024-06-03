@@ -92,8 +92,6 @@ export class ModificarRutinaComponent {
                                 this.showErrorMessage("Error en la petición");
                             else if (error.status == 500)
                                 this.showErrorMessage("Error en el servidor");
-    
-                            console.log(error)
                             return "";
                         })
                     ).
@@ -124,7 +122,6 @@ export class ModificarRutinaComponent {
             switch(accion){
                 case 1:
                     this.ejerciciosRutina[index].accion = acciones[2];
-                    console.log(this.ejerciciosRutina)
                     break
                 case 2:
                     this.idEjercicio = Number(this.ejerciciosRutina[index].id)

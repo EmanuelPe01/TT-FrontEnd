@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-editar-perfil',
-  templateUrl: './editar-perfil.component.html',
-  styleUrls: ['./editar-perfil.component.css']
+  template: `<router-outlet></router-outlet>`,
 })
 export class EditarPerfilComponent {
 

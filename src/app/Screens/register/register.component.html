@@ -177,6 +177,7 @@
                                                 formControlName="fecha_nacimiento"
                                                 (focus)="onFocus()"
                                                 (blur)="onBlur()"
+                                                [max]="edadMinima"
                                             >
                                         </div> 
                                         <div *ngIf="formRegistro.get('fecha_nacimiento')?.hasError('required') && formRegistro.get('fecha_nacimiento')?.touched; else ErrorMatch">

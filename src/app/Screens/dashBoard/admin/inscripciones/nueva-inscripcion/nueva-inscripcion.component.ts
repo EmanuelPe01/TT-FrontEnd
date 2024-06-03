@@ -116,8 +116,6 @@ export class NuevaInscripcionComponent {
             this.showErrorMessage("El usuario ya está registrado");            
           else if (error.status == 500 )
             this.showErrorMessage("Error en la base de datos");
-
-          console.log(error)
           return "";
         })
       ).subscribe((data) => {

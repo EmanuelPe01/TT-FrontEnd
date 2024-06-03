@@ -85,7 +85,6 @@ export class NuevoTipoEjercicioComponent {
               break
             default:
               this.showErrorMessage("Error inesperado")
-              console.log(error)
           }
           return ""
         })
