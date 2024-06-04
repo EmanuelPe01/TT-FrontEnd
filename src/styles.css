@@ -4,3 +4,17 @@
 *{
     font-family: 'Rubik', sans-serif;
 }
+
+::-webkit-scrollbar {
+    width: 0.7rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 20px;
+    border: 2px solid #ffffff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #383838;
+}

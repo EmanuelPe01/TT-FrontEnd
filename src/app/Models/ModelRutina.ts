@@ -18,6 +18,8 @@ export interface DetalleRutina {
     tiempo:             number
     peso:               number
     halterofilia:       boolean
+    nombre_cliente?:    string
+    peso_maximo?:       number
     detalle_rutina: [
         {
             id:                     number
@@ -35,3 +37,8 @@ export interface DetalleRutina {
     ]
 }
 
+export interface ResultadoRutina {
+    rondas:       number  
+    tiempo:       string
+    comentarios:  string
+}

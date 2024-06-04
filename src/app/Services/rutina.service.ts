@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DetalleRutina, rutinaGenerada } from '../Models';
+import { DetalleRutina, ResultadoRutina, rutinaGenerada } from '../Models';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { url } from '../Models';
 import { Observable } from 'rxjs';
@@ -27,11 +27,23 @@ export class RutinaService {
     return this.http.get<DetalleRutina[]>(url + 'showRutinas', { params: params });
   }
 
+  getRutina(idRutina: number): Observable<DetalleRutina> {
+    return this.http.get<DetalleRutina>(url + 'getRutina/'+idRutina);
+  }
+
   deleteRutina(idRutina: number) {
     return this.http.delete(url + 'deleteRutina/' + idRutina);
   }
 
   updateRutina(rutina: rutinaGenerada, id: number) {
     return this.http.put(url + 'updateRutina/' + id, rutina)
+  }
+
+  getResultadoRutina(idRutina: number): Observable<ResultadoRutina> {
+    return this.http.get<ResultadoRutina>(url + 'getResultRoutine/' + idRutina);
+  }
+
+  setResultados(data: any) {
+    return this.http.post(url + 'saveResult', data)
   }
 }

@@ -63,7 +63,6 @@ export class DetalleEjercicioComponent implements OnChanges {
 
     constructor(
         private sanitizer: DomSanitizer,
-        private renderer: Renderer2
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {

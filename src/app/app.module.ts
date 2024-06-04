@@ -42,6 +42,9 @@ import { EditarPerfilComponent } from './Screens/dashBoard/common/editar-perfil/
 import { MostrarInfoPerfilComponent } from './Screens/dashBoard/common/editar-perfil/mostrar-info-perfil/mostrar-info-perfil.component';
 import { CambiarPasswordComponent } from './Screens/dashBoard/common/editar-perfil/acciones-perfil/cambiar-pass.component';
 import { CambiarInfoPerfilComponent } from './Screens/dashBoard/common/editar-perfil/acciones-perfil/cambiar-info-perfil.component';
+import { RutinasCustomerComponent } from './Screens/dashBoard/customer/rutinas/rutinas-customer.component';
+import { VerRutinaComponent } from './Screens/dashBoard/customer/rutinas/ver-rutina/ver-rutina.component';
+import { ConsultarRutinasCustomerComponent } from './Screens/dashBoard/customer/rutinas/consultar-rutinas/consultar-rutinas.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +81,10 @@ import { CambiarInfoPerfilComponent } from './Screens/dashBoard/common/editar-pe
     EditarPerfilComponent,
     MostrarInfoPerfilComponent,
     CambiarPasswordComponent,
-    CambiarInfoPerfilComponent
+    CambiarInfoPerfilComponent,
+    RutinasCustomerComponent,
+    VerRutinaComponent,
+    ConsultarRutinasCustomerComponent
   ],
   imports: [
     ModalModule.forRoot(),

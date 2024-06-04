@@ -1,0 +1,174 @@
+<div class="container-fluid text-center mt-3">
+    <div class="row justify-content-center mb-3">
+        <div class="card col col-12 col-xl-10 card-bd">
+            <div class="row">
+                <div class="col col-1">
+                    <a routerLink="../..">
+                        <button class="button">
+                            <div class="button-box">
+                                <span class="button-elem">
+                                    <i class="fa-solid fa-arrow-right fa-xl"></i>
+                                </span>
+                                <span class="button-elem">
+                                    <i class="fa-solid fa-arrow-right fa-xl"></i>
+                                </span>
+                            </div>
+                        </button>
+                    </a>
+                </div>
+                <div class="col col-10">
+                    <h3>Detalle de la rutina</h3>
+                </div>
+            </div>
+            <div *ngIf="isLoading else showInfo">
+                <div class="pt-5 pb-5">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <ng-template #showInfo>
+                <div class="row">
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col col-7">
+                            <h4>{{rutina?.fecha_rutina}}</h4>
+                            <div class="row mini-box mb-3">
+                                <div class="col col-4">
+                                    <p class="fs-6"><strong>Rondas: </strong>{{rutina?.rondas}}</p>
+                                </div>
+                                <div class="col col-4">
+                                    <p class="fs-6"><strong>Peso: </strong>{{rutina?.peso}}</p>
+                                </div>
+                                <div class="col col-4">
+                                    <p class="fs-6"><strong>Tiempo: </strong>{{rutina?.tiempo}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-12">
+                                    <div class="collapsible-div">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div class="row">
+                                                    <div class="col col-6">
+                                                        Ejercicio
+                                                    </div>
+                                                    <div class="col col-4">
+                                                        Cantidad
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="accordion accordion-flush" id="detalleEjercicios">
+                                                    <div class="accordion-item"
+                                                        *ngFor="let Ejercicio of rutina?.detalle_rutina">
+                                                        <div class="accordion-header">
+                                                            <div class="row align-items-center">
+                                                                <div class="col col-6">
+                                                                    {{Ejercicio.detalle_ejercicio.nombre_ejercicio}}
+                                                                </div>
+                                                                <div class="col col-4">
+                                                                    {{Ejercicio.cantidad_ejercicio}}
+                                                                    {{Ejercicio.detalle_ejercicio.unidad_medida.unidad_medida}}
+                                                                </div>
+                                                                <div class="col col-2">
+                                                                    <button id="btn-collapse"
+                                                                        class="accordion-button collapsed" type="button"
+                                                                        data-bs-toggle="collapse"
+                                                                        [attr.data-bs-target]="'#ejercicio' + Ejercicio.id"
+                                                                        aria-expanded="false"
+                                                                        [attr.aria-controls]="'ejercicio' + Ejercicio.id">
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div [id]="'ejercicio' + Ejercicio.id"
+                                                            class="accordion-collapse collapse"
+                                                            data-bs-parent="#detalleEjercicios">
+                                                            <div class="accordion-body">
+                                                                <iframe class="YouTubeVideo"
+                                                                    [src]="satinizarUrl(Ejercicio.detalle_ejercicio.demo_ejercicio)"
+                                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                                    referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion" *ngFor="let Ejercicio of rutina?.detalle_rutina"
+                                                    id="detalleEjercicios">
+                                                    <div class="accordion-item">
+                                                        <div class="accordion-header">
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-5">
+                            <h4 class="text-center">Resultados obtenidos</h4>
+                            <form (ngSubmit)="guardarResultados()" [formGroup]="formResultados">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col col-6">
+                                                <div class="input-container">
+                                                    <input required="" formControlName="rondas" type="text" />
+                                                    <label class="label">Rondas:</label>
+                                                    <div class="underline"></div>
+                                                </div>
+                                                <div
+                                                    *ngIf="formResultados.get('rondas')?.hasError('required') && formResultados.get('rondas')?.touched">
+                                                    <p class="errorText">Campo requerido*</p>
+                                                </div>
+                                            </div>
+                                            <div class="col col-6">
+                                                <div class="input-container">
+                                                    <div class="row">
+                                                        <div class="col col-5">
+                                                            <input required="" formControlName="minutos" placeholder="MM" type="number"
+                                                                [max]="tiempoMaximo" />
+                                                            <div class="underline"></div>
+                                                        </div>
+                                                        <div class="col col-1 mt-2"> : </div>
+                                                        <div class="col col-5">
+                                                            <input required="" formControlName="segundos" placeholder="SS" type="number" [min]="0"
+                                                                max="59" />
+                                                            <div class="underline"></div>
+                                                        </div>
+                                                    </div>
+                                                    <label class="label">Tiempo:</label>
+                                                </div>
+                                                <div
+                                                    *ngIf="formResultados.get('minutos')?.hasError('required') && formResultados.get('minutos')?.touched 
+                                                        || formResultados.get('segundos')?.hasError('required') && formResultados.get('segundos')?.touched">
+                                                    <p class="errorText">Campo requerido*</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-col-12 mt-3">
+                                                <div class="input-container">
+                                                    <textarea required="" formControlName="comentarios" id="Nombre_edit" type="text"></textarea>
+                                                    <label class="label" for="Nombre">Comentarios:</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center mt-2 mb-2">
+                                    <div class="col col-12">
+                                        <button class="btn-32" [disabled]="formResultados.invalid">
+                                            <span class="text-container">
+                                                <span class="text">Aceptar</span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

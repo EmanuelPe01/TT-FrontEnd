@@ -46,11 +46,11 @@ export class ModificarRutinaComponent {
 
 
     constructor(
-        private route: ActivatedRoute,
         private form: FormBuilder,
         private ejercicioService: EjercicioService,
         private rutinaService: RutinaService,
-        private router: Router
+        private router: Router,
+        private activatedRute: ActivatedRoute,
     ) {
         this.formRutina = this.form.group({
             fecha_rutina: ['', Validators.required],
@@ -68,12 +68,19 @@ export class ModificarRutinaComponent {
     }
 
     ngOnInit() {
-        const objetoString = this.route.snapshot.paramMap.get('rutina');
-        this.nombreCliente = this.route.snapshot.paramMap.get('nombreCliente')?.toString();
-        this.pesoMaximo = Number(this.route.snapshot.paramMap.get('pesoMaximo'));
-        if (objetoString) this.rutina = JSON.parse(objetoString)
-        this.initializeDates()
-        this.getTiposEjercicio()
+        this.getRutina()
+    }
+
+    getRutina() {
+        this.idRutina = Number(this.activatedRute.snapshot.paramMap.get('idRutina'));
+        this.rutinaService.getRutina(this.idRutina).pipe()
+        .subscribe((data: DetalleRutina) => {
+            this.rutina = data;
+            this.nombreCliente = this.rutina.nombre_cliente
+            this.pesoMaximo = this.rutina.peso_maximo
+            this.initializeDates()
+            this.getTiposEjercicio()
+        })
     }
 
     saveRutina() {
@@ -202,7 +209,7 @@ export class ModificarRutinaComponent {
         const selectElement = event.target as HTMLSelectElement;
         const selectedId = Number(selectElement.value);
         const ejercicioSeleccionado = this.detalleEjercicios.find(ejercicio => ejercicio.id === selectedId);
-        ejercicioSeleccionado ? this.unidadMedida = ejercicioSeleccionado.unidad_medida : this.unidadMedida = 'Cantidad'
+        ejercicioSeleccionado ? this.unidadMedida = ejercicioSeleccionado.unidad_medida.unidad_medida : this.unidadMedida = 'Cantidad'
     }
 
     filterEjercicios(detalleEjercicios: any[], tipoEjercicio: string) {

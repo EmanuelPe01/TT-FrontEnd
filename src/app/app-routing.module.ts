@@ -25,6 +25,9 @@ import { UsuariosComponent } from './Screens/dashBoard/admin/usuarios/usuarios.c
 import { ConsultarUsuariosComponent } from './Screens/dashBoard/admin/usuarios/consultar-usuarios/consultar-usuarios.component';
 import { EditarPerfilComponent } from './Screens/dashBoard/common/editar-perfil/editar-perfil.component';
 import { MostrarInfoPerfilComponent } from './Screens/dashBoard/common/editar-perfil/mostrar-info-perfil/mostrar-info-perfil.component';
+import { ConsultarRutinasCustomerComponent } from './Screens/dashBoard/customer/rutinas/consultar-rutinas/consultar-rutinas.component';
+import { VerRutinaComponent } from './Screens/dashBoard/customer/rutinas/ver-rutina/ver-rutina.component';
+import { RutinasCustomerComponent } from './Screens/dashBoard/customer/rutinas/rutinas-customer.component';
 
 
 const routes: Routes = [
@@ -41,7 +44,7 @@ const routes: Routes = [
             path: 'rutinas', component: RutinasComponent, children: [
               {path: '', component: ConsultarRutinasComponent},
               {path: 'nuevaRutina', component: NuevaRutinaComponent},
-              {path: 'modificarRutina', component: ModificarRutinaComponent},
+              {path: 'modificarRutina/:idRutina', component: ModificarRutinaComponent},
           ]
           },
           {
@@ -81,6 +84,21 @@ const routes: Routes = [
           {
             path: 'ejercicios', component: EjerciciosComponent, children: [
               {path: '', component: ConsultaEjerciciosComponent}
+            ]
+          },
+          {
+            path: 'perfil', component: EditarPerfilComponent, children: [
+              {path:'', component: MostrarInfoPerfilComponent}
+            ]
+          }
+        ]
+      },
+      {
+        path: 'customer', children: [
+          {
+            path: 'rutinas', component: RutinasCustomerComponent, children: [
+              { path: '', component: ConsultarRutinasCustomerComponent},
+              { path: 'detailRoutine/:idRutina', component: VerRutinaComponent}
             ]
           },
           {

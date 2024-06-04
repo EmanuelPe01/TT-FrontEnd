@@ -3,6 +3,8 @@ import { DetailInscription, InfoLogin } from 'src/app/Models';
 import { UserServiceService } from 'src/app/Services/user.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { catchError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-screen-controller',
@@ -24,21 +26,37 @@ export class ScreenControllerComponent {
   ) { }
 
   async ngOnInit() {
-    this.userInformation = await this.userService.isAuthenticated().toPromise().
-      then((data) => {return data}).catch((data) => {
-        this.userService.deleteToken()
-        this.route.navigate(['/']);
-        return undefined
-      });
-    this.inscriptionInformation = await this.userService.detailInscription().toPromise().
-      then(data => { return data }).catch((data) => {
-        this.userService.deleteToken()
-        this.route.navigate(['/']);
-        return undefined;
-      });
-    const rutaNavegacion = this.setTitles();
-    this.isLoading = false;
-    this.route.navigate([rutaNavegacion]);
+    this.userService.isAuthenticated().pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status == 401){
+          this.userService.deleteToken()
+          this.route.navigate(['/']);
+          this.showErrorMessage("Ocurró un error, por favor inicia sesión nuevamente");
+        }
+        else if (error.status == 500)
+          this.showErrorMessage("Error en el servidor, intente más tarde");
+        return "";
+      })
+    ).subscribe((data: InfoLogin | any) => {
+      this.userInformation = data;
+      this.userService.detailInscription().pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status == 401){
+            this.userService.deleteToken()
+            this.route.navigate(['/']);
+            this.showErrorMessage("Ocurró un error, por favor inicia sesión nuevamente");
+          }
+          else if (error.status == 500)
+            this.showErrorMessage("Error en el servidor, intente más tarde");
+          return "";
+        })
+      ).subscribe((data: DetailInscription | any) => {
+        this.inscriptionInformation = data;
+        const rutaNavegacion = this.setTitles();
+        this.isLoading = false;
+        this.route.navigate([rutaNavegacion]);
+      })
+    })
   }
 
   setTitles() {
@@ -48,9 +66,10 @@ export class ScreenControllerComponent {
       this.navBarBrand = 'Rutinas';
       switch (this.userInformation?.user.rol.id) {
         case 1:
-          rutaNavegacion = '/dash-board/user'
+          rutaNavegacion = '/dash-board/customer/rutinas/detailRoutine/2'
           this.urls = [
-            { nombre: 'Rutinas', url: '/dash-board/user' },
+            { nombre: 'Rutinas', url: '/dash-board/customer/rutinas' },
+            { nombre: 'Perfil', url: '/dash-board/customer/perfil' }
           ]
           break;
         case 2:
@@ -60,13 +79,13 @@ export class ScreenControllerComponent {
           ]
           break;
         case 3:
-          rutaNavegacion = '/dash-board/admin/usuarios'
+          rutaNavegacion = '/dash-board/admin/rutinas'
           this.urls = [
             { nombre: 'Rutinas', url: '/dash-board/admin/rutinas' },
-            { nombre: 'Ejercicios', url: '/dash-board/admin/ejercicios'},
-            { nombre: 'Usuarios', url: '/dash-board/admin/usuarios'},
+            { nombre: 'Ejercicios', url: '/dash-board/admin/ejercicios' },
+            { nombre: 'Usuarios', url: '/dash-board/admin/usuarios' },
             { nombre: 'Inscripciones', url: '/dash-board/admin/inscripciones' },
-            { nombre: 'Perfil', url: '/dash-board/admin/perfil'}
+            { nombre: 'Perfil', url: '/dash-board/admin/perfil' }
           ]
           break;
         default:
