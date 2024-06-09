@@ -1,0 +1,206 @@
+.collapsible-div {
+  height: 60vh;
+  overflow: auto;
+}
+
+.margin-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 60%; 
+  padding: 10px;
+  word-wrap: break-word;
+  align-self: flex-start;
+  text-align: left;
+}
+
+.fecha {
+  font-size: 0.6em;
+  color: #272727;
+  margin-bottom: 5px; 
+}
+
+.message-from {
+  align-self: flex-end; 
+}
+
+.message-box {
+  padding: 0.5rem;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.message-box-from {
+  background-color: #000;
+  color: #fff;
+}
+
+.input-container {
+  position: relative;
+  margin: 0.5em auto;
+  width: 100%;
+}
+
+.input-container .label {
+  position: absolute;
+  top: -20px;
+  font-size: 16px;
+  color: #333;
+  left: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-container .underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #333;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.select-estatus {
+  margin-top: -1em;
+}
+
+.input-container input[type="text"],
+.input-container input[type="date"],
+.select-estatus {
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.input-container textarea {
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.input-container input[type="text"]:focus~.label,
+.input-container input[type="text"]:valid~.label,
+.input-container input[type="text"]:read-only~.label {
+  top: -20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.input-container input[type="text"]:focus~.underline,
+.input-container input[type="text"]:valid~.underline,
+.input-container input[type="text"]:read-only~.underline,
+.input-container select:valid~.underline,
+.input-container textarea:focus~.underline,
+.input-container textarea:valid~.underline
+ {
+  transform: scaleX(1);
+}
+
+.input-container select:focus~.underline,
+.input-container textarea:focus~.underline,
+.input-container textarea:valid~.underline {
+  transform: scaleX(0);
+}
+
+.input-container input[type="date"] {
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+}
+
+
+.input-container input[type="date"]:focus~.underline,
+.input-container input[type="date"]:valid~.underline {
+  transform: scaleX(1);
+}
+
+.loader {
+  position: relative;
+  left: 50%;
+  width: 4px;
+  color: #000;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow:
+      19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+      19px 0 0 5px, 38px 0 0 5px, 57px 0 0 5px,
+      19px 19px 0 0px, 38px 19px 0 0px, 57px 19px 0 0px;
+  transform: translateX(-38px);
+  animation: l26 2s infinite linear;
+}
+
+@keyframes l26 {
+  12.5% {
+      box-shadow:
+          19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 5px,
+          19px 0 0 5px, 38px 0 0 0px, 57px 0 0 5px,
+          19px 19px 0 0px, 38px 19px 0 0px, 57px 19px 0 0px
+  }
+
+  25% {
+      box-shadow:
+          19px -19px 0 5px, 38px -19px 0 0px, 57px -19px 0 5px,
+          19px 0 0 0px, 38px 0 0 0px, 57px 0 0 0px,
+          19px 19px 0 0px, 38px 19px 0 5px, 57px 19px 0 0px
+  }
+
+  50% {
+      box-shadow:
+          19px -19px 0 5px, 38px -19px 0 5px, 57px -19px 0 0px,
+          19px 0 0 0px, 38px 0 0 0px, 57px 0 0 0px,
+          19px 19px 0 0px, 38px 19px 0 0px, 57px 19px 0 5px
+  }
+
+  62.5% {
+      box-shadow:
+          19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+          19px 0 0 5px, 38px 0 0 0px, 57px 0 0 0px,
+          19px 19px 0 0px, 38px 19px 0 5px, 57px 19px 0 5px
+  }
+
+  75% {
+      box-shadow:
+          19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+          19px 0 0 0px, 38px 0 0 0px, 57px 0 0 5px,
+          19px 19px 0 0px, 38px 19px 0 0px, 57px 19px 0 5px
+  }
+
+  87.5% {
+      box-shadow:
+          19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+          19px 0 0 0px, 38px 0 0 5px, 57px 0 0 0px,
+          19px 19px 0 5px, 38px 19px 0 0px, 57px 19px 0 0px
+  }
+}
+
+.loader-mini {
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #000;
+  box-shadow: 0 0 0 0 #0004;
+  animation: l1 1s infinite;
+}
+
+@keyframes l1 {
+  100% {
+      box-shadow: 0 0 0 30px #0000
+  }
+}

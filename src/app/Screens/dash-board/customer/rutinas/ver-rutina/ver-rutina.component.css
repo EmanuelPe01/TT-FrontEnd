@@ -134,7 +134,7 @@
 }
 
 .collapsible-div {
-  height: 70vh;
+  height: 60vh;
   overflow: auto;
   transition: max-height 0.5s ease-in-out;
 }

@@ -1,0 +1,195 @@
+<div class="container-fluid text-center mt-3">
+    <div class="row mb-3">
+        <div class="row">
+            <div class="col col-12">
+                <h3>Comentarios y/o aclaraciones</h3>
+            </div>
+        </div>
+        <div *ngIf="isLoading; else ShowScreen">
+            <div class="mt-5">
+                <div class="loader"></div>
+            </div>
+        </div>
+        <ng-template #ShowScreen>
+            <div class="row justify-content-center">
+                <div class="col col-12 col-xl-10 ">
+                    <div class="card card-bd">
+                        <div class="card-header">
+                            <div class="row align-items-center justify-content-around"
+                                *ngIf="showParameters else ShowTrainer">
+                                <div class="col col-6">
+                                    <div class="input-container">
+                                        <label class="label-select" for="nombreCliente">Cliente</label>
+                                        <select id="nombreCliente" class="select-estatus"
+                                            (change)="activarBuscar($event)">
+                                            <option style="color: darkgrey;" selected>Selecciona a un cliente </option>
+                                            <option *ngFor="let inscripcion of inscripcionesActivas"
+                                                [value]="inscripcion.id">
+                                                {{inscripcion.cliente.name}} {{inscripcion.cliente.firstSurname}}
+                                                {{inscripcion.cliente.secondSurname}}
+                                            </option>
+                                        </select>
+                                        <div class="underline"></div>
+                                    </div>
+                                </div>
+                                <div class="col col-1">
+                                    <button type="button" class="btn btn-outline-dark" style="
+                                        --bs-btn-font-size: 1rem;
+                                        --bs-btn-padding-y: .4rem; 
+                                        --bs-btn-padding-x: .6rem;
+                                        text-decoration: none;
+                                        " [disabled]="!id_cliente" (click)="obtenerContacto()" data-bs-toggle="modal" data-bs-target="#contacto">
+                                        <i class="fa-regular fa-address-book"></i>
+                                    </button>
+                                </div>
+                                <div class="col col-2">
+                                    <div class="d-grid">
+                                        <button class="btn btn-outline-dark" style="
+                                                    --bs-btn-font-size: 1rem;
+                                                    --bs-btn-padding-y: .4rem; 
+                                                    --bs-btn-padding-x: .6rem;
+                                                    text-decoration: none;
+                                                    --bs-btn-color: #fff;
+                                                    --bs-btn-bg: #000;
+                                                    --bs-btn-border-color: #fff;
+                                                    --bs-btn-hover-color: #000;
+                                                    --bs-btn-hover-bg: #fff;
+                                                    --bs-btn-hover-border-color: #000;
+                                                    --bs-btn-active-color: #000;
+                                                    --bs-btn-active-bg: #fff;
+                                                    --bs-btn-active-border-color: #000;
+                                                " [disabled]="!searchEnable" (click)="obtenerComentarios()">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                            Buscar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-template #ShowTrainer>
+                                <div class="row">
+                                    <div class="col col-10">
+                                        <h5><strong>Entrenador:</strong> {{contacto?.name}} {{contacto?.firstSurname}}
+                                            {{contacto?.secondSurname}}</h5>
+                                    </div>
+                                    <div class="col col-1">
+                                        <button type="button" class="btn btn-outline-dark" style="
+                                            --bs-btn-font-size: 1rem;
+                                            --bs-btn-padding-y: .4rem; 
+                                            --bs-btn-padding-x: .6rem;
+                                            text-decoration: none;
+                                            " data-bs-toggle="modal" data-bs-target="#contacto">
+                                            <i class="fa-regular fa-address-book"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                        <div class="card-body collapsible-div" #messageContainer>
+                            <div *ngIf="gettingMessages; else ShowMessages">
+                                <div class="position-relative pt-3 pb-3">
+                                    <div class="position-absolute top-50 start-50 translate-middle">
+                                        <div class="loader-mini"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-template #ShowMessages>
+                                <div class="margin-chat">
+                                    <div class="message" *ngFor="let comentario of comments"
+                                        [ngClass]="{'message-from': messageFrom(comentario.tipo_usuario)}">
+                                        <div class="fecha">{{ formatISODate(comentario.created_at) }}</div>
+                                        <div class="message-box"
+                                            [ngClass]="{'message-box-from': messageFrom(comentario.tipo_usuario)}">
+                                            {{ comentario.mensaje }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                        <div class="card-footer">
+                            <form (ngSubmit)="createPost()" [formGroup]="formComentario">
+                                <div class="row mt-2">
+                                    <div class="col col-10">
+                                        <div class="input-container">
+                                            <textarea required="" formControlName="comentarios" id="Nombre_edit"
+                                                type="text"></textarea>
+                                            <label class="label" for="Nombre">Comentarios:</label>
+                                            <div class="underline"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-2">
+                                        <button class="btn btn-outline-dark" style="
+                                                --bs-btn-font-size: 1rem;
+                                                --bs-btn-padding-y: .4rem; 
+                                                --bs-btn-padding-x: .6rem;
+                                                text-decoration: none;
+                                                --bs-btn-color: #fff;
+                                                --bs-btn-bg: #000;
+                                                --bs-btn-border-color: #fff;
+                                                --bs-btn-hover-color: #000;
+                                                --bs-btn-hover-bg: #fff;
+                                                --bs-btn-hover-border-color: #000;
+                                                --bs-btn-active-color: #000;
+                                                --bs-btn-active-bg: #fff;
+                                                --bs-btn-active-border-color: #000;
+                                            " [disabled]="formComentario.invalid">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                            Enviar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+<div class="modal fade" id="contacto" tabindex="-1" aria-labelledby="contactoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="contactoLabel">Contacto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="gettingContact; else ShowContact">
+                    <div class="position-relative pt-3 pb-3">
+                        <div class="position-absolute top-50 start-50 translate-middle">
+                            <div class="loader-mini"></div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #ShowContact>
+                    <div class="row">
+                        <div class="col col-12 mb-3">
+                            <div class="input-container">
+                                <input required=""
+                                    value="{{contacto?.name}} {{contacto?.firstSurname}}{{contacto?.secondSurname}}"
+                                    id="input-cliente" type="text" readonly />
+                                <label class="label" for="input-cliente">Nombre :</label>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <div class="input-container">
+                                <input required="" value="{{contacto?.telephone}}" id="input-cliente" type="text"
+                                    readonly />
+                                <label class="label" for="input-cliente">Teléfono:</label>
+                            </div>
+                        </div>
+                        <div class="col col-6">
+                            <div class="input-container">
+                                <input required="" value="{{contacto?.email}}" id="input-cliente" type="text" readonly />
+                                <label class="label" for="input-cliente">Email:</label>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

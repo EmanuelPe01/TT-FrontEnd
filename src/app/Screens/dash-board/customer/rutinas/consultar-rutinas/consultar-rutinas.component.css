@@ -190,7 +190,8 @@
     transform: translateX(-56px);
 }
 
-.input-container {
+.input-container,
+.input-container textarea {
     position: relative;
     margin: 0.5em auto;
     width: 100%;
@@ -223,7 +224,8 @@
 
 .input-container input[type="text"],
 .input-container input[type="date"],
-.select-estatus {
+.select-estatus,
+.input-container textarea {
     font-size: 16px;
     width: 100%;
     border: none;

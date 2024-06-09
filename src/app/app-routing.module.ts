@@ -3,31 +3,26 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Screens/login/login.component';
 import { RegisterComponent } from './Screens/register/register.component';
 import { RecoveryPasswordComponent } from './Screens/recovery-password/recovery-password.component';
-import { ScreenControllerComponent } from './Screens/dashBoard/common/screen-controller/screen-controller.component';
-
-//Inscripciones
-import { InscripcionesComponent } from './Screens/dashBoard/admin/inscripciones/inscripciones.component';
-import { ConsultaInscripcionesComponent } from './Screens/dashboard/admin/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
-import { NuevaInscripcionComponent } from './Screens/dashBoard/admin/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
-import { VerInscripcionComponent } from './Screens/dashboard/admin/inscripciones/ver-inscripcion/ver-inscripcion.component';
-import { EditarInscripcionComponent } from './Screens/dashboard/admin/inscripciones/editar-inscripcion/editar-inscripcion.component';
-
-//Woods
-import { RutinasComponent } from './Screens/dashBoard/common/rutinas/rutinas.component';
-import { ConsultarRutinasComponent } from './Screens/dashBoard/common/rutinas/consultar-rutina/consultar-rutina.component';
-import { NuevaRutinaComponent } from './Screens/dashBoard/common/rutinas/nueva-rutina/nueva-rutina.component';
-
-//Ejercicios
-import { EjerciciosComponent } from './Screens/dashboard/admin/ejercicios/ejercicios.component';
-import { ConsultaEjerciciosComponent } from './Screens/dashboard/admin/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
-import { ModificarRutinaComponent } from './Screens/dashBoard/common/rutinas/modificar-rutina/modificar-rutina.component';
-import { UsuariosComponent } from './Screens/dashBoard/admin/usuarios/usuarios.component';
-import { ConsultarUsuariosComponent } from './Screens/dashBoard/admin/usuarios/consultar-usuarios/consultar-usuarios.component';
-import { EditarPerfilComponent } from './Screens/dashBoard/common/editar-perfil/editar-perfil.component';
-import { MostrarInfoPerfilComponent } from './Screens/dashBoard/common/editar-perfil/mostrar-info-perfil/mostrar-info-perfil.component';
-import { ConsultarRutinasCustomerComponent } from './Screens/dashBoard/customer/rutinas/consultar-rutinas/consultar-rutinas.component';
-import { VerRutinaComponent } from './Screens/dashBoard/customer/rutinas/ver-rutina/ver-rutina.component';
-import { RutinasCustomerComponent } from './Screens/dashBoard/customer/rutinas/rutinas-customer.component';
+import { ScreenControllerComponent } from './Screens/dash-board/common/screen-controller/screen-controller.component';
+import { InscripcionesComponent } from './Screens/dash-board/admin/inscripciones/inscripciones.component';
+import { ConsultaInscripcionesComponent } from './Screens/dash-board/admin/inscripciones/consulta-inscripciones/consulta-inscripciones.component';
+import { NuevaInscripcionComponent } from './Screens/dash-board/admin/inscripciones/nueva-inscripcion/nueva-inscripcion.component';
+import { VerInscripcionComponent } from './Screens/dash-board/admin/inscripciones/ver-inscripcion/ver-inscripcion.component';
+import { EditarInscripcionComponent } from './Screens/dash-board/admin/inscripciones/editar-inscripcion/editar-inscripcion.component';
+import { RutinasComponent } from './Screens/dash-board/common/rutinas/rutinas.component';
+import { ConsultarRutinasComponent } from './Screens/dash-board/common/rutinas/consultar-rutina/consultar-rutina.component';
+import { NuevaRutinaComponent } from './Screens/dash-board/common/rutinas/nueva-rutina/nueva-rutina.component';
+import { EjerciciosComponent } from './Screens/dash-board/admin/ejercicios/ejercicios.component';
+import { ConsultaEjerciciosComponent } from './Screens/dash-board/admin/ejercicios/consulta-ejercicios/consulta-ejercicios.component';
+import { ModificarRutinaComponent } from './Screens/dash-board/common/rutinas/modificar-rutina/modificar-rutina.component';
+import { UsuariosComponent } from './Screens/dash-board/admin/usuarios/usuarios.component';
+import { ConsultarUsuariosComponent } from './Screens/dash-board/admin/usuarios/consultar-usuarios/consultar-usuarios.component';
+import { EditarPerfilComponent } from './Screens/dash-board/common/editar-perfil/editar-perfil.component';
+import { MostrarInfoPerfilComponent } from './Screens/dash-board/common/editar-perfil/mostrar-info-perfil/mostrar-info-perfil.component';
+import { ConsultarRutinasCustomerComponent } from './Screens/dash-board/customer/rutinas/consultar-rutinas/consultar-rutinas.component';
+import { VerRutinaComponent } from './Screens/dash-board/customer/rutinas/ver-rutina/ver-rutina.component';
+import { RutinasCustomerComponent } from './Screens/dash-board/customer/rutinas/rutinas-customer.component';
+import { ComentariosComponent } from './Screens/dash-board/common/comentarios/comentarios.component';
 
 
 const routes: Routes = [
@@ -86,6 +81,7 @@ const routes: Routes = [
               {path: '', component: ConsultaEjerciciosComponent}
             ]
           },
+          { path: 'comentarios', component: ComentariosComponent } ,
           {
             path: 'perfil', component: EditarPerfilComponent, children: [
               {path:'', component: MostrarInfoPerfilComponent}
@@ -101,6 +97,7 @@ const routes: Routes = [
               { path: 'detailRoutine/:idRutina', component: VerRutinaComponent}
             ]
           },
+          { path: 'comentarios', component: ComentariosComponent } ,
           {
             path: 'perfil', component: EditarPerfilComponent, children: [
               {path:'', component: MostrarInfoPerfilComponent}

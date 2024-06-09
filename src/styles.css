@@ -5,6 +5,14 @@
     font-family: 'Rubik', sans-serif;
 }
 
+.errorText {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    color: red;
+    font-size: 10px;
+}
+
 ::-webkit-scrollbar {
     width: 0.7rem;
 }

@@ -66,16 +66,20 @@ export class ScreenControllerComponent {
       this.navBarBrand = 'Rutinas';
       switch (this.userInformation?.user.rol.id) {
         case 1:
-          rutaNavegacion = '/dash-board/customer/rutinas/detailRoutine/2'
+          rutaNavegacion = '/dash-board/customer/rutinas'
           this.urls = [
             { nombre: 'Rutinas', url: '/dash-board/customer/rutinas' },
+            { nombre: 'Comentarios', url: '/dash-board/customer/comentarios' },
             { nombre: 'Perfil', url: '/dash-board/customer/perfil' }
           ]
           break;
         case 2:
-          rutaNavegacion = '/dash-board/admin'
+          rutaNavegacion = '/dash-board/trainer/rutinas'
           this.urls = [
-            { nombre: 'Rutinas', url: '/dash-board/admin' }
+            { nombre: 'Rutinas', url: '/dash-board/trainer/rutinas' },
+            { nombre: 'Ejercicios', url: '/dash-board/trainer/ejercicios' },
+            { nombre: 'Comentarios', url: '/dash-board/trainer/comentarios' },
+            { nombre: 'Perfil', url: '/dash-board/trainer/perfil' }
           ]
           break;
         case 3:

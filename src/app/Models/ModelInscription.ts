@@ -1,5 +1,5 @@
 import { Rol } from './ModelRol';
-import { InfoBasicaUsuario } from './ModelUser';
+import { InfoBasicaUsuario, InformacionUsuario } from './ModelUser';
 
 export interface DetailInscription {
     detalle: InscriptionInformation

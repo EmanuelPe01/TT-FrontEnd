@@ -2,5 +2,6 @@ export { RegistrarUsuario, LoginUsuario, InfoLogin, InformacionUsuario, InfoBasi
 export { DetailInscription, SingleInscription, GenerateInscription, InscripcionesActivas } from './ModelInscription';
 export { tipoEjercicio, detalleEjercicio, getDetalleEjercicio, ejercicioRutina, UnidadMedida } from './ModelEjercicio';
 export { rutinaGenerada, DetalleRutina, ResultadoRutina } from './ModelRutina'
+export { SingleComment, Contacto } from './ModelComentario'
 export const url: string = 'http://localhost:8000/api/';
 //export const url: string = 'http://192.168.239.9:8000/api/'

@@ -101,4 +101,18 @@ export class UserServiceService {
     });
     return this.http.patch(url + 'changeInfoProfile/' + idUser, data, { headers });
   }
+
+  getUserRole(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.get<any>(url + 'getRoleByUser', { headers })
+  }
+
+  getUserById(idContacto: number): Observable<InformacionUsuario> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    return this.http.get<InformacionUsuario>(url+ 'getUserById/' + idContacto, {headers})
+  }
 }

@@ -155,6 +155,7 @@ export class CambiarInfoPerfilComponent implements OnChanges {
                         switch (error.status) {
                             case 500:
                                 this.showErrorMessage("Error en el servidor, intente más tarde");
+                                console.log(error)
                                 break;
                             default:
                                 this.showErrorMessage("Error inesperado");

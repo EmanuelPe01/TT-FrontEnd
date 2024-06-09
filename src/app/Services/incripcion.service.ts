@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GenerateInscription, InscripcionesActivas, SingleInscription, url } from 'src/app/Models';
+import { UserServiceService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,30 +10,49 @@ import { GenerateInscription, InscripcionesActivas, SingleInscription, url } fro
 export class IncripcionService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private userService: UserServiceService
   ) { }
 
   getAllInscriptions(): Observable<SingleInscription[]> {
-    return this.http.get<SingleInscription[]>(url + 'allInscriptions');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userService.getToken()}`
+    });
+    return this.http.get<SingleInscription[]>(url + 'allInscriptions', {headers});
   }
 
   getInscripcionById(id: number): Observable<SingleInscription> {
-    return this.http.get<SingleInscription>(url + 'getInscriptionById/' + id);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userService.getToken()}`
+    });
+    return this.http.get<SingleInscription>(url + 'getInscriptionById/' + id, {headers});
   }
 
   saveInscription(inscripcion: GenerateInscription) {
-    return this.http.post(url + 'generateInscription', inscripcion);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userService.getToken()}`
+    });
+    return this.http.post(url + 'generateInscription', inscripcion, {headers});
   }
 
   updateInscripcion(inscripcion: GenerateInscription, id: number) {
-    return this.http.put(url + 'updateInscription/' + id, inscripcion);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userService.getToken()}`
+    });
+    return this.http.put(url + 'updateInscription/' + id, inscripcion, {headers});
   }
 
   deleteInsctiption(id: number) {
-    return this.http.delete(url + 'deleteInscription/' + id);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userService.getToken()}`
+    });
+    return this.http.delete(url + 'deleteInscription/' + id, {headers});
   }
 
   getActiveInscription(): Observable<InscripcionesActivas[]> {
-    return this.http.get<InscripcionesActivas[]>(url + 'getActiveInscription');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userService.getToken()}`
+    });
+    return this.http.get<InscripcionesActivas[]>(url + 'getActiveInscription', {headers});
   }
 }
