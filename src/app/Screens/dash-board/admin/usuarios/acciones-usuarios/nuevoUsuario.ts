@@ -19,7 +19,7 @@ import Swal from "sweetalert2";
             text-decoration: none;
             width: 100%;
         "(click)="parentModal.show()">
-            <i class="fa-solid fa-eraser"></i>
+            <i class="fa-regular fa-plus"></i>
             Agregar usuario
         </button>
         <div class="modal fade" bsModal #parentModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="dialog-nested-name1">
