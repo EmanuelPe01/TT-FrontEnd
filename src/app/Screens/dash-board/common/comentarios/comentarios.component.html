@@ -81,6 +81,16 @@
                                             <i class="fa-regular fa-address-book"></i>
                                         </button>
                                     </div>
+                                    <div class="col col-1">
+                                        <button type="button" class="btn btn-outline-dark" style="
+                                            --bs-btn-font-size: 1rem;
+                                            --bs-btn-padding-y: .4rem; 
+                                            --bs-btn-padding-x: .6rem;
+                                            text-decoration: none;
+                                            " (click)="obtenerComentarios()">
+                                            <i class="fa-solid fa-rotate-right"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </ng-template>
                         </div>
@@ -166,7 +176,7 @@
                         <div class="col col-12 mb-3">
                             <div class="input-container">
                                 <input required=""
-                                    value="{{contacto?.name}} {{contacto?.firstSurname}}{{contacto?.secondSurname}}"
+                                    value="{{contacto?.name}} {{contacto?.firstSurname}} {{contacto?.secondSurname}}"
                                     id="input-cliente" type="text" readonly />
                                 <label class="label" for="input-cliente">Nombre :</label>
                             </div>

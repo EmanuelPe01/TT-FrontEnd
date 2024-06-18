@@ -32,13 +32,13 @@
                             <h4>{{rutina?.fecha_rutina}}</h4>
                             <div class="row mini-box mb-3">
                                 <div class="col col-4">
-                                    <p class="fs-6"><strong>Rondas: </strong>{{rutina?.rondas}}</p>
+                                    <p class="fs-6"><strong>Rondas: </strong>{{rutina?.rondas}} rondas</p>
                                 </div>
                                 <div class="col col-4">
-                                    <p class="fs-6"><strong>Peso: </strong>{{rutina?.peso}}</p>
+                                    <p class="fs-6"><strong>Peso: </strong>{{rutina?.peso}} lb</p>
                                 </div>
                                 <div class="col col-4">
-                                    <p class="fs-6"><strong>Tiempo: </strong>{{rutina?.tiempo}}</p>
+                                    <p class="fs-6"><strong>Tiempo: </strong>{{rutina?.tiempo}} minutos</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -89,15 +89,6 @@
                                                                     referrerpolicy="strict-origin-when-cross-origin"></iframe>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="accordion" *ngFor="let Ejercicio of rutina?.detalle_rutina"
-                                                    id="detalleEjercicios">
-                                                    <div class="accordion-item">
-                                                        <div class="accordion-header">
-
-                                                        </div>
-
                                                     </div>
                                                 </div>
                                             </div>

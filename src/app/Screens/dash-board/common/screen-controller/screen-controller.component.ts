@@ -45,6 +45,9 @@ export class ScreenControllerComponent {
             this.userService.deleteToken()
             this.route.navigate(['/']);
             this.showErrorMessage("Ocurró un error, por favor inicia sesión nuevamente");
+          } else if(error.status == 404) {
+            this.isLoading = false
+            this.setTitles()
           }
           else if (error.status == 500)
             this.showErrorMessage("Error en el servidor, intente más tarde");

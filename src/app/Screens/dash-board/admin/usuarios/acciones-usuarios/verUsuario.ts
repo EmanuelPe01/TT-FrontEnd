@@ -37,7 +37,7 @@ import { InformacionUsuario } from "src/app/Models";
                                         </div>
                                         <div class="col col-6">
                                             <div class="detail-container">
-                                                <input required="" value="{{infoUser?.name}}" id="input-cliente"
+                                                <input required="" value="{{convertirFecha(infoUser?.fecha_nacimiento)}}" id="input-cliente"
                                                     type="date" readonly />
                                                 <label class="label" for="input-cliente">Fecha de nacimiento:</label>
                                             </div>
@@ -79,4 +79,12 @@ import { InformacionUsuario } from "src/app/Models";
 
 export class VerUsuarioComponent {
     @Input() infoUser: InformacionUsuario | undefined
+
+    convertirFecha(fecha?: string): string {
+        if(fecha){
+            const [dia, mes, año] = fecha.split('/');
+            return `${año}-${mes}-${dia}`;
+        }          
+        return ''            
+    }
 }

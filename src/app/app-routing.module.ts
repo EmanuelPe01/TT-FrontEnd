@@ -73,7 +73,7 @@ const routes: Routes = [
             path: 'rutinas', component: RutinasComponent, children: [
               {path: '', component: ConsultarRutinasComponent},
               {path: 'nuevaRutina', component: NuevaRutinaComponent},
-              {path: 'modificarRutina', component: ModificarRutinaComponent},
+              {path: 'modificarRutina/:idRutina', component: ModificarRutinaComponent},
           ]
           },
           {
