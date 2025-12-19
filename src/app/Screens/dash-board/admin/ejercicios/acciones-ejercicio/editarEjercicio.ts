@@ -155,7 +155,7 @@ export class EditarEjericicioComponent implements OnChanges {
                     this.showLoadingMessage(false, '')
                     this.formEditarEjercicio.reset()
                     this.showMessageSucces(data.message)
-                    this.actualizarListaEjercicios.emit();
+                    this.actualizarListaEjercicios.emit(); 
                 })
         }
     }

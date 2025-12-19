@@ -35,7 +35,7 @@ export class LoginComponent {
       this.showLoadingMessage(true, 'Iniciando sesión');
       const datosForm = this.formLogin.value;
       const cliente: LoginUsuario = datosForm
-
+      console.log(datosForm)
       this.user_service.login(cliente)
         .pipe(
           catchError((error) => {
